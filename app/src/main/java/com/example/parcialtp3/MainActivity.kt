@@ -24,6 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.parcialtp3.ui.VerdeCaribeno
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -123,7 +124,7 @@ fun CustomTopBar(title: String, onMenuClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
+            .background(VerdeCaribeno)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
