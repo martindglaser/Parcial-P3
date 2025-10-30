@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.app.troiano.challenge2"
+    namespace = "com.example.parcialtp3"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.app.troiano.challenge2"
+        applicationId = "com.example.parcialtp3"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

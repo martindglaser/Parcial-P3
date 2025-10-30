@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "challenge2"
+rootProject.name = "Parcial TP3"
 include(":app")
  
