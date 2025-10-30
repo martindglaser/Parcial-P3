@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation("androidx.navigation:navigation-compose:2.9.4") // <-- MODIFIED LINE
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -60,4 +62,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }
