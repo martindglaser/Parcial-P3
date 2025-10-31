@@ -3,11 +3,11 @@ package com.example.parcialtp3
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -15,31 +15,35 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.*
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.OceanBlue
+import com.example.parcialtp3.ui.Void
+import com.example.parcialtp3.ui.poppinsFamily
 import kotlinx.coroutines.launch
+
+val VerdeCaribeno = Color(0xFF00C49F)
+val Brown = Color(0xFF6D4C41)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme(colorScheme = lightColorScheme()) {
+            // Parcialtp3Theme { // Se comenta temporalmente para evitar el error de compilación.
                 AppWithDrawer()
-            }
+            // }
         }
     }
 }
 
-val Brown = Color(0xFF8B4513)
-
-/* ---------------- RAÍZ CON DRAWER ---------------- */
+/* ---------------- ESTRUCTURA CON DRAWER ---------------- */
 @Composable
 fun AppWithDrawer() {
     val navController = rememberNavController()
@@ -109,7 +113,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 @Composable
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(navController = navController, startDestination = "shopList") {
-        composable("shopList") { ShopListScreen(navController, drawerState) }
+        composable("shopList") { Transactions(navController, drawerState) }
         composable("detail") { DetailScreen(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { ProfileScreen(navController, drawerState) }
@@ -123,7 +127,7 @@ fun CustomTopBar(title: String, onMenuClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
+            .background(VerdeCaribeno)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -139,7 +143,7 @@ fun CustomTopBar(title: String, onMenuClick: () -> Unit) {
 /* ---------------- BOTTOM NAV ---------------- */
 @Composable
 fun BottomNav(navController: NavHostController, current: String) {
-    NavigationBar(containerColor = Color.White) {
+    NavigationBar(containerColor = VerdeCaribeno) {
         NavigationBarItem(
             icon = { Icon(Icons.Default.Home, contentDescription = "Shop") },
             label = { Text("Product") },
@@ -174,53 +178,182 @@ fun BottomNav(navController: NavHostController, current: String) {
 /* ---------------- PANTALLAS ---------------- */
 
 @Composable
-fun ShopListScreen(navController: NavHostController, drawerState: DrawerState) {
+fun TarjetaBalance(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
+    text1: String,
+    text2: String
+){
+    Column(modifier.padding(horizontal = 8.dp, vertical = 16.dp)) { // Ajustamos el padding
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(8.dp),
+            colors = CardDefaults.cardColors(containerColor = backgroundColor) // Usamos el color de fondo
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = text1, // Usamos el primer texto
+                    color = Void, // Usamos su color
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 15.sp,
+                    fontFamily = poppinsFamily
+                )
+                Text(
+                    text = text2, // Usamos el segundo texto
+                    color = Void, // Usamos su color
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 28.sp,
+                    fontFamily = poppinsFamily
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun TarjetasIncomeExpense(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
+    imageResId: Int,
+    text1: String,
+    text2: String,
+    text1Color: Color = MaterialTheme.colorScheme.onSurface,
+    text2Color: Color = Color.Gray
+) {
+    Column(modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(8.dp),
+            colors = CardDefaults.cardColors(containerColor = backgroundColor)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = imageResId),
+                    contentDescription = text1,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(30.dp)
+                )
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    text = text1,
+                    color = text1Color,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp,
+                    fontFamily = poppinsFamily
+                )
+                Text(
+                    text = text2,
+                    color = text2Color,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 22.sp,
+                    fontFamily = poppinsFamily
+                )
+            }
+        }
+    }
+}
+
+// CORRECCIÓN: El modifier se aplica al Row, no se usa weight aquí.
+@Composable
+fun Cabecera(modifier: Modifier = Modifier) {
+    Column(Modifier.padding(15.dp, 0.dp)){
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TarjetaBalance(
+            backgroundColor = Honeydew,
+            text1 = "Total Balance",
+            text2 = "7,783.00"
+        )
+    }
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Usamos Box con weight para que cada tarjeta ocupe la mitad del espacio de la fila
+        Box(modifier = Modifier.weight(1f)) {
+            TarjetasIncomeExpense(
+                backgroundColor = Color.White,
+                imageResId = R.drawable.group_395,
+                text1 = "Income",
+                text2 = "4,120.00",
+                text1Color = Color.Black,
+                text2Color = Color.Black
+            )
+        }
+        Box(modifier = Modifier.weight(1f)) {
+            TarjetasIncomeExpense(
+                backgroundColor = Color.White,
+                imageResId = R.drawable.group_396,
+                text1 = "Expense",
+                text2 = "1,187.40",
+                text1Color = Color.Black,
+                text2Color = OceanBlue
+            )
+        }
+    }
+}
+}
+
+@Composable
+fun Transactions(
+    navController: NavHostController,
+    drawerState: DrawerState
+) {
     val scope = rememberCoroutineScope()
     Scaffold(
         topBar = { CustomTopBar("Shop list") { scope.launch { drawerState.open() } } },
-        bottomBar = { BottomNav(navController, current = "shopList") }
-    ) { padding ->
-        Column(Modifier.padding(padding)) {
-            Card(
+        bottomBar = { BottomNav(navController, current = "shopList") },
+        containerColor = VerdeCaribeno
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+        ) {
+            // Cabecera con las dos tarjetas
+            Cabecera()
+
+            // CORRECCIÓN: Spacer con weight para empujar los botones hacia abajo
+            Spacer(modifier = Modifier.weight(1f))
+
+            // Fila de botones en la parte inferior
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                elevation = CardDefaults.cardElevation(8.dp),
-                shape = RoundedCornerShape(16.dp)
+                    .padding(16.dp)
             ) {
-                Column(Modifier.padding(16.dp)) {
-                    Icon(
-                        Icons.Default.ShoppingCart,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(180.dp),
-                        tint = Brown
-                    )
-                    Spacer(Modifier.height(12.dp))
-                    Text("Leather boots", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                    Text("27,5 $", fontSize = 14.sp, color = Color.Gray)
-                    Text("Great warm shoes from artificial leather. Only in our shop.")
-                    Spacer(Modifier.height(12.dp))
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        OutlinedButton(onClick = { navController.navigate("favourites") }) {
-                            Text("Add to favourite")
-                        }
-                        Button(
-                            onClick = { navController.navigate("detail") },
-                            colors = ButtonDefaults.buttonColors(containerColor = Brown)
-                        ) {
-                            Text("Buy", color = Color.White)
-                        }
-                    }
+                OutlinedButton(onClick = { navController.navigate("favourites") }) {
+                    Text("Add to favourite")
+                }
+                Button(
+                    onClick = { navController.navigate("detail") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Brown)
+                ) {
+                    Text("Buy", color = Color.White)
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun DetailScreen(navController: NavHostController, drawerState: DrawerState) {
@@ -247,7 +380,9 @@ fun DetailScreen(navController: NavHostController, drawerState: DrawerState) {
             Spacer(Modifier.height(24.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
             ) {
                 OutlinedButton(onClick = { navController.popBackStack() }) { Text("Back") }
                 Button(
@@ -310,26 +445,14 @@ fun ProfileScreen(navController: NavHostController, drawerState: DrawerState) {
         topBar = { CustomTopBar("Profile") { scope.launch { drawerState.open() } } },
         bottomBar = { BottomNav(navController, current = "profile") }
     ) { padding ->
-        Column(
-            Modifier.padding(padding).fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+        // Contenido de la pantalla de perfil
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
-            Spacer(Modifier.height(16.dp))
-            Icon(
-                Icons.Default.Person,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape)
-                    .background(Color.LightGray)
-            )
-            Text("Martin", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-            Text("UI UX DESIGN")
-            Spacer(Modifier.height(16.dp))
-            OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("E-Mail Address") })
-            OutlinedTextField(value = phone, onValueChange = { phone = it }, label = { Text("Phone Number") })
-            OutlinedTextField(value = web, onValueChange = { web = it }, label = { Text("Web Site") })
-            OutlinedTextField(value = password, onValueChange = { password = it }, label = { Text("Password") })
+            Text("Profile Screen")
         }
     }
 }
@@ -337,31 +460,25 @@ fun ProfileScreen(navController: NavHostController, drawerState: DrawerState) {
 @Composable
 fun SettingsScreen(navController: NavHostController, drawerState: DrawerState) {
     val scope = rememberCoroutineScope()
-    var notifications by remember { mutableStateOf(true) }
-    var darkMode by remember { mutableStateOf(false) }
-
     Scaffold(
         topBar = { CustomTopBar("Settings") { scope.launch { drawerState.open() } } },
         bottomBar = { BottomNav(navController, current = "settings") }
     ) { padding ->
-        Column(Modifier.padding(padding).fillMaxSize()) {
-            Text("Account Settings", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Spacer(Modifier.height(12.dp))
-            Text("Edit profile")
-            Text("Change password")
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Push notifications", Modifier.weight(1f))
-                Switch(checked = notifications, onCheckedChange = { notifications = it })
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Dark mode", Modifier.weight(1f))
-                Switch(checked = darkMode, onCheckedChange = { darkMode = it })
-            }
-            Spacer(Modifier.height(16.dp))
-            Text("More", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Text("About us")
-            Text("Privacy policy")
-            Text("Terms and conditions")
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("Settings Screen")
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    // Parcialtp3Theme {
+        AppWithDrawer()
+    // }
 }
