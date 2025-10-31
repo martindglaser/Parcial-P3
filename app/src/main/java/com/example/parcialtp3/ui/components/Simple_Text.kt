@@ -11,8 +11,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.parcialtp3.R
+import com.example.parcialtp3.ui.Void
 
-private val PoppinsFamily = FontFamily(
+val PoppinsFamily = FontFamily(
     Font(R.font.poppins_light, FontWeight.Light),
     Font(R.font.poppins_regular, FontWeight.Normal),
     Font(R.font.poppins_medium, FontWeight.Medium),
@@ -26,7 +27,7 @@ fun SimpleText(
     modifier: Modifier = Modifier,
     fontSize: TextUnit = 14.sp,
     fontWeight: FontWeight = FontWeight.Normal,
-    color: Color = Color.Black,
+    color: Color = Void,
     textAlign: TextAlign = TextAlign.Start
 ) {
     Text(
