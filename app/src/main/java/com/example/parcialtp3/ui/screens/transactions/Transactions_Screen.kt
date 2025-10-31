@@ -37,7 +37,7 @@ import com.example.parcialtp3.ui.poppinsFamily
 @Composable
 fun Transactions_Screen() {
     BackgroundScaffold(
-        headerHeight = 380.dp,
+        headerHeight = 410.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Transactions_Header() },
         panelContent = { PreviewMonthSection() }
