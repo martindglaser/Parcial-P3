@@ -26,6 +26,7 @@ import androidx.navigation.compose.*
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
+import com.example.parcialtp3.ui.components.BottomNavIcon
 import com.example.parcialtp3.ui.poppinsFamily
 import kotlinx.coroutines.launch
 
@@ -144,36 +145,122 @@ fun CustomTopBar(title: String, onMenuClick: () -> Unit) {
 @Composable
 fun BottomNav(navController: NavHostController, current: String) {
     NavigationBar(containerColor = VerdeCaribeno) {
+
+        val selectedColor = Brown
+        val unselectedColor = Color.White
+
+        // HOME
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Shop") },
-            label = { Text("Product") },
+            icon = {
+                BottomNavIcon(
+                    iconResId = R.drawable.ic_home,
+                    contentDescription = "Home",
+                    isSelected = current == "shopList",
+                    selectedColor = selectedColor,
+                    unselectedColor = unselectedColor
+                )
+            },
+            label = null,
             selected = current == "shopList",
             onClick = { navController.navigate("shopList") },
+            alwaysShowLabel = false,
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Brown,
-                selectedTextColor = Brown
+                selectedIconColor = selectedColor,
+                unselectedIconColor = unselectedColor,
+                indicatorColor = Color.Transparent // elimina el fondo circular
             )
         )
+
+        // ANALYSIS
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Search, contentDescription = "Search") },
-            label = { Text("Search") },
-            selected = false,
-            onClick = { /* futura pantalla */ }
+            icon = {
+                BottomNavIcon(
+                    iconResId = R.drawable.ic_analysis,
+                    contentDescription = "Analysis",
+                    isSelected = current == "analysis",
+                    selectedColor = selectedColor,
+                    unselectedColor = unselectedColor
+                )
+            },
+            label = null,
+            selected = current == "analysis",
+            onClick = { navController.navigate("analysis") },
+            alwaysShowLabel = false,
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = selectedColor,
+                unselectedIconColor = unselectedColor,
+                indicatorColor = Color.Transparent
+            )
         )
+
+        // TRANSACTION
         NavigationBarItem(
-            icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart") },
-            label = { Text("Cart") },
+            icon = {
+                BottomNavIcon(
+                    iconResId = R.drawable.ic_transaction,
+                    contentDescription = "Transaction",
+                    isSelected = current == "favourites",
+                    selectedColor = selectedColor,
+                    unselectedColor = unselectedColor
+                )
+            },
+            label = null,
             selected = current == "favourites",
-            onClick = { navController.navigate("favourites") }
+            onClick = { navController.navigate("favourites") },
+            alwaysShowLabel = false,
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = selectedColor,
+                unselectedIconColor = unselectedColor,
+                indicatorColor = Color.Transparent
+            )
         )
+
+        // CATEGORY
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-            label = { Text("Profile") },
+            icon = {
+                BottomNavIcon(
+                    iconResId = R.drawable.ic_category,
+                    contentDescription = "Category",
+                    isSelected = current == "category",
+                    selectedColor = selectedColor,
+                    unselectedColor = unselectedColor
+                )
+            },
+            label = null,
+            selected = current == "category",
+            onClick = { navController.navigate("category") },
+            alwaysShowLabel = false,
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = selectedColor,
+                unselectedIconColor = unselectedColor,
+                indicatorColor = Color.Transparent
+            )
+        )
+
+        // PROFILE
+        NavigationBarItem(
+            icon = {
+                BottomNavIcon(
+                    iconResId = R.drawable.ic_profile,
+                    contentDescription = "Profile",
+                    isSelected = current == "profile",
+                    selectedColor = selectedColor,
+                    unselectedColor = unselectedColor
+                )
+            },
+            label = null,
             selected = current == "profile",
-            onClick = { navController.navigate("profile") }
+            onClick = { navController.navigate("profile") },
+            alwaysShowLabel = false,
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = selectedColor,
+                unselectedIconColor = unselectedColor,
+                indicatorColor = Color.Transparent
+            )
         )
     }
 }
+
 
 /* ---------------- PANTALLAS ---------------- */
 
