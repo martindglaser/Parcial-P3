@@ -12,14 +12,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.TextUnit
 import com.example.parcialtp3.R
 
-private val PoppinsFamily = FontFamily(
-    Font(R.font.poppins_light, FontWeight.Light),
-    Font(R.font.poppins_regular, FontWeight.Normal),
-    Font(R.font.poppins_medium, FontWeight.Medium),
-    Font(R.font.poppins_semi_bold, FontWeight.SemiBold),
-    Font(R.font.poppins_bold, FontWeight.Bold)
-)
-
 @Composable
 fun TitleText(
     text: String,
