@@ -36,6 +36,7 @@ import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CabeceraTransactions
+import com.example.parcialtp3.ui.components.DisplayName
 import com.example.parcialtp3.ui.components.HeaderBar
 import com.example.parcialtp3.ui.components.ImagenFlotadora
 import com.example.parcialtp3.ui.components.MonthSection
@@ -59,35 +60,8 @@ fun Profile_Screen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Spacer(Modifier.height(50.dp)) // deja espacio para la imagen
-                Text(
-                    text = "John Smith",
-                    color = Void,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = poppinsFamily
-                )
-                Text(
-                    buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                fontWeight = FontWeight.Bold
-                            )
-                        ) {
-                            append("ID: ")
-                        }
-                        withStyle(
-                            style = SpanStyle(
-                                fontWeight = FontWeight.Normal
-                            )
-                        ) {
-                            append("25030024")
-                        }
-                    },
-                    fontSize = 14.sp,
-                    color = Void,
-                    fontFamily = poppinsFamily
-                )
 
+                DisplayName("25030024","John Smith")
 
                 Spacer(Modifier.height(20.dp))
 
