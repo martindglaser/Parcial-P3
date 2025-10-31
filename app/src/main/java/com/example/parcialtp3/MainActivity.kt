@@ -27,6 +27,7 @@ import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -37,8 +38,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             // Parcialtp3Theme { // Se comenta temporalmente para evitar el error de compilación.
-                AppWithDrawer()
+                //AppWithDrawer()
             // }
+            Transactions_Screen()
         }
     }
 }
