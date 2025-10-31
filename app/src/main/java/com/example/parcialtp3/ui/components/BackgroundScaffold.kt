@@ -62,7 +62,7 @@ fun BackgroundScaffold(
             shape = RoundedCornerShape(topStart = overlapRoundness, topEnd = overlapRoundness),
             modifier = panelModifier
                 .padding(top = headerHeight - overlapOffset)
-                .align(Alignment.TopStart)
+                .align(Alignment.TopCenter)
         ) {
             // Contenedor del contenido del PANEL
             Box(
