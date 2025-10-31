@@ -76,7 +76,7 @@ private fun Body() {
         Spacer(Modifier.height(15.dp))
 
         RoundedButton("Sign Up", onClick = {}, width = 207.dp, height = 45.dp)
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(15.dp))
         Text(
             buildAnnotatedString {
                 append("Already have an account? ")
