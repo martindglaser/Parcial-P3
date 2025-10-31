@@ -42,7 +42,7 @@ fun BackgroundScaffold(
                 .height(headerHeight),
             contentAlignment = Alignment.TopCenter
         ) {
-            Box(modifier = Modifier.padding(top = 60.dp)) {
+            Box(modifier = Modifier.padding(top = 60.dp)) { //PADDING SUPERIOR INCORPORADO DE 60PX
                 headerContent()
             }
         }
@@ -62,7 +62,7 @@ fun BackgroundScaffold(
             shape = RoundedCornerShape(topStart = overlapRoundness, topEnd = overlapRoundness),
             modifier = panelModifier
                 .padding(top = headerHeight - overlapOffset)
-                .align(Alignment.TopStart)
+                .align(Alignment.TopCenter)
         ) {
             // Contenedor del contenido del PANEL
             Box(
