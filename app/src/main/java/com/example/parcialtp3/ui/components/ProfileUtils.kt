@@ -2,6 +2,7 @@ package com.example.parcialtp3.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -38,12 +39,14 @@ import com.example.parcialtp3.ui.poppinsFamily
 @Composable
 fun ProfileOption(
     iconRes: Int,
-    label: String
+    label: String,
+    onClick: (() -> Unit)? = null
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 40.dp, vertical = 10.dp),
+            .padding(horizontal = 40.dp, vertical = 10.dp)
+            .clickable(enabled = onClick != null) { onClick?.invoke() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
