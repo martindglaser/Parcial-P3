@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
@@ -19,6 +20,7 @@ import com.example.parcialtp3.ui.components.LargeFingerprintIcon
 
 @Composable
 fun F_Fingerprint_Add_Screen(
+    navController: NavHostController,
     onBack: () -> Unit = {},
     onNotifications: () -> Unit = {},
     onUseTouchId: () -> Unit = {}
@@ -28,6 +30,7 @@ fun F_Fingerprint_Add_Screen(
         whiteHeight = Dp.Unspecified,
         headerContent = {
             HeaderBar(
+                navController = navController,
                 title = "Add Fingerprint",
                 onBackClick = onBack,
                 onNotificationClick = onNotifications
@@ -98,10 +101,4 @@ fun F_Fingerprint_Add_Screen(
             }
         }
     )
-}
-
-@Preview(showBackground = true, showSystemUi = true, name = "Add Fingerprint")
-@Composable
-private fun Preview_F_Add() {
-    F_Fingerprint_Add_Screen()
 }

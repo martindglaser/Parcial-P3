@@ -16,12 +16,13 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.LightGreen
 
-@Preview(showBackground = true, showSystemUi = true, name = "Security")
 @Composable
 fun A_Security_Screen(
+    navController: NavHostController,
     onBack: () -> Unit = {},
     onNotifications: () -> Unit = {},
     onChangePin: () -> Unit = {},
@@ -33,6 +34,7 @@ fun A_Security_Screen(
         whiteHeight = androidx.compose.ui.unit.Dp.Unspecified,
         headerContent = {
             HeaderBar(
+                navController = navController,
                 title = "Security",
                 onBackClick = onBack,
                 onNotificationClick = onNotifications
@@ -112,10 +114,4 @@ private fun SecurityDivider() {
         thickness = 1.dp,
         color = LightGreen.copy(alpha = 0.7f)
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewSecurity() {
-    A_Security_Screen()
 }

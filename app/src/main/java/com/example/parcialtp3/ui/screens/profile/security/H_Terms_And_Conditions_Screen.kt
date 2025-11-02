@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
@@ -26,6 +27,7 @@ import com.example.parcialtp3.ui.components.HeaderBar
 
 @Composable
 fun H_Terms_And_Conditions_Screen(
+    navController: NavHostController,
     onBack: () -> Unit = {},
     onNotifications: () -> Unit = {},
     onOpenLink: (String) -> Unit = {},
@@ -40,6 +42,7 @@ fun H_Terms_And_Conditions_Screen(
         whiteHeight = Dp.Unspecified,
         headerContent = {
             HeaderBar(
+                navController = navController,
                 title = "Terms And Conditions",
                 onBackClick = onBack,
                 onNotificationClick = onNotifications
@@ -212,10 +215,4 @@ private fun BulletedListCompactSmall(items: List<String>) {
         }
     }
     Spacer(Modifier.height(8.dp))
-}
-
-@Preview(showSystemUi = true, showBackground = true, name = "Terms & Conditions (compact)")
-@Composable
-private fun Preview_Terms() {
-    H_Terms_And_Conditions_Screen()
 }

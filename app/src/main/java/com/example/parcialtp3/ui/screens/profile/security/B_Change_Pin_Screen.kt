@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
@@ -17,6 +18,7 @@ import com.example.parcialtp3.ui.components.PasswordInputField
 
 @Composable
 fun B_Change_Pin_Screen(
+    navController: NavHostController,
     onBack: () -> Unit = {},
     onNotifications: () -> Unit = {},
     onConfirm: () -> Unit = {}
@@ -26,6 +28,7 @@ fun B_Change_Pin_Screen(
         whiteHeight = Dp.Unspecified,
         headerContent = {
             HeaderBar(
+                navController = navController,
                 title = "Change Pin",
                 onBackClick = onBack,
                 onNotificationClick = onNotifications
@@ -85,10 +88,4 @@ fun B_Change_Pin_Screen(
             }
         }
     )
-}
-
-@Preview(showBackground = true, showSystemUi = true, name = "Change Pin")
-@Composable
-private fun PreviewChangePin() {
-    B_Change_Pin_Screen()
 }

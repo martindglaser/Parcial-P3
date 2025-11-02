@@ -17,10 +17,12 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.components.LargeFingerprintIcon
 
 @Composable
 fun E_Fingerprint_Screen(
+    navController: NavHostController,
     title: String = "Jhon Fingerprint",
     onBack: () -> Unit = {},
     onNotifications: () -> Unit = {},
@@ -31,6 +33,7 @@ fun E_Fingerprint_Screen(
         whiteHeight = Dp.Unspecified,
         headerContent = {
             HeaderBar(
+                navController = navController,
                 title = title,
                 onBackClick = onBack,
                 onNotificationClick = onNotifications
@@ -95,10 +98,4 @@ fun E_Fingerprint_Screen(
             }
         }
     )
-}
-
-@Preview(showBackground = true, showSystemUi = true, name = "Fingerprint Detail")
-@Composable
-private fun Preview_E_Fingerprint() {
-    E_Fingerprint_Screen()
 }

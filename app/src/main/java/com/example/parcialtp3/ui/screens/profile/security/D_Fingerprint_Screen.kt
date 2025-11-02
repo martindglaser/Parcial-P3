@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
 
@@ -25,6 +26,7 @@ import com.example.parcialtp3.ui.components.HeaderBar
 
 @Composable
 fun D_Fingerprint_Screen(
+    navController: NavHostController,
     onBack: () -> Unit = {},
     onNotifications: () -> Unit = {},
     onTapExisting: () -> Unit = {},
@@ -35,6 +37,7 @@ fun D_Fingerprint_Screen(
         whiteHeight = Dp.Unspecified,
         headerContent = {
             HeaderBar(
+                navController = navController,
                 title = "Fingerprint",
                 onBackClick = onBack,
                 onNotificationClick = onNotifications
@@ -116,10 +119,4 @@ private fun FingerprintRow(
             )
         }
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true, name = "Fingerprint")
-@Composable
-private fun PreviewFingerprint() {
-    D_Fingerprint_Screen()
 }
