@@ -65,7 +65,8 @@ fun RoundedInputField(
     backgroundColor: Color = LightGreen,
     textColor: Color = Color(0xFF1A1A1A),
     placeholderColor: Color = Color(0xFF7C8A86),
-    labelPaddingLeft: Dp = 20.dp
+    labelPaddingLeft: Dp = 20.dp,
+    onTextChanged: (String) -> Unit = {}
 ) {
     var value by remember { mutableStateOf("") }
 
@@ -104,7 +105,9 @@ fun RoundedInputField(
                 }
                 BasicTextField(
                     value = value,
-                    onValueChange = { value = it },
+                    onValueChange = {
+                        value = it
+                        onTextChanged(it)},
                     singleLine = true,
                     textStyle = TextStyle(color = textColor, fontSize = 15.sp),
                     cursorBrush = SolidColor(textColor),
@@ -122,7 +125,8 @@ fun RoundedPassInput(
     textColor: Color = Color(0xFF1A1A1A),
     placeholderColor: Color = Color(0xFF7C8A86),
     labelPaddingLeft: Dp = 20.dp,
-    passPaddingLeft: Dp = 40.dp
+    passPaddingLeft: Dp = 40.dp,
+    onTextChanged: (String) -> Unit = {}
 ) {
     var value by remember { mutableStateOf("") }
 
@@ -163,7 +167,10 @@ fun RoundedPassInput(
                 }
                 BasicTextField(
                     value = value,
-                    onValueChange = { value = it },
+                    onValueChange = {
+                        value = it
+                        onTextChanged(it)
+                    },
                     singleLine = true,
                     textStyle = TextStyle(color = textColor, fontSize = 15.sp),
                     cursorBrush = SolidColor(textColor),
