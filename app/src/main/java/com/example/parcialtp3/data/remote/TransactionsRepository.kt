@@ -8,12 +8,16 @@ class TransactionsRepository {
 
     private val api = RetrofitClient.api
 
-    suspend fun getTransactionsGroupedByMonth(typeFilter: String): Map<String, List<Map<String, Any>>> {
+    // typeFilter es opcional → si es null o vacío, devuelve todas las transacciones
+    suspend fun getTransactionsGroupedByMonth(typeFilter: String? = null): Map<String, List<Map<String, Any>>> {
         val response: TransactionsResponse = api.getTransactions()
 
-        // Filtramos según el tipo (income / expense)
-        val filteredTransactions = response.transactions
-            .filter { it.type == typeFilter }
+        // Filtramos sólo si hay filtro
+        val filteredTransactions = if (typeFilter.isNullOrBlank()) {
+            response.transactions
+        } else {
+            response.transactions.filter { it.type == typeFilter }
+        }
 
         // Convertimos cada item en un mapa genérico (para tu UI)
         val allTransactions = filteredTransactions.map {
@@ -34,9 +38,9 @@ class TransactionsRepository {
             sdf.parse(dateStr)
         }
 
-        // Agrupar por mes (ej: "October 2024")
+        // Agrupar por mes legible (ej: "October 2024")
         val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
-        val grouped = sorted.groupBy {
+        return sorted.groupBy {
             try {
                 val date = sdf.parse(it["date"]?.toString() ?: "")
                 monthFormat.format(date ?: Date())
@@ -44,7 +48,5 @@ class TransactionsRepository {
                 "Unknown"
             }
         }
-
-        return grouped
     }
 }

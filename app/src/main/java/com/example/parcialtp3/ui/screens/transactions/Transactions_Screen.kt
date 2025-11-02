@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
@@ -15,40 +16,47 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.*
 
 @Composable
-fun Transactions_Screen(navController: NavHostController) { // ✅ Ahora recibe el navController
+fun Transactions_Screen(navController: NavHostController) {
+    val viewModel: TransactionsViewModel = viewModel()
+
     Scaffold(
         bottomBar = { BottomNavBar(navController, current = "transactions") }
     ) { paddingValues ->
         BackgroundScaffold(
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
-            headerContent = { Transactions_Header(navController) }, // ✅ Se lo pasamos al header
-            panelContent = { PreviewMonthSection() },
+            headerContent = { Transactions_Header(navController) },
+            panelContent = {
+                TransactionsMonthSection(viewModel = viewModel)
+            },
             modifier = Modifier.padding(paddingValues)
         )
     }
 }
 
 @Composable
-fun Transactions_Header(navController: NavHostController) { // ✅ También lo recibe acá
+fun Transactions_Header(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         HeaderBar(
             title = "Transaction",
-            navController = navController, // ✅ Se lo pasamos al HeaderBar
+            navController = navController,
             onBackClick = { navController.popBackStack() }
         )
 
         CabeceraTransactions(
+            navController = navController,
             tarjetaBalanceText1 = "Total Balance",
             tarjetaBalanceText2 = "$7,783.00",
+            tarjeta1Direccion = "Income_Screen",
             tarjeta1Color = Honeydew,
             tarjeta1Imagen = R.drawable.group_395,
             tarjeta1Texto1 = "Income",
             tarjeta1Texto2 = "$4,120.00",
             tarjeta1Texto1Color = Void,
             tarjeta1Texto2Color = Void,
+            tarjeta2Direccion = "Expense_Screen",
             tarjeta2Color = Honeydew,
             tarjeta2Imagen = R.drawable.group_396,
             tarjeta2Texto1 = "Expense",
@@ -58,63 +66,5 @@ fun Transactions_Header(navController: NavHostController) { // ✅ También lo r
         )
 
         Spacer(modifier = Modifier.weight(1f))
-    }
-}
-
-@Composable
-fun PreviewMonthSection() {
-    val aprilTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_salary,
-            title = "Salary",
-            subtitle = "18:27 - April 30",
-            middleText = "Monthly",
-            value = "$4.000,00",
-            valueColor = Void
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_groceries,
-            title = "Groceries",
-            subtitle = "17:00 - April 24",
-            middleText = "Pantry",
-            value = "-$100,00",
-            valueColor = OceanBlue
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_rent,
-            title = "Rent",
-            subtitle = "8:30 - April 15",
-            middleText = "Rent",
-            value = "-$674,40",
-            valueColor = OceanBlue
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_transport,
-            title = "Transport",
-            subtitle = "7:30 - April 08",
-            middleText = "Fuel",
-            value = "-$4,13",
-            valueColor = OceanBlue
-        )
-    )
-
-    val marchTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_food,
-            title = "Food",
-            subtitle = "19:30 - March 31",
-            middleText = "Dinner",
-            value = "-$70,40",
-            valueColor = OceanBlue
-        )
-    )
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp)
-    ) {
-        item { MonthSection(monthName = "April", transactions = aprilTransactions) }
-        item { MonthSection(monthName = "March", transactions = marchTransactions) }
     }
 }

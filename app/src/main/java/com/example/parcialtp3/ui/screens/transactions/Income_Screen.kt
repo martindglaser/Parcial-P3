@@ -48,18 +48,21 @@ fun TransactionsIncomeHeader(navController: NavHostController) {
         CabeceraTransactions(
             tarjetaBalanceText1 = "Total Balance",
             tarjetaBalanceText2 = "$7,783.00",
+            tarjeta1Direccion = "Tranasctions_Screen",
             tarjeta1Color = OceanBlue,
             tarjeta1Imagen = R.drawable.group_395_white,
             tarjeta1Texto1 = "Income",
             tarjeta1Texto2 = "$4,120.00",
             tarjeta1Texto1Color = Honeydew,
             tarjeta1Texto2Color = Honeydew,
+            tarjeta2Direccion = "Expense_Screen",
             tarjeta2Color = Honeydew,
             tarjeta2Imagen = R.drawable.group_396,
             tarjeta2Texto1 = "Expense",
             tarjeta2Texto2 = "$1,187.40",
             tarjeta2Texto1Color = Void,
-            tarjeta2Texto2Color = OceanBlue
+            tarjeta2Texto2Color = OceanBlue,
+            navController = navController
         )
 
         Spacer(modifier = Modifier.weight(1f))
