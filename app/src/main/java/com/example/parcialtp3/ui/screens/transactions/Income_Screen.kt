@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
@@ -15,28 +16,30 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.*
 
 @Composable
-fun TransactionsIncomeScreen(navController: NavHostController) {  // ✅ ahora recibe navController
+fun TransactionsIncomeScreen(navController: NavHostController) {
+    val viewModel: TransactionsViewModel = viewModel()
+
     Scaffold(
         bottomBar = { BottomNavBar(navController, current = "transactions") }
     ) { paddingValues ->
         BackgroundScaffold(
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
-            headerContent = { TransactionsIncomeHeader(navController) }, // ✅ se lo pasamos
-            panelContent = { PreviewTransactionsIncomeMonthSection() },
+            headerContent = { TransactionsIncomeHeader(navController) },
+            panelContent = { TransactionsMonthSection(viewModel) },
             modifier = Modifier.padding(paddingValues)
         )
     }
 }
 
 @Composable
-fun TransactionsIncomeHeader(navController: NavHostController) {  // ✅ también lo recibe
+fun TransactionsIncomeHeader(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         HeaderBar(
             title = "Transaction",
-            navController = navController, // ✅ lo pasamos al HeaderBar
+            navController = navController,
             onBackClick = { navController.popBackStack() }
         )
 
@@ -117,8 +120,23 @@ fun PreviewTransactionsIncomeMonthSection() {
             .fillMaxWidth()
             .padding(bottom = 16.dp)
     ) {
-        item { MonthSection(monthName = "April", transactions = aprilTransactions) }
-        item { MonthSection(monthName = "March", transactions = marchTransactions) }
-        item { MonthSection(monthName = "February", transactions = februaryTransactions) }
+        item {
+            com.example.parcialtp3.ui.components.MonthSection(
+                monthName = "April",
+                transactions = aprilTransactions
+            )
+        }
+        item {
+            com.example.parcialtp3.ui.components.MonthSection(
+                monthName = "March",
+                transactions = marchTransactions
+            )
+        }
+        item {
+            com.example.parcialtp3.ui.components.MonthSection(
+                monthName = "February",
+                transactions = februaryTransactions
+            )
+        }
     }
 }
