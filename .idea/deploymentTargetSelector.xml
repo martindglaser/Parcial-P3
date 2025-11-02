@@ -8,9 +8,6 @@
       <SelectionState runConfigName="Preview_E_Fingerprint">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PreviewFingerprintEliminate">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="PreviewFingerprintEliminate (1)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -18,6 +15,9 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="Preview_F_Add">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Preview_Terms">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
