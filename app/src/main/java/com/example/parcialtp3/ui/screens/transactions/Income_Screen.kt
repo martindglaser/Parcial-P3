@@ -26,7 +26,9 @@ fun TransactionsIncomeScreen(navController: NavHostController) {
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
             headerContent = { TransactionsIncomeHeader(navController) },
-            panelContent = { TransactionsMonthSection(viewModel) },
+            panelContent = {
+                TransactionsMonthSection(viewModel = viewModel, typeFilter = "income")
+            },
             modifier = Modifier.padding(paddingValues)
         )
     }
@@ -61,82 +63,5 @@ fun TransactionsIncomeHeader(navController: NavHostController) {
         )
 
         Spacer(modifier = Modifier.weight(1f))
-    }
-}
-
-@Composable
-fun PreviewTransactionsIncomeMonthSection() {
-    val aprilTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_salary,
-            title = "Salary",
-            subtitle = "18:27 - April 30",
-            middleText = "Monthly",
-            value = "$4.000,00",
-            valueColor = Void
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_salary,
-            title = "Others",
-            subtitle = "17:00 - April 24",
-            middleText = "Payments",
-            value = "$120,00",
-            valueColor = Void
-        )
-    )
-
-    val marchTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_salary,
-            title = "Salary",
-            subtitle = "19:39 - March 31",
-            middleText = "Monthly",
-            value = "4.000,00",
-            valueColor = Void
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_salary,
-            title = "Others",
-            subtitle = "09:30 - April 12",
-            middleText = "Upwork",
-            value = "$340,00",
-            valueColor = Void
-        )
-    )
-
-    val februaryTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_salary,
-            title = "Salary",
-            subtitle = "19:30 - March 31",
-            middleText = "Upwork",
-            value = "340,00",
-            valueColor = Void
-        )
-    )
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp)
-    ) {
-        item {
-            com.example.parcialtp3.ui.components.MonthSection(
-                monthName = "April",
-                transactions = aprilTransactions
-            )
-        }
-        item {
-            com.example.parcialtp3.ui.components.MonthSection(
-                monthName = "March",
-                transactions = marchTransactions
-            )
-        }
-        item {
-            com.example.parcialtp3.ui.components.MonthSection(
-                monthName = "February",
-                transactions = februaryTransactions
-            )
-        }
     }
 }

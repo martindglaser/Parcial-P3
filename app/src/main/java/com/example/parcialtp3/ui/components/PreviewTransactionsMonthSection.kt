@@ -21,13 +21,15 @@ import com.example.parcialtp3.data.remote.model.TransactionsResponse
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.data.remote.RetrofitClient.api
 
-
 @Composable
-fun TransactionsMonthSection(viewModel: TransactionsViewModel = viewModel()) {
+fun TransactionsMonthSection(
+    viewModel: TransactionsViewModel,
+    typeFilter: String
+) {
     val grouped by viewModel.transactionsByMonth.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.loadTransactions()
+    LaunchedEffect(typeFilter) {
+        viewModel.loadTransactions(typeFilter)
     }
 
     if (grouped.isEmpty()) {
@@ -54,9 +56,9 @@ fun TransactionsMonthSection(viewModel: TransactionsViewModel = viewModel()) {
                                 iconRes = R.drawable.icon_salary,
                                 title = map["description"]?.toString() ?: "Sin descripción",
                                 subtitle = map["date"]?.toString() ?: "",
-                                middleText = if (map["type"] == "credit") "Income" else "Expense",
-                                value = "$${map["amount"]},00",
-                                valueColor = if (map["type"] == "credit") OceanBlue else Void
+                                middleText = map["subtype"]?.toString() ?: "",
+                                value = "$${map["amount"]}",
+                                valueColor = if (map["type"] == "income") OceanBlue else Void
                             )
                         }
                     )
@@ -65,4 +67,3 @@ fun TransactionsMonthSection(viewModel: TransactionsViewModel = viewModel()) {
         }
     }
 }
-

@@ -8,11 +8,15 @@ class TransactionsRepository {
 
     private val api = RetrofitClient.api
 
-    suspend fun getTransactionsGroupedByMonth(): Map<String, List<Map<String, Any>>> {
+    suspend fun getTransactionsGroupedByMonth(typeFilter: String): Map<String, List<Map<String, Any>>> {
         val response: TransactionsResponse = api.getTransactions()
 
-        // Tomamos todas las transacciones del JSON
-        val allTransactions = response.transactions.map {
+        // Filtramos según el tipo (income / expense)
+        val filteredTransactions = response.transactions
+            .filter { it.type == typeFilter }
+
+        // Convertimos cada item en un mapa genérico (para tu UI)
+        val allTransactions = filteredTransactions.map {
             mapOf(
                 "date" to it.date,
                 "description" to it.description,

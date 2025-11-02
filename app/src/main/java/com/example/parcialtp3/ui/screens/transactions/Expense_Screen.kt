@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
@@ -17,27 +18,31 @@ import com.example.parcialtp3.ui.components.*
 
 @Composable
 fun TransactionsExpenseScreen(navController: NavHostController) {
+    val viewModel: TransactionsViewModel = viewModel()
+
     Scaffold(
         bottomBar = { BottomNavBar(navController, current = "transactions") }
     ) { paddingValues ->
         BackgroundScaffold(
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
-            headerContent = { TransactionsExpenseHeader(navController) }, // ✅ le pasamos el navController
-            panelContent = { PreviewTransactionsExpenseMonthSection() },
+            headerContent = { TransactionsExpenseHeader(navController) },
+            panelContent = {
+                TransactionsMonthSection(viewModel = viewModel, typeFilter = "expense")
+            },
             modifier = Modifier.padding(paddingValues)
         )
     }
 }
 
 @Composable
-fun TransactionsExpenseHeader(navController: NavHostController) { // ✅ lo agregamos acá también
+fun TransactionsExpenseHeader(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         HeaderBar(
             title = "Transaction",
-            navController = navController, // ✅ se lo pasamos al HeaderBar
+            navController = navController,
             onBackClick = { navController.popBackStack() }
         )
 
@@ -59,63 +64,5 @@ fun TransactionsExpenseHeader(navController: NavHostController) { // ✅ lo agre
         )
 
         Spacer(modifier = Modifier.weight(1f))
-    }
-}
-
-@Composable
-fun PreviewTransactionsExpenseMonthSection() {
-    val aprilTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_groceries,
-            title = "Groceries",
-            subtitle = "17:00 - April 24",
-            middleText = "Pantry",
-            value = "-$100,00",
-            valueColor = OceanBlue
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_rent,
-            title = "Rent",
-            subtitle = "8:30 - April 15",
-            middleText = "Rent",
-            value = "-$674,40",
-            valueColor = OceanBlue
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_transport,
-            title = "Transport",
-            subtitle = "7:30 - April 08",
-            middleText = "Fuel",
-            value = "-$4,13",
-            valueColor = OceanBlue
-        )
-    )
-
-    val marchTransactions = listOf(
-        Transaction(
-            iconRes = R.drawable.icon_food,
-            title = "Food",
-            subtitle = "19:30 - March 31",
-            middleText = "Dinner",
-            value = "-$70,40",
-            valueColor = OceanBlue
-        ),
-        Transaction(
-            iconRes = R.drawable.icon_rent,
-            title = "Rent",
-            subtitle = "18:39 - March 31",
-            middleText = "Rent",
-            value = "-$674,40",
-            valueColor = OceanBlue
-        )
-    )
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp)
-    ) {
-        item { MonthSection(monthName = "April", transactions = aprilTransactions) }
-        item { MonthSection(monthName = "March", transactions = marchTransactions) }
     }
 }
