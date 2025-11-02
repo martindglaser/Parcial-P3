@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.LightGreen
 
 @Composable
 fun C_Change_Pin_Success_Screen(
@@ -42,7 +42,7 @@ fun C_Change_Pin_Success_Screen(
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Honeydew
+                color = LightGreen
             )
         }
     }
