@@ -82,7 +82,7 @@ fun B_Change_Pin_Screen(
                     shape = RoundedCornerShape(24.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = CaribbeanGreen,
-                        contentColor = Color.Black
+                        contentColor = Void
                     )
                 ) {
                     Text("Change Pin", style = MaterialTheme.typography.bodyLarge)
