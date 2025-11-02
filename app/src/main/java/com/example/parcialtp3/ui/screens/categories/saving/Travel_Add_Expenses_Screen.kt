@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Cyprus
@@ -28,7 +28,7 @@ import com.example.parcialtp3.ui.components.RoundedInputRow
 
 @Composable
 fun TravelAddExpenseScreen(
-    navController: NavController? = null
+    navController: NavHostController
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
@@ -37,7 +37,9 @@ fun TravelAddExpenseScreen(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                onBackClick = { navController?.popBackStack() }
+                navController = navController,
+                onBackClick = { navController.popBackStack() },
+                onNotificationClick = { navController.navigate("notifications") }
             )
         }
     ) {
@@ -116,7 +118,7 @@ fun TravelAddExpenseScreen(
             ) {
                 PrimaryButton(
                     text = "Save",
-                    onClick = { }
+                    onClick = { /* Lógica para guardar */ }
                 )
             }
         }

@@ -1,7 +1,5 @@
 package com.example.parcialtp3.ui.screens.categories.groceries
 
-
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Cyprus
@@ -30,7 +28,7 @@ import com.example.parcialtp3.ui.components.RoundedInputRow
 
 @Composable
 fun GroceriesAddExpenseScreen(
-    navController: NavController? = null
+    navController: NavHostController
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
@@ -39,7 +37,9 @@ fun GroceriesAddExpenseScreen(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                onBackClick = { navController?.popBackStack() }
+                navController = navController,
+                onBackClick = { navController.popBackStack() },
+                onNotificationClick = { navController.navigate("notifications") }
             )
         }
     ) {
@@ -56,7 +56,7 @@ fun GroceriesAddExpenseScreen(
                 // --- 1) DATE ---
                 RoundedInputRow(
                     label = "Date",
-                    value = "March 30, 2024", // <-- Dato del Figma
+                    value = "March 30, 2024",
                     valueColor = Void,
                     trailing = {
                         Box(
@@ -109,6 +109,7 @@ fun GroceriesAddExpenseScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // --- 5) ENTER MESSAGE ---
                 MessageBox(label = "Enter Message")
                 Spacer(modifier = Modifier.height(12.dp))
             }

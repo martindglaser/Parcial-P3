@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.BackgroundScaffold
@@ -21,12 +21,13 @@ data class TravelExpense(
 
 @Composable
 fun TravelScreen(
-    navController: NavController? = null
+    navController: NavHostController
 ) {
     val marchExpenses = listOf(
         TravelExpense("Tickets", "18:27 - March 30", "-$1,200.00"),
         TravelExpense("Hotel", "15:00 - March 24", "-$3,000.00"),
     )
+
     val februaryExpenses = listOf(
         TravelExpense("Suitcase", "12:30 - February 15", "-$250.00"),
     )
@@ -39,13 +40,12 @@ fun TravelScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-
             ) {
                 HeaderBar(
                     title = "Travel",
-                    onBackClick = { navController?.popBackStack() },
-                    onNotificationClick = { /* hacer*/ },
-
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() },
+                    onNotificationClick = { navController.navigate("notifications") }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
 
@@ -63,7 +63,7 @@ fun TravelScreen(
                 amount = { it.amount },
                 iconResId = R.drawable.vector_gift,
                 onAddExpense = {
-                    navController?.navigate("travel/addExpense")
+                    navController.navigate("travel/addExpense")
                 }
             )
         }

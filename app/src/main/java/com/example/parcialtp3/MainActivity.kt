@@ -22,6 +22,9 @@ import com.example.parcialtp3.ui.components.BottomNavIcon
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
 import com.example.parcialtp3.ui.screens.launch.SplashScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
+import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
+import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
+import com.example.parcialtp3.ui.screens.profile.Profile_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -112,10 +115,16 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
         composable("welcome") { WelcomeScreen(navController) }
+        composable("b_launch") { LaunchScreen(navController) }
+        composable("notifications") { NotificationScreen(navController) }
+        composable("edit_profile") { Edit_Profile_Screen(navController) }
+
+
+
 
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
-        composable("profile") { ProfileScreen(navController, drawerState) }
+        composable("profile") { Profile_Screen(navController)}
         composable("settings") { SettingsScreen(navController, drawerState) }
     }
 }

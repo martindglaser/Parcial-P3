@@ -1,64 +1,38 @@
 package com.example.parcialtp3.ui.screens.profile
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
-import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.components.BackgroundScaffold
-import com.example.parcialtp3.ui.components.CabeceraTransactions
-import com.example.parcialtp3.ui.components.DisplayName
-import com.example.parcialtp3.ui.components.HeaderBar
-import com.example.parcialtp3.ui.components.ImagenFlotadora
-import com.example.parcialtp3.ui.components.MonthSection
-import com.example.parcialtp3.ui.components.ProfileOption
-import com.example.parcialtp3.ui.components.RoundedButton
-import com.example.parcialtp3.ui.components.TarjetaBalance
-import com.example.parcialtp3.ui.components.Transaction
-import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.components.*
 
 @Composable
-fun Profile_Screen() {
+fun Profile_Screen(navController: NavHostController) {
     val showDialog = remember { mutableStateOf(false) }
 
     BackgroundScaffold(
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {
-            HeaderBar(title = "Profile")
+            // 🔹 Ahora el HeaderBar recibe el navController
+            HeaderBar(title = "Profile", navController = navController, onBackClick = {
+                navController.popBackStack()
+            })
         },
         panelContent = {
             Column(
@@ -67,7 +41,7 @@ fun Profile_Screen() {
             ) {
                 Spacer(Modifier.height(50.dp))
 
-                DisplayName("25030024","John Smith")
+                DisplayName("25030024", "John Smith")
 
                 Spacer(Modifier.height(20.dp))
 
@@ -84,11 +58,9 @@ fun Profile_Screen() {
         }
     )
 
+    ImagenFlotadora(135.dp, R.drawable.profile_picture)
 
-    ImagenFlotadora(135.dp,R.drawable.profile_picture)
-
-
-   if (showDialog.value) {
+    if (showDialog.value) {
         AlertDialog(
             onDismissRequest = { showDialog.value = false },
             confirmButton = {
@@ -96,17 +68,13 @@ fun Profile_Screen() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-
                     RoundedButton(
                         text = "Yes, End Session",
                         width = 207.dp,
                         height = 45.dp,
                         backgroundColor = CaribbeanGreen,
                         textColor = Color.White,
-                        onClick = {
-                            showDialog.value = false
-                            // lógica de logout
-                        }
+                        onClick = { showDialog.value = false }
                     )
 
                     Spacer(Modifier.height(10.dp))
@@ -117,9 +85,7 @@ fun Profile_Screen() {
                         height = 45.dp,
                         backgroundColor = LightGreen,
                         textColor = Void,
-                        onClick = {
-                            showDialog.value = false
-                        }
+                        onClick = { showDialog.value = false }
                     )
                 }
             },
@@ -141,12 +107,7 @@ fun Profile_Screen() {
                     modifier = Modifier.fillMaxWidth()
                 )
             },
-            containerColor = Color.White,
-            shape = RoundedCornerShape(20.dp)
+            containerColor = Color.White
         )
-  }
+    }
 }
-
-
-
-

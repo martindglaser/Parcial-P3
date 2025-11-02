@@ -1,72 +1,55 @@
 package com.example.parcialtp3.ui.screens.transaction
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
-import com.example.parcialtp3.ui.OceanBlue
-import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.components.BackgroundScaffold
-import com.example.parcialtp3.ui.components.CabeceraTransactions
-import com.example.parcialtp3.ui.components.FinanceSummaryBlock
-import com.example.parcialtp3.ui.components.HeaderBar
-import com.example.parcialtp3.ui.components.MonthSection
-import com.example.parcialtp3.ui.components.TarjetaBalance
-import com.example.parcialtp3.ui.components.Transaction
-import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.*
+import com.example.parcialtp3.ui.components.*
 
 @Composable
-fun Transaction_Screen() {
+fun TransactionScreen(
+    navController: NavHostController
+) {
     BackgroundScaffold(
         headerHeight = 410.dp,
         whiteHeight = Dp.Unspecified,
-        headerContent = { Transaction_Header() },
-        panelContent = { PreviewMonthSection() }
+        headerContent = {
+            TransactionHeader(navController)
+        },
+        panelContent = {
+            PreviewMonthSection()
+        }
     )
 }
 
 @Composable
-fun Transaction_Header() {
+fun TransactionHeader(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        HeaderBar("Transaction")
+        HeaderBar(
+            title = "Transactions",
+            navController = navController,
+            onBackClick = { navController.popBackStack() },
+            onNotificationClick = { navController.navigate("notifications") }
+        )
+
         TarjetaBalance(
             backgroundColor = Honeydew,
             text1 = "Total Balance",
             text2 = "$7,783.00"
         )
+
         FinanceSummaryBlock()
         Spacer(modifier = Modifier.weight(1f))
     }
 }
 
-
-
-@Preview(showBackground = true)
 @Composable
 fun PreviewMonthSection() {
     val aprilTransactions = listOf(
@@ -75,7 +58,7 @@ fun PreviewMonthSection() {
             title = "Salary",
             subtitle = "18:27 - April 30",
             middleText = "Monthly",
-            value = "$4.000,00",
+            value = "$4,000.00",
             valueColor = Void
         ),
         Transaction(
@@ -83,7 +66,7 @@ fun PreviewMonthSection() {
             title = "Groceries",
             subtitle = "17:00 - April 24",
             middleText = "Pantry",
-            value = "-$100,00",
+            value = "-$100.00",
             valueColor = OceanBlue
         ),
         Transaction(
@@ -91,7 +74,7 @@ fun PreviewMonthSection() {
             title = "Rent",
             subtitle = "8:30 - April 15",
             middleText = "Rent",
-            value = "-$674,40",
+            value = "-$674.40",
             valueColor = OceanBlue
         ),
         Transaction(
@@ -99,17 +82,18 @@ fun PreviewMonthSection() {
             title = "Transport",
             subtitle = "7:30 - April 08",
             middleText = "Fuel",
-            value = "-$4,13",
+            value = "-$4.13",
             valueColor = OceanBlue
         )
     )
+
     val marchTransactions = listOf(
         Transaction(
             iconRes = R.drawable.icon_food,
             title = "Food",
             subtitle = "19:30 - March 31",
             middleText = "Dinner",
-            value = "-$70,40",
+            value = "-$70.40",
             valueColor = OceanBlue
         )
     )

@@ -1,12 +1,15 @@
 package com.example.parcialtp3.ui.screens.loginSignUp
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -19,32 +22,53 @@ import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.components.BackgroundScaffold
-import com.example.parcialtp3.ui.components.FacebookGoogle
-import com.example.parcialtp3.ui.components.PoppinsFamily
-import com.example.parcialtp3.ui.components.RoundedButton
-import com.example.parcialtp3.ui.components.RoundedInputField
-import com.example.parcialtp3.ui.components.RoundedPassInput
-import com.example.parcialtp3.ui.components.SimpleText
-import com.example.parcialtp3.ui.components.TitleText
+import com.example.parcialtp3.ui.components.*
 
 @Composable
 fun WelcomeScreen(navController: NavHostController) {
     BackgroundScaffold(
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
-        headerContent = { Title() },
-        panelContent = { Body() }
+        headerContent = { TitleWithBack(navController) },
+        panelContent = { Body(navController) }
     )
 }
 
 @Composable
-private fun Title() {
-    TitleText("Welcome", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+private fun TitleWithBack(navController: NavHostController) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp, vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Botón de retroceso
+        IconButton(onClick = { navController.navigate("b_launch") }) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Go back",
+                tint = Color.Black
+            )
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        // Título centrado
+        TitleText(
+            text = "Welcome",
+            color = Void,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.weight(1f),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.width(48.dp)) // balance visual del ícono
+    }
 }
+
 @Composable
-private fun Body() {
-    Column (horizontalAlignment = Alignment.CenterHorizontally){
+private fun Body(navController: NavHostController) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         RoundedInputField(
             label = "Username or Email",
             placeholder = "example@example.com",
@@ -58,7 +82,7 @@ private fun Body() {
             width = 207.dp,
             height = 45.dp,
             backgroundColor = CaribbeanGreen,
-            onClick = {}
+            onClick = { /* TODO: agregar navegación al onboarding */ }
         )
         Spacer(Modifier.height(15.dp))
         SimpleText("Forgot Password?", color = Void, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)

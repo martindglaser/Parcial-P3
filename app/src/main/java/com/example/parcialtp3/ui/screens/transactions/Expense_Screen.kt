@@ -3,12 +3,12 @@ package com.example.parcialtp3.ui.screens.transactions
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.compose.material3.Scaffold
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
@@ -23,7 +23,7 @@ fun TransactionsExpenseScreen(navController: NavHostController) {
         BackgroundScaffold(
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
-            headerContent = { TransactionsExpenseHeader() },
+            headerContent = { TransactionsExpenseHeader(navController) }, // ✅ le pasamos el navController
             panelContent = { PreviewTransactionsExpenseMonthSection() },
             modifier = Modifier.padding(paddingValues)
         )
@@ -31,11 +31,16 @@ fun TransactionsExpenseScreen(navController: NavHostController) {
 }
 
 @Composable
-fun TransactionsExpenseHeader() {
+fun TransactionsExpenseHeader(navController: NavHostController) { // ✅ lo agregamos acá también
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        HeaderBar("Transaction")
+        HeaderBar(
+            title = "Transaction",
+            navController = navController, // ✅ se lo pasamos al HeaderBar
+            onBackClick = { navController.popBackStack() }
+        )
+
         CabeceraTransactions(
             tarjetaBalanceText1 = "Total Balance",
             tarjetaBalanceText2 = "$7,783.00",
@@ -52,6 +57,7 @@ fun TransactionsExpenseHeader() {
             tarjeta2Texto1Color = Honeydew,
             tarjeta2Texto2Color = Honeydew
         )
+
         Spacer(modifier = Modifier.weight(1f))
     }
 }
