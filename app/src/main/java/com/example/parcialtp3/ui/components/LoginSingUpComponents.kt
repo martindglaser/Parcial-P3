@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -54,6 +55,7 @@ import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.VividBlue
 import com.example.parcialtp3.ui.Void
+import com.example.parcialtp3.ui.poppinsFamily
 
 @Composable
 fun RoundedInputField(
@@ -198,26 +200,23 @@ fun RoundedButton(
     textColor: Color = Void,
     onClick: () -> Unit = {}
 ) {
-    Surface(
-        color = backgroundColor,
-        shape = RoundedCornerShape(50.dp),
+    Box(
         modifier = modifier
             .sizeIn(minWidth = width, minHeight = height)
-            .clickable(onClick = onClick)
+            .clip(RoundedCornerShape(50.dp))
+            .background(backgroundColor)
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier
-                .height(height),
-            contentAlignment = Alignment.Center
-        ) {
-            SimpleText(
-                text = text,
-                color = textColor,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
+        Text(
+            text = text,
+            color = textColor,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = poppinsFamily,
+            modifier = Modifier.align(Alignment.Center)
+
+        )
     }
 }
 @Composable

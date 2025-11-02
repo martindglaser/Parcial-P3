@@ -12,3 +12,6 @@ val Cyprus = Color(0xFF0E3E3E)
 val LightBlue = Color(0xFF6DB6FE)
 val VividBlue = Color(0xFF3299FF)
 val OceanBlue = Color(0xFF0068FF)
+
+val DarkTeal = Color(0xFF093030)
+
