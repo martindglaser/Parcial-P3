@@ -124,6 +124,7 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("edit_profile") { Edit_Profile_Screen(navController) }
 
 
+        composable("Tranasction_Screen") { TransactionScreen(navController) }
         composable("Tranasctions_Screen") { Transactions_Screen(navController) }
         composable("Income_Screen") { TransactionsIncomeScreen(navController) }
         composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
