@@ -29,7 +29,6 @@ fun Profile_Screen(navController: NavHostController) {
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {
-            // 🔹 Ahora el HeaderBar recibe el navController
             HeaderBar(title = "Profile", navController = navController, onBackClick = {
                 navController.popBackStack()
             })
@@ -45,10 +44,24 @@ fun Profile_Screen(navController: NavHostController) {
 
                 Spacer(Modifier.height(20.dp))
 
-                ProfileOption(R.drawable.icon_profile, "Edit Profile")
-                ProfileOption(R.drawable.icon_security, "Security")
-                ProfileOption(R.drawable.icon_setting, "Setting")
-                ProfileOption(R.drawable.icon_help, "Help")
+                ProfileOption(iconRes = R.drawable.icon_profile,
+                    label = "Edit Profile",
+                    onClick = {navController.navigate("edit_profile")}
+                )
+                ProfileOption(
+                    iconRes = R.drawable.icon_security,
+                    label = "Security",
+                    onClick = {navController.navigate("security")}
+                )
+                ProfileOption(
+                    iconRes = R.drawable.icon_setting,
+                    label = "Setting",
+                    onClick = {navController.navigate("settings")}
+                )
+                ProfileOption(iconRes = R.drawable.icon_help,
+                    label = "Help",
+                    onClick = {}
+                )
                 ProfileOption(
                     iconRes = R.drawable.icon_logout,
                     label = "Logout",

@@ -36,8 +36,7 @@ fun A_Security_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Security",
-                onBackClick = onBack,
-                onNotificationClick = onNotifications
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

@@ -25,6 +25,7 @@ import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
 import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.Profile_Screen
+import com.example.parcialtp3.ui.screens.profile.security.A_Security_Screen
 import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
@@ -132,6 +133,7 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
 
 
 
+        composable("security") { A_Security_Screen(navController) }
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { Profile_Screen(navController)}
