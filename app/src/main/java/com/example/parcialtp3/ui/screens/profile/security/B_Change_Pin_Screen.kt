@@ -8,19 +8,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
+import com.example.parcialtp3.ui.components.PasswordInputField
 
 @Composable
 fun B_Change_Pin_Screen(
@@ -46,27 +41,27 @@ fun B_Change_Pin_Screen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                Spacer(Modifier.height(20.dp))
+                Spacer(Modifier.height(16.dp))
 
                 var currentPin by remember { mutableStateOf("") }
                 var newPin by remember { mutableStateOf("") }
                 var confirmPin by remember { mutableStateOf("") }
 
-                PinField(
+                PasswordInputField(
                     label = "Current Pin",
                     value = currentPin,
                     onValueChange = { currentPin = it }
                 )
                 Spacer(Modifier.height(20.dp))
 
-                PinField(
+                PasswordInputField(
                     label = "New Pin",
                     value = newPin,
                     onValueChange = { newPin = it }
                 )
                 Spacer(Modifier.height(20.dp))
 
-                PinField(
+                PasswordInputField(
                     label = "Confirm Pin",
                     value = confirmPin,
                     onValueChange = { confirmPin = it }
@@ -82,7 +77,7 @@ fun B_Change_Pin_Screen(
                     shape = RoundedCornerShape(24.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = CaribbeanGreen,
-                        contentColor = Void
+                        contentColor = Color.Black
                     )
                 ) {
                     Text("Change Pin", style = MaterialTheme.typography.bodyLarge)
@@ -92,50 +87,6 @@ fun B_Change_Pin_Screen(
             }
         }
     )
-}
-
-@Composable
-private fun PinField(
-    label: String,
-    value: String,
-    onValueChange: (String) -> Unit
-) {
-    Column(Modifier.fillMaxWidth()) {
-        Text(label, style = MaterialTheme.typography.bodyMedium, color = Void)
-        Spacer(Modifier.height(6.dp))
-
-        TextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(46.dp),
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(R.drawable.eyepass),
-                    contentDescription = null,
-                    tint = Color.Unspecified,
-                    modifier = Modifier.size(18.dp)
-                )
-            },
-            shape = RoundedCornerShape(18.dp),
-            textStyle = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = LightGreen,
-                unfocusedContainerColor = LightGreen,
-                disabledContainerColor = LightGreen,
-                cursorColor = Void,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                focusedTextColor = Void,
-                unfocusedTextColor = Void
-            )
-        )
-    }
 }
 
 @Preview(showBackground = true, showSystemUi = true, name = "Change Pin")
