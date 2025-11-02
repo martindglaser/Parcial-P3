@@ -1,16 +1,19 @@
-package com.example.parcialtp3.ui.screens.categories
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.components.AddCategoryDialog
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryGridItem
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
@@ -28,6 +31,8 @@ fun CategoriesScreen(
     onBack: () -> Unit = {},
     onCategoryClick: (String) -> Unit = {}
 ) {
+    var showAddCategoryDialog by remember { mutableStateOf(false) }
+
     val primaryColor = Color(0xFF006BFF)
     val secondaryColor = Color(0xFF87C8FF)
 
@@ -38,10 +43,22 @@ fun CategoriesScreen(
         CategoryUi("groceries", "Groceries", R.drawable.vector_groceries),
         CategoryUi("rent", "Rent", R.drawable.vector_rent),
         CategoryUi("gifts", "Gifts", R.drawable.vector_gift),
-        CategoryUi("savings", "Savings", R.drawable.vector_gift),
+        CategoryUi("savings", "Savings", R.drawable.vector_savings),
         CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter),
         CategoryUi("new_category", "More", R.drawable.vector_more)
     )
+
+    if (showAddCategoryDialog) {
+        AddCategoryDialog(
+            onDismissRequest = {
+                showAddCategoryDialog = false
+            },
+            onConfirm = { categoryName ->
+
+                showAddCategoryDialog = false
+            }
+        )
+    }
 
     BackgroundScaffold(
         headerHeight = 290.dp,
@@ -52,7 +69,7 @@ fun CategoriesScreen(
                 HeaderBar(
                     title = "Categories",
                     onBackClick = onBack,
-                    onNotificationClick = { /* ... */ }
+                    onNotificationClick = { }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 FinanceSummaryBlock()
@@ -75,7 +92,13 @@ fun CategoriesScreen(
                             title = item.title,
                             iconRes = item.iconRes,
                             backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
-                            onClick = { onCategoryClick(item.id) }
+                            onClick = {
+                                if (item.id == "new_category") {
+                                    showAddCategoryDialog = true
+                                } else {
+                                    onCategoryClick(item.id)
+                                }
+                            }
                         )
                     }
                 }
