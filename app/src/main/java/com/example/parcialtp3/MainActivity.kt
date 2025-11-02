@@ -114,7 +114,7 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        composable("welcome") { WelcomeScreen(navController) }
+        composable("welcome") { WelcomeScreen() }
         composable("b_launch") { LaunchScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("edit_profile") { Edit_Profile_Screen(navController) }
