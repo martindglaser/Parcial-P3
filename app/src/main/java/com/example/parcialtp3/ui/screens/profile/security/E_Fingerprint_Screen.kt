@@ -22,6 +22,7 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 import androidx.compose.ui.unit.sp
+import com.example.parcialtp3.ui.components.LargeFingerprintIcon
 
 @Composable
 fun E_Fingerprint_Screen(
@@ -49,18 +50,7 @@ fun E_Fingerprint_Screen(
             ) {
                 Spacer(Modifier.height(28.dp))
 
-                Box(
-                    modifier = Modifier
-                        .size(180.dp)
-                        .background(CaribbeanGreen, CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_fingerprint),
-                        contentDescription = null,
-                        modifier = Modifier.size(180.dp)
-                    )
-                }
+                LargeFingerprintIcon()
 
                 Spacer(Modifier.height(20.dp))
 
