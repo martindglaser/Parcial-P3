@@ -25,6 +25,10 @@ import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
 import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.Profile_Screen
+import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
+import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
+import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
+import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -118,6 +122,11 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("b_launch") { LaunchScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("edit_profile") { Edit_Profile_Screen(navController) }
+
+
+        composable("Tranasctions_Screen") { Transactions_Screen(navController) }
+        composable("Income_Screen") { TransactionsIncomeScreen(navController) }
+        composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
 
 
 
