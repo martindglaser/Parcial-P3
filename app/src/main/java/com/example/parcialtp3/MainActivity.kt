@@ -19,17 +19,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.parcialtp3.ui.components.BottomNavIcon
+import com.example.parcialtp3.ui.screens.accountBalance.AccountBalanceScreen
+import com.example.parcialtp3.ui.screens.home.HomeScreen
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
 import com.example.parcialtp3.ui.screens.launch.SplashScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
 import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
+import com.example.parcialtp3.ui.screens.onBoarding.OnBoardingAScreen
+import com.example.parcialtp3.ui.screens.onBoarding.OnBoardingBScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.Profile_Screen
-import com.example.parcialtp3.ui.screens.profile.security.A_Security_Screen
-import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
-import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
-import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -115,25 +115,23 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(
         navController = navController,
-        startDestination = "splash"
+        startDestination = "account_balance"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        composable("welcome") { WelcomeScreen() }
+        composable("welcome") { WelcomeScreen(navController) }
         composable("b_launch") { LaunchScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("edit_profile") { Edit_Profile_Screen(navController) }
+        composable("home") { HomeScreen(navController) }
+        composable("account_balance") { AccountBalanceScreen(navController) }
+        composable("transactions_expense") { TransactionsExpenseScreen(navController) }
+        composable("OnboardingA") { OnBoardingAScreen(navController) }
+        composable("OnboardingB") { OnBoardingBScreen(navController) }
 
 
-        composable("Tranasction_Screen") { TransactionScreen(navController) }
-        composable("Tranasctions_Screen") { Transactions_Screen(navController) }
-        composable("Income_Screen") { TransactionsIncomeScreen(navController) }
-        composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
 
 
-
-
-        composable("security") { A_Security_Screen(navController) }
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { Profile_Screen(navController)}

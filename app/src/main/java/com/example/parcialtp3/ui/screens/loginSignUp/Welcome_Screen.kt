@@ -1,18 +1,13 @@
 package com.example.parcialtp3.ui.screens.loginSignUp
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -33,13 +28,13 @@ import com.example.parcialtp3.ui.components.RoundedInputField
 import com.example.parcialtp3.ui.components.RoundedPassInput
 import com.example.parcialtp3.ui.components.SimpleText
 import com.example.parcialtp3.ui.components.TitleText
-import com.example.parcialtp3.ui.viewmodels.WelcomeViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun WelcomeScreen(
-    vm: WelcomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    vm: NavHostController = viewModel()
 ) {
     var email by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
