@@ -14,6 +14,8 @@ import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.*
+import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
+
 
 @Composable
 fun Transactions_Screen(navController: NavHostController) {

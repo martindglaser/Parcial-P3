@@ -11,7 +11,7 @@ import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.*
-import com.example.parcialtp3.ui.screens.transactions.TransactionsViewModel
+import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
 @Composable
 fun TransactionScreen(
