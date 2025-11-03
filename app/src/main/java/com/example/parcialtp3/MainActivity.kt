@@ -118,7 +118,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(
         navController = navController,
-        startDestination = "categories"
+        startDestination = "splash"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
