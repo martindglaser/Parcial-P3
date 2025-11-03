@@ -3,7 +3,12 @@ package com.example.parcialtp3.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,17 +21,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
 
+
 @Composable
 fun HeaderBar(
     title: String,
-    navController: NavHostController,
-    onBackClick: (() -> Unit)? = null
+    onBackClick: (() -> Unit)? = null,
+    onNotificationClick: (() -> Unit)? = null
 ) {
     Row(
         modifier = Modifier
@@ -36,7 +41,7 @@ fun HeaderBar(
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        // Flecha para volver
+
         Image(
             painter = painterResource(id = R.drawable.bring_back),
             contentDescription = "Back",
@@ -46,7 +51,6 @@ fun HeaderBar(
             contentScale = ContentScale.Fit
         )
 
-        // Título centrado
         Text(
             text = title,
             color = Void,
@@ -57,10 +61,19 @@ fun HeaderBar(
             textAlign = TextAlign.Center
         )
 
-        // Botón funcional de notificaciones (reutiliza el composable NotificationFAB)
-        NotificationFAB(navController = navController)
+        Box(
+            modifier = Modifier
+                .size(32.dp)
+                .background(Color(0xFFE9FFF6), CircleShape)
+                .clickable { onNotificationClick?.invoke() },
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.icon_notification),
+                contentDescription = "Notifications",
+                modifier = Modifier.size(20.dp),
+                contentScale = ContentScale.Fit
+            )
+        }
     }
 }
-
-
-

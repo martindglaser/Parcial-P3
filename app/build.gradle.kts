@@ -54,15 +54,10 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.9.4") // <-- MODIFIED LINE
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
-    //RETROFIT
-    implementation(libs.retrofit)
-
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-// lifecycle-viewmodel para Compose
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+   // implementation(libs.androidx.compose.foundation)
+    implementation("androidx.compose.foundation:foundation")
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

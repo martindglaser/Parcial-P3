@@ -28,17 +28,25 @@ import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BottomNavIcon
-import com.example.parcialtp3.ui.screens.launch.LaunchScreen
-import com.example.parcialtp3.ui.screens.launch.SplashScreen
-import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
-import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
-import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
-import com.example.parcialtp3.ui.screens.profile.Profile_Screen
-import com.example.parcialtp3.ui.screens.profile.security.A_Security_Screen
-import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
-import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
-import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
-import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
+
+import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.screens.categories.entertainment.A_Entertainment_Screen
+import com.example.parcialtp3.ui.screens.categories.food.FoodScreen
+import com.example.parcialtp3.ui.screens.categories.gifts.GiftsScreen
+import com.example.parcialtp3.ui.screens.categories.groceries.GroceriesScreen
+
+
+import com.example.parcialtp3.ui.screens.categories.medicine.A_Medicine_Screen
+
+import com.example.parcialtp3.ui.screens.categories.rent.RentScreen
+import com.example.parcialtp3.ui.screens.categories.saving.CarScreen
+import com.example.parcialtp3.ui.screens.categories.saving.NewHouseScreen
+import com.example.parcialtp3.ui.screens.categories.saving.SavingsScreen
+import com.example.parcialtp3.ui.screens.categories.saving.TravelScreen
+import com.example.parcialtp3.ui.screens.categories.saving.WeddingScreen
+import com.example.parcialtp3.ui.screens.categories.transport.TransportScreen
+
+
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -124,31 +132,11 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 /* ---------------- NAVHOST PRINCIPAL ---------------- */
 @Composable
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
-    NavHost(
-        navController = navController,
-        startDestination = "splash"
-    ) {
-        composable("splash") { SplashScreen(navController) }
-        composable("launch") { LaunchScreen(navController) }
-        composable("welcome") { WelcomeScreen() }
-        composable("b_launch") { LaunchScreen(navController) }
-        composable("notifications") { NotificationScreen(navController) }
-        composable("edit_profile") { Edit_Profile_Screen(navController) }
-
-
-        composable("Tranasction_Screen") { TransactionScreen(navController) }
-        composable("Tranasctions_Screen") { Transactions_Screen(navController) }
-        composable("Income_Screen") { TransactionsIncomeScreen(navController) }
-        composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
-
-
-
-
-        composable("security") { A_Security_Screen(navController) }
+    NavHost(navController = navController, startDestination = "shopList") {
         composable("shopList") { Transactions(navController, drawerState) }
         composable("detail") { DetailScreen(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
-        composable("profile") { Profile_Screen(navController)}
+        composable("profile") { ProfileScreen(navController, drawerState) }
         composable("settings") { SettingsScreen(navController, drawerState) }
     }
 }

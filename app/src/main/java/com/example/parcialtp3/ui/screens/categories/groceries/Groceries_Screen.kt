@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
@@ -26,13 +26,12 @@ data class GroceriesExpense(
 
 @Composable
 fun GroceriesScreen(
-    navController: NavHostController
+    navController: NavController? = null
 ) {
     val marchExpenses = listOf(
         GroceriesExpense("Pantry", "17:00 - March 24", "-$26,00"),
         GroceriesExpense("Snacks", "17:02 - March 24", "-$18,35")
     )
-
     val februaryExpenses = listOf(
         GroceriesExpense("Canned Food", "18:30 - February 28", "-$15,40"),
         GroceriesExpense("Veeggies", "18:31 - February 28", "-$12,13"),
