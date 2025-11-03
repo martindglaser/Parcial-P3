@@ -17,7 +17,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
+import com.example.parcialtp3.ui.screens.transactions.TransactionsViewModel
+
 
 @Composable
 fun TransactionsMonthSection(
