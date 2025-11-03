@@ -9,9 +9,9 @@ import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryPanel
+import com.example.parcialtp3.ui.components.MonthlyExpenseGroup
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
 import com.example.parcialtp3.ui.components.HeaderBar
-import com.example.parcialtp3.ui.poppinsFamily
 
 data class FoodExpense(
     val title: String,
@@ -32,6 +32,12 @@ fun FoodScreen(
 
     val marchExpenses = listOf(
         FoodExpense("Dinner", "20:50 - March 31", "-$27,20")
+    )
+
+
+    val allMonthlyExpenses = listOf(
+        MonthlyExpenseGroup("April", aprilExpenses),
+        MonthlyExpenseGroup("March", marchExpenses)
     )
 
     BackgroundScaffold(
@@ -56,16 +62,13 @@ fun FoodScreen(
         },
         panelContent = {
             CategoryPanel(
-                month1Name = "April",
-                month1Expenses = aprilExpenses,
-                month2Name = "March",
-                month2Expenses = marchExpenses,
-                title = { it.title },
-                time = { it.time },
-                amount = { it.amount },
+                monthlyExpenses = allMonthlyExpenses,
                 iconResId = R.drawable.vector_food,
                 onAddExpense = {
-                    navController.navigate("food/addExpense")
+                    navController?.navigate("food/addExpense")
+                },
+                expenseData = { expense ->
+                    Triple(expense.title, expense.time, expense.amount)
                 }
             )
         }

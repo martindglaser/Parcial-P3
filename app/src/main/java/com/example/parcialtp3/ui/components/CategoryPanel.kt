@@ -1,141 +1,188 @@
 package com.example.parcialtp3.ui.components
 
-
-
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.FenceGreen
-import com.example.parcialtp3.ui.LightBlue
-import com.example.parcialtp3.ui.VividBlue
-import com.example.parcialtp3.ui.Void
+import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.poppinsFamily
+
+
+data class MonthlyExpenseGroup<T>(
+    val month: String,
+    val expenses: List<T>
+)
 
 @Composable
 fun <T> CategoryPanel(
-    month1Name: String,
-    month1Expenses: List<T>,
-    month2Name: String,
-    month2Expenses: List<T>,
-    title: (T) -> String,
-    time: (T) -> String,
-    amount: (T) -> String,
+    monthlyExpenses: List<MonthlyExpenseGroup<T>>,
+    expenseData: (T) -> Triple<String, String, String>,
     @DrawableRes iconResId: Int,
     onAddExpense: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp, bottom = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = month1Name,
-                style = TextStyle(
-                    fontFamily = poppinsFamily,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 15.sp,
-                    color = Void
-                )
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Surface(
-                modifier = Modifier.size(36.dp),
-                shape = CircleShape,
-                color = CaribbeanGreen,
-                shadowElevation = 0.dp
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.vector_calendar),
-                        contentDescription = "Calendar",
-                        tint = FenceGreen,
-                        modifier = Modifier.size(18.dp)
-                    )
-                }
-            }
-        }
-
         LazyColumn(
             modifier = Modifier
+                .weight(1f)
                 .fillMaxWidth()
-                .weight(1f),
-            contentPadding = PaddingValues(bottom = 12.dp)
+                .padding(horizontal = 20.dp)
         ) {
-            itemsIndexed(month1Expenses) { index, expense ->
-                CategoryExpenseRow(
-                    expense = expense,
-                    title = title,
-                    time = time,
-                    amount = amount,
-                    iconResId = iconResId,
-                    iconBackground = if (index % 2 == 0) LightBlue else VividBlue
-                )
+
+            var globalExpenseIndex = 0
+
+            monthlyExpenses.forEachIndexed { monthIndex, monthlyData ->
+
+                item {
+                    CategoryPanelMonthHeader(
+                        month = monthlyData.month,
+                        showCalendar = monthIndex == 0
+                    )
+                }
+
+                items(monthlyData.expenses) { expenseItem ->
+
+                    val (title, time, amount) = expenseData(expenseItem)
+
+                    CategoryExpenseRow(
+
+                        title = title,
+                        time = time,
+                        amount = amount,
+                        iconResId = iconResId,
+                        iconBackground = if (globalExpenseIndex % 2 == 0) VividBlue else LightBlue
+                    )
+                    globalExpenseIndex++
+                }
             }
 
             item {
-                Text(
-                    text = month2Name,
-                    modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
-                    style = TextStyle(
-                        fontFamily = poppinsFamily,
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 15.sp,
-                        color = Void
-                    )
-                )
-            }
-
-            itemsIndexed(month2Expenses) { index, expense ->
-                CategoryExpenseRow(
-                    expense = expense,
-                    title = title,
-                    time = time,
-                    amount = amount,
-                    iconResId = iconResId,
-                    iconBackground = if (index % 2 == 0) LightBlue else VividBlue
-                )
+                Spacer(modifier = Modifier.height(6.dp))
             }
         }
 
-        PrimaryButton(
-            text = "Add Expenses",
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp)
-                .wrapContentWidth(Alignment.CenterHorizontally),
-            onClick = onAddExpense
+                .padding(horizontal = 20.dp, vertical = 18.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            PrimaryButton(
+                text = "Add Expenses",
+                onClick = onAddExpense
+            )
+        }
+    }
+}
+
+@Composable
+private fun CategoryPanelMonthHeader(
+    month: String,
+    showCalendar: Boolean
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp, bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = month,
+            fontFamily = poppinsFamily,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Medium,
+            color = Void
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.weight(1f))
+        if (showCalendar) {
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(CaribbeanGreen)
+                    .padding(7.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.vector_calendar),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(18.dp)
+                        .width(18.dp)
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun CategoryExpenseRow(
+    title: String,
+    time: String,
+    amount: String,
+    @DrawableRes iconResId: Int,
+    iconBackground: Color
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(iconBackground),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = iconResId),
+                contentDescription = title,
+                tint = Color.White,
+                modifier = Modifier.size(22.dp)
+            )
+        }
+        Spacer(modifier = Modifier.width(12.dp))
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = title,
+                fontFamily = poppinsFamily,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Medium,
+                color = Void
+            )
+            Text(
+                text = time,
+                fontFamily = poppinsFamily,
+                fontSize = 12.sp,
+                color = Color(0xFF1064C8)
+            )
+        }
+        Text(
+            text = amount,
+            fontFamily = poppinsFamily,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Medium,
+            color = OceanBlue
+        )
     }
 }
