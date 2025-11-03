@@ -32,7 +32,8 @@ data class SavingCategoryUi(
     val id: String,
     val title: String,
     val iconRes: Int,
-    val isPrimary: Boolean = false
+    val isPrimary: Boolean = false,
+    val direccion: String
 )
 
 @Composable
@@ -43,10 +44,10 @@ fun SavingsScreen(
     val secondaryColor = Color(0xFF87C8FF)
 
     val categories = listOf(
-        SavingCategoryUi("travel", "Travel", R.drawable.vector_plane, true),
-        SavingCategoryUi("new_house", "New House", R.drawable.vector_newhouse),
-        SavingCategoryUi("car", "Car", R.drawable.vector_car),
-        SavingCategoryUi("wedding", "Wedding", R.drawable.vector_wedding),
+        SavingCategoryUi("travel", "Travel", R.drawable.vector_plane, true, direccion = ""),
+        SavingCategoryUi("new_house", "New House", R.drawable.vector_newhouse, direccion = ""),
+        SavingCategoryUi("car", "Car", R.drawable.vector_car, direccion = ""),
+        SavingCategoryUi("wedding", "Wedding", R.drawable.vector_wedding, direccion = ""),
     )
 
     BackgroundScaffold(
@@ -81,7 +82,8 @@ fun SavingsScreen(
                             title = item.title,
                             iconRes = item.iconRes,
                             backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
-                            onClick = { navController?.navigate(item.id) }
+                            direccion = item.direccion,
+                            navController = navController
                         )
                     }
                 }

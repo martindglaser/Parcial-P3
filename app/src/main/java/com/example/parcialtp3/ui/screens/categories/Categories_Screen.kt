@@ -24,13 +24,14 @@ data class CategoryUi(
     val id: String,
     val title: String,
     val iconRes: Int,
-    val isPrimary: Boolean = false
+    val isPrimary: Boolean = false,
+    val direccion: String
 )
 
 @Composable
 fun CategoriesScreen(
-    onCategoryClick: (String) -> Unit = {},
-    navController: NavHostController
+    navController: NavHostController,
+    onCategoryClick: (String) -> Unit = {}
 ) {
     var showAddCategoryDialog by remember { mutableStateOf(false) }
 
@@ -38,15 +39,15 @@ fun CategoriesScreen(
     val secondaryColor = Color(0xFF87C8FF)
 
     val categories = listOf(
-        CategoryUi("food", "Food", R.drawable.vector_food, true),
-        CategoryUi("transport", "Transport", R.drawable.vector_transport),
-        CategoryUi("medicine", "Medicine", R.drawable.vector_medicine),
-        CategoryUi("groceries", "Groceries", R.drawable.vector_groceries),
-        CategoryUi("rent", "Rent", R.drawable.vector_rent),
-        CategoryUi("gifts", "Gifts", R.drawable.vector_gift),
-        CategoryUi("savings", "Savings", R.drawable.vector_savings),
-        CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter),
-        CategoryUi("new_category", "More", R.drawable.vector_more)
+        CategoryUi("food", "Food", R.drawable.vector_food, true,direccion = "food"),
+        CategoryUi("transport", "Transport", R.drawable.vector_transport, direccion = "transport"),
+        CategoryUi("medicine", "Medicine", R.drawable.vector_medicine,direccion = ""),
+        CategoryUi("groceries", "Groceries", R.drawable.vector_groceries,direccion = ""),
+        CategoryUi("rent", "Rent", R.drawable.vector_rent,direccion = ""),
+        CategoryUi("gifts", "Gifts", R.drawable.vector_gift,direccion = ""),
+        CategoryUi("savings", "Savings", R.drawable.vector_savings,direccion = ""),
+        CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter,direccion = ""),
+        CategoryUi("new_category", "More", R.drawable.vector_more,direccion = "")
     )
 
     if (showAddCategoryDialog) {
@@ -92,14 +93,16 @@ fun CategoriesScreen(
                             title = item.title,
                             iconRes = item.iconRes,
                             backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
-                            onClick = {
-                                if (item.id == "new_category") {
-                                    showAddCategoryDialog = true
-                                } else {
-                                    onCategoryClick(item.id)
-                                }
-                            }
+                            direccion = item.direccion,
+                            navController = navController
                         )
+//                        onClick = {
+//                            if (item.id == "new_category") {
+//                                showAddCategoryDialog = true
+//                            } else {
+//                                onCategoryClick(item.id)
+//                            }
+//                        }
                     }
                 }
             }

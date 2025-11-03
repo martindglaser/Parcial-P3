@@ -1,5 +1,6 @@
 package com.example.parcialtp3
 
+import CategoriesScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.parcialtp3.ui.components.BottomNavIcon
+import com.example.parcialtp3.ui.screens.categories.food.FoodScreen
+import com.example.parcialtp3.ui.screens.categories.transport.TransportScreen
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
 import com.example.parcialtp3.ui.screens.launch.SplashScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
@@ -115,7 +118,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(
         navController = navController,
-        startDestination = "splash"
+        startDestination = "categories"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
@@ -130,6 +133,9 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("Income_Screen") { TransactionsIncomeScreen(navController) }
         composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
 
+        composable("food") { FoodScreen(navController) }
+        composable("transport") { TransportScreen(navController) }
+        composable("categories") { CategoriesScreen(navController) }
 
 
         composable("security") { A_Security_Screen(navController) }
