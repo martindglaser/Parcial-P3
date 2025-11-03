@@ -1,60 +1,108 @@
-package com.example.parcialtp3.ui.components
-
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
+import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.components.AddCategoryDialog
+import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.CategoryGridItem
+import com.example.parcialtp3.ui.components.FinanceSummaryBlock
+import com.example.parcialtp3.ui.components.HeaderBar
+
+data class CategoryUi(
+    val id: String,
+    val title: String,
+    val iconRes: Int,
+    val isPrimary: Boolean = false
+)
 
 @Composable
-fun HeaderBar(
-    title: String,
-    navController: NavHostController,
-    onBackClick: (() -> Unit)? = null,
-    onNotificationClick: (() -> Unit)? = null // 👈 nuevo parámetro agregado
+fun CategoriesScreen(
+    onCategoryClick: (String) -> Unit = {},
+    navController: NavHostController
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        // Botón atrás
-        IconButton(onClick = { onBackClick?.invoke() }) {
-            Icon(
-                painter = painterResource(id = R.drawable.bring_back),
-                contentDescription = "Back",
-                tint = Color.White
-            )
-        }
+    var showAddCategoryDialog by remember { mutableStateOf(false) }
 
-        // Título
-        Text(
-            text = title,
-            color = Color.White,
-            style = MaterialTheme.typography.titleLarge
+    val primaryColor = Color(0xFF006BFF)
+    val secondaryColor = Color(0xFF87C8FF)
+
+    val categories = listOf(
+        CategoryUi("food", "Food", R.drawable.vector_food, true),
+        CategoryUi("transport", "Transport", R.drawable.vector_transport),
+        CategoryUi("medicine", "Medicine", R.drawable.vector_medicine),
+        CategoryUi("groceries", "Groceries", R.drawable.vector_groceries),
+        CategoryUi("rent", "Rent", R.drawable.vector_rent),
+        CategoryUi("gifts", "Gifts", R.drawable.vector_gift),
+        CategoryUi("savings", "Savings", R.drawable.vector_savings),
+        CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter),
+        CategoryUi("new_category", "More", R.drawable.vector_more)
+    )
+
+    if (showAddCategoryDialog) {
+        AddCategoryDialog(
+            onDismissRequest = {
+                showAddCategoryDialog = false
+            },
+            onConfirm = { categoryName ->
+
+                showAddCategoryDialog = false
+            }
         )
-
-        // Botón de notificación
-        IconButton(onClick = { onNotificationClick?.invoke() }) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_notification),
-                contentDescription = "Notifications",
-                tint = Color.White
-            )
-        }
     }
+
+    BackgroundScaffold(
+        headerHeight = 290.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
+        headerContent = {
+            Column {
+                HeaderBar(
+                    title = "Categories",
+                    navController = navController
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                FinanceSummaryBlock()
+            }
+        },
+        panelContent = {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 18.dp)
+            ) {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    verticalArrangement = Arrangement.spacedBy(20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(bottom = 32.dp)
+                ) {
+                    items(categories) { item ->
+                        CategoryGridItem(
+                            title = item.title,
+                            iconRes = item.iconRes,
+                            backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
+                            onClick = {
+                                if (item.id == "new_category") {
+                                    showAddCategoryDialog = true
+                                } else {
+                                    onCategoryClick(item.id)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    )
 }

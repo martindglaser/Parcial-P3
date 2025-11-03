@@ -1,17 +1,23 @@
 package com.example.parcialtp3.ui.screens.categories.groceries
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.*
+import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryPanel
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
 import com.example.parcialtp3.ui.components.HeaderBar
-import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.components.MonthlyExpenseGroup
 
 data class GroceriesExpense(
     val title: String,
@@ -24,14 +30,18 @@ fun GroceriesScreen(
     navController: NavHostController
 ) {
     val marchExpenses = listOf(
-        GroceriesExpense("Groceries", "18:27 - March 30", "-$26,00"),
-        GroceriesExpense("Groceries", "15:00 - March 24", "-$18,35"),
-        GroceriesExpense("Groceries", "12:30 - March 15", "-$15,40"),
-        GroceriesExpense("Groceries", "9:30 - March 08", "-$12,13"),
+        GroceriesExpense("Pantry", "17:00 - March 24", "-$26,00"),
+        GroceriesExpense("Snacks", "17:02 - March 24", "-$18,35")
+    )
+    val februaryExpenses = listOf(
+        GroceriesExpense("Canned Food", "18:30 - February 28", "-$15,40"),
+        GroceriesExpense("Veeggies", "18:31 - February 28", "-$12,13"),
+        GroceriesExpense("Groceries", "18:31 - February 28", "-$27,20")
     )
 
-    val februaryExpenses = listOf(
-        GroceriesExpense("Groceries", "20:50 - February 28", "-$27,20")
+    val allMonthlyExpenses = listOf(
+        MonthlyExpenseGroup("March", marchExpenses),
+        MonthlyExpenseGroup("February", februaryExpenses)
     )
 
     BackgroundScaffold(
@@ -46,9 +56,7 @@ fun GroceriesScreen(
             ) {
                 HeaderBar(
                     title = "Groceries",
-                    navController = navController,
-                    onBackClick = { navController.popBackStack() },
-                    onNotificationClick = { navController.navigate("notifications") }
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()
@@ -56,16 +64,13 @@ fun GroceriesScreen(
         },
         panelContent = {
             CategoryPanel(
-                month1Name = "March",
-                month1Expenses = marchExpenses,
-                month2Name = "February",
-                month2Expenses = februaryExpenses,
-                title = { it.title },
-                time = { it.time },
-                amount = { it.amount },
+                monthlyExpenses = allMonthlyExpenses,
                 iconResId = R.drawable.vector_groceries,
                 onAddExpense = {
-                    navController.navigate("groceries/addExpense")
+                    navController?.navigate("groceries/addExpense")
+                },
+                expenseData = { expense ->
+                    Triple(expense.title, expense.time, expense.amount)
                 }
             )
         }

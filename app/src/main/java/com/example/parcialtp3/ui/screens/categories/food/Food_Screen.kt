@@ -4,14 +4,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryPanel
+import com.example.parcialtp3.ui.components.MonthlyExpenseGroup
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
 import com.example.parcialtp3.ui.components.HeaderBar
-import com.example.parcialtp3.ui.poppinsFamily
 
 data class FoodExpense(
     val title: String,
@@ -29,9 +30,14 @@ fun FoodScreen(
         FoodExpense("Lunch", "12:30 - April 15", "-$15,40"),
         FoodExpense("Brunch", "9:30 - April 08", "-$12,13"),
     )
-
     val marchExpenses = listOf(
         FoodExpense("Dinner", "20:50 - March 31", "-$27,20")
+    )
+
+
+    val allMonthlyExpenses = listOf(
+        MonthlyExpenseGroup("April", aprilExpenses),
+        MonthlyExpenseGroup("March", marchExpenses)
     )
 
     BackgroundScaffold(
@@ -46,26 +52,22 @@ fun FoodScreen(
             ) {
                 HeaderBar(
                     title = "Food",
-                    navController = navController,
-                    onBackClick = { navController.popBackStack() },
-                    onNotificationClick = { navController.navigate("notifications") }
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()
             }
         },
         panelContent = {
+
             CategoryPanel(
-                month1Name = "April",
-                month1Expenses = aprilExpenses,
-                month2Name = "March",
-                month2Expenses = marchExpenses,
-                title = { it.title },
-                time = { it.time },
-                amount = { it.amount },
+                monthlyExpenses = allMonthlyExpenses,
                 iconResId = R.drawable.vector_food,
                 onAddExpense = {
-                    navController.navigate("food/addExpense")
+                    navController?.navigate("food/addExpense")
+                },
+                expenseData = { expense ->
+                    Triple(expense.title, expense.time, expense.amount)
                 }
             )
         }

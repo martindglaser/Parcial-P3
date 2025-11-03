@@ -19,8 +19,6 @@ import com.example.parcialtp3.ui.components.PasswordInputField
 @Composable
 fun B_Change_Pin_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {},
-    onNotifications: () -> Unit = {},
     onConfirm: () -> Unit = {}
 ) {
     BackgroundScaffold(
@@ -30,8 +28,6 @@ fun B_Change_Pin_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Change Pin",
-                onBackClick = onBack,
-                onNotificationClick = onNotifications
             )
         },
         panelContent = {

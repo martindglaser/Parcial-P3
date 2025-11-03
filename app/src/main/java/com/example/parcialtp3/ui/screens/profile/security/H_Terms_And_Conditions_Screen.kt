@@ -28,8 +28,6 @@ import com.example.parcialtp3.ui.components.HeaderBar
 @Composable
 fun H_Terms_And_Conditions_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {},
-    onNotifications: () -> Unit = {},
     onOpenLink: (String) -> Unit = {},
     onAccept: () -> Unit = {}
 ) {
@@ -44,8 +42,6 @@ fun H_Terms_And_Conditions_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Terms And Conditions",
-                onBackClick = onBack,
-                onNotificationClick = onNotifications
             )
         },
         panelContent = {

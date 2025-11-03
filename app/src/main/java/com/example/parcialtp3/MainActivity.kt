@@ -132,7 +132,6 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
 
 
 
-
         composable("security") { A_Security_Screen(navController) }
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }

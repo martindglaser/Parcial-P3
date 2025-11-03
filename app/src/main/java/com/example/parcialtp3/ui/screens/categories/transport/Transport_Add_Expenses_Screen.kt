@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
@@ -23,6 +24,7 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 import com.example.parcialtp3.ui.components.PrimaryButton
+// NUEVOS IMPORTS
 import com.example.parcialtp3.ui.components.MessageBox
 import com.example.parcialtp3.ui.components.RoundedInputRow
 
@@ -37,14 +39,13 @@ fun TransportAddExpenseScreen(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController,
-                onBackClick = { navController.popBackStack() },
-                onNotificationClick = { navController.navigate("notifications") }
+                navController = navController
             )
         }
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             Column(
                 modifier = Modifier
@@ -55,7 +56,7 @@ fun TransportAddExpenseScreen(
                 // --- 1) DATE ---
                 RoundedInputRow(
                     label = "Date",
-                    value = "March 30, 2024",
+                    value = "March 30,2024",
                     valueColor = Void,
                     trailing = {
                         Box(

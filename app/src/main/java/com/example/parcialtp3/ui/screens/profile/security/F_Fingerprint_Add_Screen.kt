@@ -32,8 +32,6 @@ fun F_Fingerprint_Add_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Add Fingerprint",
-                onBackClick = onBack,
-                onNotificationClick = onNotifications
             )
         },
         panelContent = {

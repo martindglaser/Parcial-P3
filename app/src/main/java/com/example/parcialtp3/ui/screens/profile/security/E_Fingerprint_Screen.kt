@@ -35,8 +35,6 @@ fun E_Fingerprint_Screen(
             HeaderBar(
                 navController = navController,
                 title = title,
-                onBackClick = onBack,
-                onNotificationClick = onNotifications
             )
         },
         panelContent = {

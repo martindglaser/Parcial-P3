@@ -1,17 +1,23 @@
 package com.example.parcialtp3.ui.screens.categories.transport
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.*
+import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryPanel
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
 import com.example.parcialtp3.ui.components.HeaderBar
-import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.components.MonthlyExpenseGroup
 
 data class TransportExpense(
     val title: String,
@@ -33,6 +39,11 @@ fun TransportScreen(
         TransportExpense("Public Transport", "7:50 - February 01", "-$1.24")
     )
 
+    val allMonthlyExpenses = listOf(
+        MonthlyExpenseGroup("March", marchExpenses),
+        MonthlyExpenseGroup("February", februaryExpenses)
+    )
+
     BackgroundScaffold(
         headerHeight = 290.dp,
         headerColor = CaribbeanGreen,
@@ -45,9 +56,7 @@ fun TransportScreen(
             ) {
                 HeaderBar(
                     title = "Transport",
-                    navController = navController,
-                    onBackClick = { navController.popBackStack() },
-                    onNotificationClick = { navController.navigate("notifications") }
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()
@@ -55,16 +64,13 @@ fun TransportScreen(
         },
         panelContent = {
             CategoryPanel(
-                month1Name = "March",
-                month1Expenses = marchExpenses,
-                month2Name = "February",
-                month2Expenses = februaryExpenses,
-                title = { it.title },
-                time = { it.time },
-                amount = { it.amount },
+                monthlyExpenses = allMonthlyExpenses,
                 iconResId = R.drawable.vector_transport,
                 onAddExpense = {
-                    navController.navigate("transport/addExpense")
+                    navController?.navigate("transport/addExpense")
+                },
+                expenseData = { expense ->
+                    Triple(expense.title, expense.time, expense.amount)
                 }
             )
         }

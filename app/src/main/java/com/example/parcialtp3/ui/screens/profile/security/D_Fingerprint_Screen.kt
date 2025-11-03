@@ -38,9 +38,7 @@ fun D_Fingerprint_Screen(
         headerContent = {
             HeaderBar(
                 navController = navController,
-                title = "Fingerprint",
-                onBackClick = onBack,
-                onNotificationClick = onNotifications
+                title = "Fingerprint"
             )
         },
         panelContent = {
