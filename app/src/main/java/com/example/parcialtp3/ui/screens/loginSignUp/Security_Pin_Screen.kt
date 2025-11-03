@@ -80,6 +80,7 @@ private fun Body(
             width = 169.dp,
             height = 32.dp,
             navController = navController,
+            route = "NewPasswordScreen"
         )
         Spacer(Modifier.height(10.dp))
 
@@ -89,9 +90,9 @@ private fun Body(
             onClick = {},
             width = 169.dp,
             height = 32.dp,
-            navController = navController,
+            navController = navController
         )
         Spacer(Modifier.height(200.dp))
-        FacebookGoogle()
+        FacebookGoogle(navController)
     }
 }

@@ -228,7 +228,9 @@ fun RoundedButton(
     }
 }
 @Composable
-fun FacebookGoogle(){
+fun FacebookGoogle(
+    navController: NavHostController
+){
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SimpleText("or sign up with", fontSize = 13.sp, fontWeight = FontWeight.Light)
         Spacer(Modifier.height(13.dp))
@@ -265,7 +267,12 @@ fun FacebookGoogle(){
             fontSize = 13.sp,
             color = Void,
             fontWeight = FontWeight.Light,
-            fontFamily = PoppinsFamily
+            fontFamily = PoppinsFamily,
+            modifier = Modifier.clickable(
+                onClick = {
+                    navController.navigate("CreateAccountScreen")
+                }
+            )
         )
     }
 }

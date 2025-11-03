@@ -75,7 +75,7 @@ private fun Body(
             backgroundColor = CaribbeanGreen,
             onClick = {},
             navController = navController,
-            route = "WelcomeSceen"
+            route = "WelcomeScreen"
         )
 
     }

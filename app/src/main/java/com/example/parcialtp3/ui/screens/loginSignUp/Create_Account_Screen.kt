@@ -1,5 +1,6 @@
 package com.example.parcialtp3.ui.screens.loginSignUp
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -30,6 +31,7 @@ import com.example.parcialtp3.ui.components.TitleText
 import com.example.parcialtp3.ui.viewmodels.CreateAccountViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.navigation.NavHostController
 
 @Composable
@@ -109,7 +111,12 @@ fun CreateAccountScreen(
                     fontSize = 13.sp,
                     color = Void,
                     fontWeight = FontWeight.Light,
-                    fontFamily = PoppinsFamily
+                    fontFamily = PoppinsFamily,
+                    modifier = Modifier.clickable(
+                        onClick = {
+                            navController.navigate("WelcomeScreen")
+                        }
+                    )
                 )
             }
         }

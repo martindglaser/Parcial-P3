@@ -1,5 +1,6 @@
 package com.example.parcialtp3.ui.screens.loginSignUp
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -73,7 +74,14 @@ fun WelcomeScreen(
                 token?.let {}
 
                 Spacer(Modifier.height(15.dp))
-                SimpleText("Forgot Password?", color = Void, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                SimpleText(
+                    "Forgot Password?",
+                    color = Void,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp,
+                    navController = navController,
+                    route = "ForgotPasswordScreen"
+                )
                 Spacer(Modifier.height(15.dp))
 
                 RoundedButton(
@@ -101,7 +109,7 @@ fun WelcomeScreen(
                     fontSize = 14.sp
                 )
                 Spacer(Modifier.height(25.dp))
-                FacebookGoogle()
+                FacebookGoogle(navController)
             }
         }
     )

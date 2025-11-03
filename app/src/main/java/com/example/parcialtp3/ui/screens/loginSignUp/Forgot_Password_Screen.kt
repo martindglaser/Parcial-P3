@@ -90,6 +90,6 @@ private fun Body(
             route = "CreateAccountScreen"
         )
         Spacer(Modifier.height(25.dp))
-        FacebookGoogle()
+        FacebookGoogle(navController)
     }
 }
