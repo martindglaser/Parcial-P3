@@ -13,6 +13,7 @@ import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.*
 import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
+
 @Composable
 fun TransactionScreen(
     navController: NavHostController

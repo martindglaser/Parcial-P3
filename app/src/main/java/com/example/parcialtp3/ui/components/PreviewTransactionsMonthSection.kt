@@ -19,6 +19,7 @@ import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
+
 @Composable
 fun TransactionsMonthSection(
     viewModel: TransactionsViewModel = viewModel(),

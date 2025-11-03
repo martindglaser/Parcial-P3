@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.parcialtp3.ui.components.BottomNavIcon
+import com.example.parcialtp3.ui.screens.accountBalance.AccountBalanceScreen
 import com.example.parcialtp3.ui.screens.categories.food.FoodScreen
 import com.example.parcialtp3.ui.screens.categories.transport.TransportScreen
+import com.example.parcialtp3.ui.screens.home.HomeScreen
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
 import com.example.parcialtp3.ui.screens.launch.SplashScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
@@ -126,6 +128,9 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("b_launch") { LaunchScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("edit_profile") { Edit_Profile_Screen(navController) }
+        composable("account_balance") { AccountBalanceScreen(navController) }
+        composable("home") { HomeScreen(navController) }
+
 
 
         composable("Tranasction_Screen") { TransactionScreen(navController) }
