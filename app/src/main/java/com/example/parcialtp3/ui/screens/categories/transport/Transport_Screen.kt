@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
@@ -26,7 +26,7 @@ data class TransportExpense(
 
 @Composable
 fun TransportScreen(
-    navController: NavController? = null
+    navController: NavHostController
 ) {
     val marchExpenses = listOf(
         TransportExpense("Fuel", "18:27 - March 30", "-$3.53"),

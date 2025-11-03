@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Cyprus
@@ -22,13 +22,12 @@ import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 import com.example.parcialtp3.ui.components.PrimaryButton
-// NUEVOS IMPORTS
 import com.example.parcialtp3.ui.components.MessageBox
 import com.example.parcialtp3.ui.components.RoundedInputRow
 
 @Composable
 fun FoodAddExpenseScreen(
-    navController: NavController? = null
+    navController: NavHostController
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
@@ -37,7 +36,8 @@ fun FoodAddExpenseScreen(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                //  onBack = { navController?.popBackStack() }
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {

@@ -2,6 +2,7 @@ package com.example.parcialtp3.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
@@ -123,6 +125,8 @@ fun TarjetaBalance(
 
 @Composable
 fun TarjetasIncomeExpense(
+    direccion: String,
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.colorScheme.surface,
     imageResId: Int,
@@ -133,7 +137,10 @@ fun TarjetasIncomeExpense(
 ) {
     Column(modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
         Card(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().
+            clickable {
+                navController.navigate(direccion)
+            },
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(8.dp),
             colors = CardDefaults.cardColors(containerColor = backgroundColor)
@@ -173,15 +180,18 @@ fun TarjetasIncomeExpense(
 
 @Composable
 fun CabeceraTransactions(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     tarjetaBalanceText1: String,
     tarjetaBalanceText2: String,
+    tarjeta1Direccion: String,
     tarjeta1Color: Color,
     tarjeta1Imagen: Int,
     tarjeta1Texto1: String,
     tarjeta1Texto2: String,
     tarjeta1Texto1Color: Color,
     tarjeta1Texto2Color: Color,
+    tarjeta2Direccion: String,
     tarjeta2Color: Color,
     tarjeta2Imagen: Int,
     tarjeta2Texto1: String,
@@ -206,6 +216,8 @@ fun CabeceraTransactions(
         ) {
             Box(modifier = Modifier.weight(1f)) {
                 TarjetasIncomeExpense(
+                    navController = navController,
+                    direccion = tarjeta1Direccion,
                     backgroundColor = tarjeta1Color,
                     imageResId = tarjeta1Imagen,
                     text1 = tarjeta1Texto1,
@@ -216,6 +228,8 @@ fun CabeceraTransactions(
             }
             Box(modifier = Modifier.weight(1f)) {
                 TarjetasIncomeExpense(
+                    navController = navController,
+                    direccion = tarjeta2Direccion,
                     backgroundColor = tarjeta2Color,
                     imageResId = tarjeta2Imagen,
                     text1 = tarjeta2Texto1,
