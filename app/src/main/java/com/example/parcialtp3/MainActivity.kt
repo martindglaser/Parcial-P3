@@ -129,7 +129,12 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        composable("onboarding") { OnBoardingPagerScreen(navController) }
+        //composable("onboarding") { OnBoardingPagerScreen(navController) }
+        composable("OnBoardingPagerScreen?next={next}") { backStackEntry ->
+            val next = backStackEntry.arguments?.getString("next") ?: "HomeScreen"
+            OnBoardingPagerScreen(navController = navController, nextRoute = next)
+        }
+
         composable("HomeScreen") { HomeScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("account_balance") { AccountBalanceScreen(navController) }

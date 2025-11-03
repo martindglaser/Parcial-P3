@@ -74,18 +74,13 @@ fun OnBoardingAScreen(navController: NavHostController) {
                     Spacer(modifier = Modifier.height(40.dp))
 
                     // Botón Next
-                    Button(
-                        onClick = { navController.navigate("onboarding_b") },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                    Text(
+                        text = "Next",
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = poppinsFamily,
                         modifier = Modifier.padding(bottom = 8.dp)
-                    ) {
-                        Text(
-                            "Next",
-                            color = FenceGreen,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp
-                        )
-                    }
+                    )
 
                     Spacer(modifier = Modifier.height(8.dp))
 
