@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.BackgroundScaffold
@@ -21,7 +21,7 @@ data class FoodExpense(
 
 @Composable
 fun FoodScreen(
-    navController: NavHostController
+    navController: NavController? = null
 ) {
     val aprilExpenses = listOf(
         FoodExpense("Dinner", "18:27 - April 30", "-$26,00"),
@@ -29,7 +29,6 @@ fun FoodScreen(
         FoodExpense("Lunch", "12:30 - April 15", "-$15,40"),
         FoodExpense("Brunch", "9:30 - April 08", "-$12,13"),
     )
-
     val marchExpenses = listOf(
         FoodExpense("Dinner", "20:50 - March 31", "-$27,20")
     )
@@ -52,15 +51,15 @@ fun FoodScreen(
             ) {
                 HeaderBar(
                     title = "Food",
-                    navController = navController,
-                    onBackClick = { navController.popBackStack() },
-                    onNotificationClick = { navController.navigate("notifications") }
+                    onBackClick = { navController?.popBackStack() },
+                    onNotificationClick = { /* hacer*/ }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()
             }
         },
         panelContent = {
+
             CategoryPanel(
                 monthlyExpenses = allMonthlyExpenses,
                 iconResId = R.drawable.vector_food,
