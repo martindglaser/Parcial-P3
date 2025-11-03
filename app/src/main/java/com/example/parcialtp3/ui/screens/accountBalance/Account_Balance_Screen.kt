@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -36,9 +35,8 @@ fun AccountBalanceScreen(navController: NavHostController) {
     )
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // --- Contenido principal ---
         BackgroundScaffold(
-            headerHeight = 480.dp, // altura suficiente para mostrar todo el header
+            headerHeight = 480.dp,
             headerColor = CaribbeanGreen,
             panelColor = Honeydew,
             headerContent = {
@@ -50,7 +48,7 @@ fun AccountBalanceScreen(navController: NavHostController) {
                     HeaderBar(
                         title = "Account Balance",
                         navController = navController,
-                        onBackClick = { navController.navigate("HomeScreen") } // vuelve a Home
+                        onBackClick = { navController.navigate("HomeScreen") }
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -68,7 +66,7 @@ fun AccountBalanceScreen(navController: NavHostController) {
                             modifier = Modifier
                                 .weight(1f)
                                 .height(110.dp),
-                            backgroundColor = Honeydew,
+                            backgroundColor = LightGreen,
                             imageResId = R.drawable.group_395,
                             text1 = "Income",
                             text2 = "$4,000.00",
@@ -131,7 +129,7 @@ fun AccountBalanceScreen(navController: NavHostController) {
 
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(bottom = 120.dp) // deja espacio para el nav bar
+                        contentPadding = PaddingValues(bottom = 120.dp)
                     ) {
                         items(transactions) { t ->
                             TransactionItem(
@@ -153,7 +151,7 @@ fun AccountBalanceScreen(navController: NavHostController) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth(),
-            color = Color(0xFF013B36),
+            color = FenceGreen,
             shadowElevation = 12.dp
         ) {
             BottomNavBar(navController = navController, current = "transactions")

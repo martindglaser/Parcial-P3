@@ -32,6 +32,7 @@ import com.example.parcialtp3.ui.screens.loginSignUp.NewPasswordScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.SecurityPinScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
 import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
+import com.example.parcialtp3.ui.screens.onBoarding.OnBoardingPagerScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.security.A_Security_Screen
@@ -128,12 +129,13 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        composable("b_launch") { LaunchScreen(navController) }
-        composable("notifications") { NotificationScreen(navController) }
-        composable("edit_profile") { Edit_Profile_Screen(navController) }
-        composable("account_balance") { AccountBalanceScreen(navController) }
+        composable("onboarding") { OnBoardingPagerScreen(navController) }
         composable("HomeScreen") { HomeScreen(navController) }
+        composable("notifications") { NotificationScreen(navController) }
+        composable("account_balance") { AccountBalanceScreen(navController) }
+        //composable("b_launch") { LaunchScreen(navController) }
 
+        composable("edit_profile") { Edit_Profile_Screen(navController) }
 
 
         composable("Tranasction_Screen") { TransactionScreen(navController) }

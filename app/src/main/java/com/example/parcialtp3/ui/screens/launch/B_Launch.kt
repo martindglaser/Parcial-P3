@@ -10,14 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
+import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.poppinsFamily
 
 @Composable
@@ -25,13 +25,13 @@ fun LaunchScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF002B28)), // verde oscuro
+            .background(Honeydew),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
             Image(
-                painter = painterResource(id = R.drawable.ic_analysis),
+                painter = painterResource(id = R.drawable.ic_grafico),
                 contentDescription = "FinWise logo",
                 modifier = Modifier.size(120.dp)
             )
@@ -42,7 +42,7 @@ fun LaunchScreen(navController: NavHostController) {
                 text = "FinWise",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF00C49F),
+                color = CaribbeanGreen, // ← cambiado a verde caribeño
                 fontFamily = poppinsFamily
             )
 
@@ -51,7 +51,7 @@ fun LaunchScreen(navController: NavHostController) {
             Text(
                 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
                 fontSize = 14.sp,
-                color = Color.White,
+                color = Void,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 40.dp),
                 fontFamily = poppinsFamily
@@ -60,37 +60,38 @@ fun LaunchScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Button(
-                onClick = {navController.navigate("WelcomeScreen") {
-                        popUpTo("launch") { inclusive = true } // limpia el stack anterior
+                onClick = {
+                    navController.navigate("WelcomeScreen") {
+                        popUpTo("launch") { inclusive = true }
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00C49F)),
+                colors = ButtonDefaults.buttonColors(containerColor = CaribbeanGreen),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .height(48.dp)
             ) {
-                Text("Log In", color = Color.Black, fontWeight = FontWeight.Bold)
+                Text("Log In", color = Honeydew, fontWeight = FontWeight.Bold)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = { navController.navigate("signup") },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFBFFFEF)), // color más claro
+                colors = ButtonDefaults.buttonColors(containerColor = LightGreen),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .height(48.dp)
             ) {
-                Text("Sign Up", color = Color.Black, fontWeight = FontWeight.Bold)
+                Text("Sign Up", color = FenceGreen, fontWeight = FontWeight.Bold)
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
                 text = "Forgot Password?",
-                color = Color.White,
+                color = OceanBlue,
                 fontSize = 13.sp,
                 fontFamily = poppinsFamily
             )

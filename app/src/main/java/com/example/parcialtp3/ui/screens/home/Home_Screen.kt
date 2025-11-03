@@ -13,18 +13,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
-import com.example.parcialtp3.ui.FenceGreen
-import com.example.parcialtp3.ui.OceanBlue
-import com.example.parcialtp3.ui.Void
+import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.*
 import com.example.parcialtp3.ui.poppinsFamily
 import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
@@ -51,7 +46,7 @@ fun HomeScreen(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize()) {
 
         BackgroundScaffold(
-            headerHeight = 330.dp,
+            headerHeight = 320.dp,
             headerColor = CaribbeanGreen,
             panelColor = Honeydew,
             headerContent = {
@@ -152,7 +147,7 @@ fun HomeScreen(navController: NavHostController) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     // ───── Filtros ─────
                     Row(
@@ -164,9 +159,7 @@ fun HomeScreen(navController: NavHostController) {
                         listOf("Daily", "Weekly", "Monthly").forEach { label ->
                             val isSelected = selectedFilter == label
                             Surface(
-                                color = if (isSelected)
-                                    CaribbeanGreen
-                                else Color(0xFF013B36).copy(alpha = 0.4f),
+                                color = if (isSelected) CaribbeanGreen else LightGreen,
                                 shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
                                 modifier = Modifier
                                     .weight(1f)
@@ -177,8 +170,9 @@ fun HomeScreen(navController: NavHostController) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Text(
                                         text = label,
-                                        color = if (isSelected) Honeydew else Color(0xFFB6E0DC),
-                                        fontFamily = poppinsFamily
+                                        color = if (isSelected) Honeydew else FenceGreen,
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
                                     )
                                 }
                             }
@@ -187,7 +181,72 @@ fun HomeScreen(navController: NavHostController) {
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    TransactionsMonthSection(viewModel = viewModel)
+                    // ───── Transacciones ─────
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(bottom = 100.dp)
+                    ) {
+                        items(transactions) { t ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .clip(CircleShape)
+                                        .background(
+                                            if (t.amount.startsWith("-")) LightBlue.copy(alpha = 0.25f)
+                                            else LightGreen
+                                        ),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = t.iconRes),
+                                        contentDescription = t.title,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(14.dp))
+
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(t.title, color = Void, fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
+                                    Text(t.subtitle, color = OceanBlue, fontFamily = poppinsFamily)
+                                }
+
+                                Box(
+                                    modifier = Modifier
+                                        .width(2.dp)
+                                        .height(45.dp)
+                                        .background(CaribbeanGreen.copy(alpha = 0.6f))
+                                )
+
+                                Spacer(modifier = Modifier.width(12.dp))
+
+                                Text(t.category, color = FenceGreen, fontFamily = poppinsFamily)
+
+                                Box(
+                                    modifier = Modifier
+                                        .width(2.dp)
+                                        .height(45.dp)
+                                        .background(CaribbeanGreen.copy(alpha = 0.6f))
+                                        .padding(horizontal = 10.dp)
+                                )
+
+                                Spacer(modifier = Modifier.width(12.dp))
+
+                                Text(
+                                    text = t.amount,
+                                    color = if (t.amount.startsWith("-")) OceanBlue else FenceGreen,
+                                    fontFamily = poppinsFamily,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+                        }
+                    }
                 }
             }
         )
@@ -197,7 +256,7 @@ fun HomeScreen(navController: NavHostController) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth(),
-            color = Color(0xFF013B36),
+            color = FenceGreen,
             shadowElevation = 12.dp
         ) {
             BottomNavBar(navController = navController, current = "HomeScreen")
