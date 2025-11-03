@@ -5,6 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -14,27 +17,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
-import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.*
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingPagerScreen(navController: NavHostController) {
+fun OnBoardingPagerScreen(
+    navController: NavHostController,
+    nextRoute: String
+) {
     val pagerState = rememberPagerState(pageCount = { 2 })
     val scope = rememberCoroutineScope()
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(CaribbeanGreen),
-        contentAlignment = Alignment.BottomCenter
+            .background(Honeydew),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
+        Spacer(modifier = Modifier.height(40.dp))
+
+        // Slides
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.weight(1f)
         ) { page ->
             when (page) {
                 0 -> OnBoardingAScreen(navController)
@@ -42,27 +49,52 @@ fun OnBoardingPagerScreen(navController: NavHostController) {
             }
         }
 
-        // Indicadores de página (reemplaza los puntos individuales dentro de cada pantalla)
+        // Indicador de burbujas manual
         Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 30.dp)
-                .background(Honeydew.copy(alpha = 0.6f), shape = androidx.compose.foundation.shape.RoundedCornerShape(50))
-                .padding(horizontal = 20.dp, vertical = 6.dp)
+                .padding(bottom = 16.dp)
+                .height(20.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            repeat(2) { index ->
-                val isSelected = pagerState.currentPage == index
-                Text(
-                    text = if (isSelected) "•" else "○",
-                    fontSize = if (isSelected) 22.sp else 18.sp,
-                    color = if (isSelected) CaribbeanGreen else Void,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = poppinsFamily,
-                    modifier = Modifier.padding(horizontal = 4.dp)
+            repeat(pagerState.pageCount) { index ->
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 4.dp)
+                        .size(if (pagerState.currentPage == index) 10.dp else 8.dp)
+                        .background(
+                            color = if (pagerState.currentPage == index) CaribbeanGreen else LightGreen,
+                            shape = RoundedCornerShape(50)
+                        )
                 )
             }
+        }
+
+        // Botón Next / Continue
+        Button(
+            onClick = {
+                if (pagerState.currentPage == pagerState.pageCount - 1) {
+                    navController.navigate(nextRoute)
+                } else {
+                    scope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                }
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = CaribbeanGreen),
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth(0.5f)
+                .height(48.dp)
+        ) {
+            Text(
+                text = if (pagerState.currentPage == pagerState.pageCount - 1) "Continue" else "Next",
+                color = Honeydew,
+                fontFamily = poppinsFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
         }
     }
 }
