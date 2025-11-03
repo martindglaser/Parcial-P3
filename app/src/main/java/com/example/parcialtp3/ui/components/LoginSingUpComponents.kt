@@ -49,6 +49,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
@@ -194,6 +195,8 @@ fun RoundedPassInput(
 fun RoundedButton(
     text: String,
     modifier: Modifier = Modifier,
+    navController: NavHostController,
+    route: String? = null,
     width: Dp = 200.dp,
     height: Dp = 50.dp,
     backgroundColor: Color = CaribbeanGreen,
@@ -205,7 +208,12 @@ fun RoundedButton(
             .sizeIn(minWidth = width, minHeight = height)
             .clip(RoundedCornerShape(50.dp))
             .background(backgroundColor)
-            .clickable { onClick() },
+            .clickable {
+                onClick()
+                route?.let {
+                    navController.navigate(it)
+                }
+            },
         contentAlignment = Alignment.Center
     ) {
         Text(

@@ -83,7 +83,8 @@ fun Edit_Profile_Screen(navController: NavHostController) {   // ✅ agregamos e
                     width = 207.dp,
                     height = 45.dp,
                     backgroundColor = CaribbeanGreen,
-                    onClick = {}
+                    onClick = {},
+                    navController = navController
                 )
             }
         }

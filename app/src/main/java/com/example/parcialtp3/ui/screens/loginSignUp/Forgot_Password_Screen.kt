@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.BackgroundScaffold
@@ -23,12 +24,14 @@ import com.example.parcialtp3.ui.components.SimpleText
 import com.example.parcialtp3.ui.components.TitleText
 
 @Composable
-fun ForgotPasswordScreen(){
+fun ForgotPasswordScreen(
+    navController: NavHostController
+){
     BackgroundScaffold(
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },
-        panelContent = { Body() }
+        panelContent = { Body(navController) }
     )
 }
 @Composable
@@ -36,7 +39,9 @@ private fun Title() {
     TitleText("Forgot Password", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
 @Composable
-private fun Body() {
+private fun Body(
+    navController: NavHostController
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -69,7 +74,9 @@ private fun Body() {
             onClick = {},
             width = 169.dp,
             height = 32.dp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            navController = navController,
+            route = "SecurityPinScreen"
         )
         Spacer(Modifier.height(110.dp))
         RoundedButton(
@@ -78,7 +85,9 @@ private fun Body() {
             onClick = {},
             width = 169.dp,
             height = 32.dp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            navController = navController,
+            route = "CreateAccountScreen"
         )
         Spacer(Modifier.height(25.dp))
         FacebookGoogle()

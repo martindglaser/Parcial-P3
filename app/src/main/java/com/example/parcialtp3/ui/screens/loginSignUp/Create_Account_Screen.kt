@@ -30,10 +30,12 @@ import com.example.parcialtp3.ui.components.TitleText
 import com.example.parcialtp3.ui.viewmodels.CreateAccountViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavHostController
 
 @Composable
 fun CreateAccountScreen(
-    vm: CreateAccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    vm: CreateAccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    navController: NavHostController
 ) {
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -84,7 +86,9 @@ fun CreateAccountScreen(
                 RoundedButton(
                     "Sign Up",
                     onClick = { vm.createAccount(fullName, email, phone, pass2) },
-                    width = 207.dp, height = 45.dp
+                    width = 207.dp, height = 45.dp,
+                    navController = navController,
+                    route = "HomeScreen"
                 )
 
                 val lastUser by vm.lastUser.collectAsState()

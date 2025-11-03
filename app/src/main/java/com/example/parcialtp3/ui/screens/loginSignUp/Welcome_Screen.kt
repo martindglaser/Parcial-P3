@@ -39,7 +39,8 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun WelcomeScreen(
-    vm: WelcomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    vm: WelcomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    navController: NavHostController
 ) {
     var email by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
@@ -64,9 +65,10 @@ fun WelcomeScreen(
                     width = 207.dp,
                     height = 45.dp,
                     backgroundColor = CaribbeanGreen,
-                    onClick = { vm.login(email, pass) }
+                    onClick = { vm.login(email, pass) },
+                    navController = navController,
+                    route = "HomeScreen"
                 )
-                // si querés observar el token:
                 val token by vm.token.collectAsState()
                 token?.let {}
 
@@ -79,7 +81,9 @@ fun WelcomeScreen(
                     width = 207.dp,
                     height = 45.dp,
                     backgroundColor = LightGreen,
-                    onClick = {}
+                    onClick = {},
+                    navController = navController,
+                    route = "CreateAccountScreen"
                 )
                 Spacer(Modifier.height(25.dp))
                 Text(

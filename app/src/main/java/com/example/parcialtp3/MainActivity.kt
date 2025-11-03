@@ -26,6 +26,10 @@ import com.example.parcialtp3.ui.screens.categories.transport.TransportScreen
 import com.example.parcialtp3.ui.screens.home.HomeScreen
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
 import com.example.parcialtp3.ui.screens.launch.SplashScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.CreateAccountScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.ForgotPasswordScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.NewPasswordScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.SecurityPinScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
 import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
@@ -124,12 +128,11 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        composable("welcome") { WelcomeScreen() }
         composable("b_launch") { LaunchScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("edit_profile") { Edit_Profile_Screen(navController) }
         composable("account_balance") { AccountBalanceScreen(navController) }
-        composable("home") { HomeScreen(navController) }
+        composable("HomeScreen") { HomeScreen(navController) }
 
 
 
@@ -148,6 +151,13 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { Profile_Screen(navController)}
         composable("settings") { SettingsScreen(navController, drawerState) }
+
+        composable("WelcomeScreen") { WelcomeScreen(navController = navController) }
+        composable("CreateAccountScreen") { CreateAccountScreen(navController = navController) }
+        composable("SecurityPinScreen") { SecurityPinScreen(navController = navController) }
+        composable("ForgotPasswordScreen") { ForgotPasswordScreen(navController) }
+        composable("NewPasswordScreen") { NewPasswordScreen(navController) }
+
     }
 }
 

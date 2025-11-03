@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
@@ -26,6 +27,7 @@ import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.components.*
 import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
 data class HomeTransaction(
     val iconRes: Int,
@@ -37,7 +39,7 @@ data class HomeTransaction(
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-
+    val viewModel: TransactionsViewModel = viewModel()
     val transactions = listOf(
         HomeTransaction(R.drawable.vector_salary, "Salary", "18:27 – April 30", "Monthly", "$4.000,00"),
         HomeTransaction(R.drawable.vector_groceries, "Groceries", "17:00 – April 24", "Pantry", "-$100,00"),
@@ -185,76 +187,7 @@ fun HomeScreen(navController: NavHostController) {
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    // ───── Lista de transacciones estilizada ─────
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(bottom = 120.dp)
-                    ) {
-                        items(transactions) { t ->
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 10.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                // Ícono circular
-                                Box(
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .clip(CircleShape)
-                                        .background(
-                                            if (t.amount.startsWith("-")) OceanBlue
-                                            else CaribbeanGreen.copy(alpha = 0.7f)
-                                        ),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = t.iconRes),
-                                        contentDescription = t.title,
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-
-                                Spacer(modifier = Modifier.width(14.dp))
-
-                                // Detalles
-                                Column(
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Text(t.title, color = Void, fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
-                                    Text(t.subtitle, color = OceanBlue, fontFamily = poppinsFamily)
-                                }
-
-                                Box(
-                                    modifier = Modifier
-                                        .width(2.dp)
-                                        .height(45.dp)
-                                        .background(Color(0xFF3FD6B0))
-                                )
-
-                                Spacer(modifier = Modifier.width(12.dp))
-
-                                Text(t.category, color = FenceGreen, fontFamily = poppinsFamily)
-
-                                Box(
-                                    modifier = Modifier
-                                        .width(2.dp)
-                                        .height(45.dp)
-                                        .background(Color(0xFF3FD6B0))
-                                        .padding(horizontal = 10.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(12.dp))
-
-                                Text(
-                                    text = t.amount,
-                                    color = if (t.amount.startsWith("-")) OceanBlue else FenceGreen,
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            }
-                        }
-                    }
+                    TransactionsMonthSection(viewModel = viewModel)
                 }
             }
         )
@@ -267,7 +200,7 @@ fun HomeScreen(navController: NavHostController) {
             color = Color(0xFF013B36),
             shadowElevation = 12.dp
         ) {
-            BottomNavBar(navController = navController, current = "home")
+            BottomNavBar(navController = navController, current = "HomeScreen")
         }
     }
 }

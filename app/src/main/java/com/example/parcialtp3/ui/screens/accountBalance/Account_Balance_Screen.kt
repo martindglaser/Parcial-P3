@@ -50,7 +50,7 @@ fun AccountBalanceScreen(navController: NavHostController) {
                     HeaderBar(
                         title = "Account Balance",
                         navController = navController,
-                        onBackClick = { navController.navigate("home_screen") } // vuelve a Home
+                        onBackClick = { navController.navigate("HomeScreen") } // vuelve a Home
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))

@@ -60,7 +60,7 @@ fun LaunchScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Button(
-                onClick = {navController.navigate("welcome") {
+                onClick = {navController.navigate("WelcomeScreen") {
                         popUpTo("launch") { inclusive = true } // limpia el stack anterior
                     }
                 },
