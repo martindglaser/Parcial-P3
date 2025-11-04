@@ -27,6 +27,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,14 +50,19 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.Cyprus
+import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
+import com.example.parcialtp3.ui.ThemeAwareColors
 import com.example.parcialtp3.ui.VividBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
 
 @Composable
 fun RoundedInputField(
@@ -229,6 +235,8 @@ fun RoundedButton(
 fun FacebookGoogle(
     navController: NavHostController
 ){
+    val (panelColor, themeBackgroundColor) = ThemeAwareColors.getColors()
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SimpleText("or sign up with", fontSize = 13.sp, fontWeight = FontWeight.Light)
         Spacer(Modifier.height(13.dp))

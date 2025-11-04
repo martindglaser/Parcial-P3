@@ -37,12 +37,23 @@ import com.example.parcialtp3.ui.components.TitleText
 import com.example.parcialtp3.ui.viewmodels.WelcomeViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.colorResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.parcialtp3.ui.Cyprus
+import com.example.parcialtp3.ui.FenceGreen
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
 
 @Composable
 fun WelcomeScreen(
     vm: WelcomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     navController: NavHostController
 ) {
+    val themeViewModel: ThemeViewModel = viewModel()
+    val isDarkMode = themeViewModel.darkThemeEnabled.collectAsState().value
+
+    val textColor = if (isDarkMode) Honeydew else Void
+    val highlightedColor = if (isDarkMode) CaribbeanGreen else OceanBlue
     var email by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
 
@@ -95,9 +106,9 @@ fun WelcomeScreen(
                 Spacer(Modifier.height(25.dp))
                 Text(
                     text = buildAnnotatedString {
-                        pushStyle(SpanStyle(color = Void))
+                        pushStyle(SpanStyle(color = textColor))
                         append("Use ")
-                        withStyle(style = SpanStyle(color = OceanBlue)) {
+                        withStyle(style = SpanStyle(color = highlightedColor)) {
                             append("Fingerprint")
                         }
                         append(" To Access")
