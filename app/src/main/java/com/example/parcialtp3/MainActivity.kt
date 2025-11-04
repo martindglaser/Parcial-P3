@@ -48,6 +48,11 @@ import com.example.parcialtp3.ui.screens.profile.security.E_Fingerprint_Screen
 import com.example.parcialtp3.ui.screens.profile.security.F_Fingerprint_Add_Screen
 import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Eliminate_Screen
 import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.A_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.B_Notification_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.C_Password_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.D_Password_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.E_Delete_Account_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -165,7 +170,7 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { Profile_Screen(navController)}
-        composable("settings") { SettingsScreen(navController, drawerState) }
+        composable("settings") { A_Settings_Screen(navController) }
 
         composable("WelcomeScreen") { WelcomeScreen(navController = navController) }
         composable("CreateAccountScreen") { CreateAccountScreen(navController = navController) }
@@ -181,6 +186,12 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("fingerprint") { E_Fingerprint_Screen(navController, onDelete = { navController.navigate("fingerprint_eliminated_success") }) }
         composable("fingerprint_eliminated_success") { G_Fingerprint_Eliminate_Screen() }
         composable("fingerprint_add_success") { G_Fingerprint_Screen() }
+
+        composable("settings") {A_Settings_Screen(navController, onNotification= {navController.navigate("notification_settings")}, onPassword = {navController.navigate("password_settings")}, onDeleteAccount = {navController.navigate("delete_account")}) }
+        composable("notification_settings") {B_Notification_Settings_Screen(navController)}
+        composable("password_settings") {C_Password_Settings_Screen(navController, onChangePassword = {navController.navigate("password_change_success")}) }
+        composable("delete_account") {E_Delete_Account_Screen(navController)}
+        composable("password_change_success") {D_Password_Settings_Screen()}
     }
 }
 
