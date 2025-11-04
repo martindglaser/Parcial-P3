@@ -13,6 +13,7 @@ data class AppThemeColors(
     val highlightText2: Color,
     val headerBackground: Color,
     val contentBackground: Color,
+    val transactionsHeaderSubTitle: Color,
 )
 
 object ThemeAwareColors {
@@ -21,18 +22,15 @@ object ThemeAwareColors {
         val themeViewModel: ThemeViewModel = viewModel()
         val isDarkMode by themeViewModel.darkThemeEnabled.collectAsState()
 
-        val normalText = if (isDarkMode) Honeydew else Void
-        val highlightText = if (isDarkMode) OceanBlue else CaribbeanGreen
-        val highlightText2 = if (isDarkMode) VividBlue else CaribbeanGreen
-        val headerBackground = if (isDarkMode) FenceGreen else CaribbeanGreen
-        val contentBackground = if (isDarkMode) FenceGreen else CaribbeanGreen
+
 
         return AppThemeColors(
-            normalText = normalText,
-            highlightText = highlightText,
-            highlightText2 = highlightText2,
-            headerBackground = headerBackground,
-            contentBackground = contentBackground
+            normalText = if (isDarkMode) Honeydew else Void,
+            highlightText = if (isDarkMode) OceanBlue else CaribbeanGreen ,
+            highlightText2 = if (isDarkMode) VividBlue else CaribbeanGreen,
+            headerBackground = if (isDarkMode) FenceGreen else CaribbeanGreen,
+            contentBackground = if (isDarkMode) Cyprus else Honeydew,
+            transactionsHeaderSubTitle = if (isDarkMode) LightGreen else Void,
         )
     }
 }

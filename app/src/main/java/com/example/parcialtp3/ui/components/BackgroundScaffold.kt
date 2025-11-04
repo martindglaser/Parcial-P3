@@ -19,6 +19,7 @@ import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
+import com.example.parcialtp3.ui.ThemeAwareColors
 
 @Composable
 fun BackgroundScaffold(
@@ -29,17 +30,13 @@ fun BackgroundScaffold(
     overlapOffset: Dp = 8.dp,
     headerContent: @Composable () -> Unit = {},
     panelContent: @Composable () -> Unit = {}
+
 ) {
-    val themeViewModel: ThemeViewModel = viewModel()
-    val isDarkMode = themeViewModel.darkThemeEnabled.collectAsState().value
-
-    val panelColor = if (isDarkMode) Cyprus else Honeydew
-    val backgroundColor = if (isDarkMode) FenceGreen else CaribbeanGreen
-
+    val themeColors = ThemeAwareColors.getColors()
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(backgroundColor)
+            .background(themeColors.headerBackground)
     ) {
         // HEADER
         Box(
@@ -63,7 +60,7 @@ fun BackgroundScaffold(
         }
 
         Surface(
-            color = panelColor,
+            color = themeColors.contentBackground,
             shape = RoundedCornerShape(topStart = overlapRoundness, topEnd = overlapRoundness),
             modifier = panelModifier
                 .padding(top = headerHeight - overlapOffset)
