@@ -45,7 +45,6 @@ private data class SupportChatUi(
 @Composable
 fun A_Online_Support_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {},
     onStartNewChat: () -> Unit = {},
     onOpenChat: (String) -> Unit = {}
 ) {
@@ -56,7 +55,7 @@ fun A_Online_Support_Screen(
             HeaderBar(
                 title = "Online Support",
                 navController = navController,
-                onBackClick = onBack
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {
@@ -256,7 +255,6 @@ private fun Preview_OnlineSupport() {
     val nav = rememberNavController()
     A_Online_Support_Screen(
         navController = nav,
-        onBack = {},
         onStartNewChat = {},
         onOpenChat = {}
     )

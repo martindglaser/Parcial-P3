@@ -73,6 +73,9 @@ import com.example.parcialtp3.ui.screens.profile.setting.B_Notification_Settings
 import com.example.parcialtp3.ui.screens.profile.setting.C_Password_Settings_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.D_Password_Settings_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.E_Delete_Account_Screen
+import com.example.parcialtp3.ui.screens.profile.help.help_center.A_B_Help_Center_Screen
+import com.example.parcialtp3.ui.screens.profile.help.online_support.A_Online_Support_Screen
+import com.example.parcialtp3.ui.screens.profile.help.online_support.B_Online_Support_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -158,7 +161,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(
         navController = navController,
-        startDestination = "categories"
+        startDestination = "splash"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
@@ -245,6 +248,10 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("password_settings") {C_Password_Settings_Screen(navController, onChangePassword = {navController.navigate("password_change_success")}) }
         composable("delete_account") {E_Delete_Account_Screen(navController)}
         composable("password_change_success") {D_Password_Settings_Screen()}
+
+        composable("help_center") {A_B_Help_Center_Screen(navController, onClickCustomService = {navController.navigate("online_support_chats")})}
+        composable("online_support_chats") { A_Online_Support_Screen(navController, onStartNewChat = {navController.navigate("online_support_assistant")}) }
+        composable("online_support_assistant") { B_Online_Support_Screen(navController) }
     }
 }
 
