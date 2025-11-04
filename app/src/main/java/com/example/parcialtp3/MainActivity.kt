@@ -40,6 +40,14 @@ import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
 import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
+import com.example.parcialtp3.ui.screens.profile.security.B_Change_Pin_Screen
+import com.example.parcialtp3.ui.screens.profile.security.D_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.security.H_Terms_And_Conditions_Screen
+import com.example.parcialtp3.ui.screens.profile.security.C_Change_Pin_Success_Screen
+import com.example.parcialtp3.ui.screens.profile.security.E_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.security.F_Fingerprint_Add_Screen
+import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Eliminate_Screen
+import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -153,7 +161,7 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("categories") { CategoriesScreen(navController) }
 
 
-        composable("security") { A_Security_Screen(navController) }
+        composable("security") { A_Security_Screen(navController, onChangePin = { navController.navigate("change_pin") },  onFingerprint = { navController.navigate("fingerprints") }, onTerms = { navController.navigate("termsAndConditions") }) }
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { Profile_Screen(navController)}
@@ -165,6 +173,14 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("ForgotPasswordScreen") { ForgotPasswordScreen(navController) }
         composable("NewPasswordScreen") { NewPasswordScreen(navController) }
 
+        composable("change_pin") { B_Change_Pin_Screen(navController, onConfirm = { navController.navigate("change_pin_success") }) }
+        composable("fingerprints") { D_Fingerprint_Screen(navController, onTapExisting = {navController.navigate("fingerprint")}, onAddFingerprint = {navController.navigate("fingerprint_add")}) }
+        composable("termsAndConditions") { H_Terms_And_Conditions_Screen(navController, onAccept = { navController.navigate("security") }) }
+        composable("change_pin_success") { C_Change_Pin_Success_Screen() }
+        composable("fingerprint_add") { F_Fingerprint_Add_Screen(navController, onUseTouchId = {navController.navigate("fingerprint_add_success")}) }
+        composable("fingerprint") { E_Fingerprint_Screen(navController, onDelete = { navController.navigate("fingerprint_eliminated_success") }) }
+        composable("fingerprint_eliminated_success") { G_Fingerprint_Eliminate_Screen() }
+        composable("fingerprint_add_success") { G_Fingerprint_Screen() }
     }
 }
 
