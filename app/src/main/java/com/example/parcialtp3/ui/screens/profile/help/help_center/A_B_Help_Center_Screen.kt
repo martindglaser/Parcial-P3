@@ -36,9 +36,9 @@ import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 
 @Composable
-fun A_Help_Center_Screen(
+fun A_B_Help_Center_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {}
+    onClickCustomService : () -> Unit = {}
 ) {
     BackgroundScaffold(
         headerHeight = 200.dp,
@@ -47,7 +47,7 @@ fun A_Help_Center_Screen(
             HeaderBar(
                 title = "Help & FAQS",
                 navController = navController,
-                onBackClick = onBack
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {
@@ -109,7 +109,7 @@ fun A_Help_Center_Screen(
 
                 when (tab) {
                     HelpTab.FAQ -> FaqSection()
-                    HelpTab.CONTACT -> ContactSection()
+                    HelpTab.CONTACT -> ContactSection(onClickCustomService)
                 }
 
                 Spacer(Modifier.height(24.dp))
@@ -248,11 +248,14 @@ private fun CategorySegment(
 /* ===================== CONTACT SECTION ========================= */
 
 @Composable
-private fun ContactSection() {
+private fun ContactSection(
+    onClickCustomService: () -> Unit = {}
+) {
     Column {
         ContactRow(
             iconRes = R.drawable.icon_bonsupport_caribbeangreen,
-            label = "Customer Service"
+            label = "Customer Service",
+            onClick = onClickCustomService
         )
         DividerLight()
 
@@ -411,5 +414,5 @@ private fun RowScope.SegmentTab(
 @Preview(showBackground = true, showSystemUi = true, name = "Help & FAQS")
 @Composable
 private fun PreviewHelpCenter() {
-    A_Help_Center_Screen(navController = rememberNavController())
+    A_B_Help_Center_Screen(navController = rememberNavController())
 }

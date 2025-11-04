@@ -10,8 +10,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,10 +49,6 @@ private data class ChatMessage(
 @Composable
 fun B_Online_Support_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {},
-    onSend: (String) -> Unit = {},
-    onAttach: () -> Unit = {},
-    onVoice: () -> Unit = {},
 ) {
     var tab by remember { mutableStateOf(ChatTab.ASSISTANT) }
     var input by remember { mutableStateOf("") }
@@ -79,7 +73,7 @@ fun B_Online_Support_Screen(
             HeaderBar(
                 title = "Online Support",
                 navController = navController,
-                onBackClick = onBack,
+                onBackClick = { navController.popBackStack() },
             )
         },
         panelContent = {
@@ -130,14 +124,9 @@ fun B_Online_Support_Screen(
                 ChatInputBar(
                     value = input,
                     onValueChange = { input = it },
-                    onAttach = onAttach,
-                    onVoice = onVoice,
-                    onSend = {
-                        if (input.isNotBlank()) {
-                            onSend(input)
-                            input = ""
-                        }
-                    }
+                    onAttach = {},
+                    onVoice = {},
+                    onSend = {}
                 )
 
                 Spacer(Modifier.height(16.dp))
@@ -381,9 +370,5 @@ private fun ActionSquare(
 private fun Preview_B_Online_Support() {
     B_Online_Support_Screen(
         navController = rememberNavController(),
-        onBack = {},
-        onSend = {},
-        onAttach = {},
-        onVoice = {}
     )
 }
