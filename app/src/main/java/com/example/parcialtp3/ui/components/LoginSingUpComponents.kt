@@ -235,7 +235,7 @@ fun RoundedButton(
 fun FacebookGoogle(
     navController: NavHostController
 ){
-    val (panelColor, themeBackgroundColor) = ThemeAwareColors.getColors()
+    val themeColors = ThemeAwareColors.getColors()
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SimpleText("or sign up with", fontSize = 13.sp, fontWeight = FontWeight.Light)
@@ -264,14 +264,14 @@ fun FacebookGoogle(
                 append("Don’t have an account? ")
                 withStyle(
                     style = SpanStyle(
-                        color = VividBlue,
+                        color = themeColors.highlightText2,
                     )
                 ) {
                     append("Sign Up")
                 }
             },
             fontSize = 13.sp,
-            color = Void,
+            color = themeColors.normalText,
             fontWeight = FontWeight.Light,
             fontFamily = PoppinsFamily,
             modifier = Modifier.clickable(
@@ -292,6 +292,8 @@ fun OtpCircleInput(
     textColor: Color = Color(0xFF0D0D0D),
     onComplete: (String) -> Unit = {}
 ) {
+    val themeColors = ThemeAwareColors.getColors()
+
     val length = 6
     val circleSize = 35.78.dp
     val textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.SemiBold, fontFamily = PoppinsFamily)
@@ -309,7 +311,7 @@ fun OtpCircleInput(
                         .border(BorderStroke(borderWidth, borderColor), CircleShape)
                 ) {
                     if (char.isNotEmpty()) {
-                        Text(text = char, style = textStyle, color = textColor)
+                        Text(text = char, style = textStyle, color = themeColors.normalText)
                     }
                 }
             }

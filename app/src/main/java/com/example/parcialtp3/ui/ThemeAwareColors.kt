@@ -26,8 +26,8 @@ object ThemeAwareColors {
 
         return AppThemeColors(
             normalText = if (isDarkMode) Honeydew else Void,
-            highlightText = if (isDarkMode) OceanBlue else CaribbeanGreen ,
-            highlightText2 = if (isDarkMode) VividBlue else CaribbeanGreen,
+            highlightText = if (isDarkMode) CaribbeanGreen else OceanBlue ,
+            highlightText2 = if (isDarkMode) CaribbeanGreen else VividBlue,
             headerBackground = if (isDarkMode) FenceGreen else CaribbeanGreen,
             contentBackground = if (isDarkMode) Cyprus else Honeydew,
             transactionsHeaderSubTitle = if (isDarkMode) LightGreen else Void,

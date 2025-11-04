@@ -33,12 +33,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.navigation.NavHostController
+import com.example.parcialtp3.ui.ThemeAwareColors
 
 @Composable
 fun CreateAccountScreen(
     vm: CreateAccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     navController: NavHostController
 ) {
+    val themeColors = ThemeAwareColors.getColors()
+
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
@@ -78,7 +81,7 @@ fun CreateAccountScreen(
                             append("Privacy Policy.")
                         }
                     },
-                    color = Void,
+                    color = themeColors.normalText,
                     fontFamily = PoppinsFamily,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
@@ -102,14 +105,14 @@ fun CreateAccountScreen(
                         append("Already have an account? ")
                         withStyle(
                             style = SpanStyle(
-                                color = VividBlue,
+                                color = themeColors.highlightText2,
                             )
                         ) {
                             append("Sign In")
                         }
                     },
                     fontSize = 13.sp,
-                    color = Void,
+                    color = themeColors.normalText,
                     fontWeight = FontWeight.Light,
                     fontFamily = PoppinsFamily,
                     modifier = Modifier.clickable(
