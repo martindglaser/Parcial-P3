@@ -21,8 +21,6 @@ import com.example.parcialtp3.ui.components.LargeFingerprintIcon
 @Composable
 fun F_Fingerprint_Add_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {},
-    onNotifications: () -> Unit = {},
     onUseTouchId: () -> Unit = {}
 ) {
     BackgroundScaffold(
@@ -32,6 +30,7 @@ fun F_Fingerprint_Add_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Add Fingerprint",
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {
