@@ -87,7 +87,8 @@ fun Profile_Screen(navController: NavHostController) {
                         height = 45.dp,
                         backgroundColor = CaribbeanGreen,
                         textColor = Color.White,
-                        onClick = { showDialog.value = false }
+                        onClick = { showDialog.value = false },
+                        navController = navController
                     )
 
                     Spacer(Modifier.height(10.dp))
@@ -98,7 +99,8 @@ fun Profile_Screen(navController: NavHostController) {
                         height = 45.dp,
                         backgroundColor = LightGreen,
                         textColor = Void,
-                        onClick = { showDialog.value = false }
+                        onClick = { showDialog.value = false },
+                        navController = navController
                     )
                 }
             },

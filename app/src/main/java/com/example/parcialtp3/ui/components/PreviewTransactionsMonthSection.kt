@@ -15,9 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.parcialtp3.R
+import com.example.parcialtp3.ui.Cyprus
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.screens.transactions.TransactionsViewModel
+import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
+import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
 
 @Composable
@@ -25,24 +29,25 @@ fun TransactionsMonthSection(
     viewModel: TransactionsViewModel = viewModel(),
     typeFilter: String? = null
 ) {
+    val themeViewModel: ThemeViewModel = viewModel()
+    val isDarkMode = themeViewModel.darkThemeEnabled.collectAsState().value
+
+
+
     val grouped by viewModel.transactionsByMonth.collectAsState()
 
-    // 🔹 Cargar SIEMPRE, con o sin filtro
     LaunchedEffect(typeFilter) {
         viewModel.loadTransactions(typeFilter)
     }
 
-    // 🔹 Determinar qué mostrar (si hay filtro o no)
     val groupedToShow = if (typeFilter.isNullOrBlank()) {
-        grouped // todas
+        grouped
     } else {
-        // filtra por type
         grouped.mapValues { entry ->
             entry.value.filter { it["type"] == typeFilter }
         }.filterValues { it.isNotEmpty() }
     }
 
-    // 🔹 Mostrar resultados
     if (groupedToShow.isEmpty()) {
         Box(
             modifier = Modifier
@@ -69,7 +74,7 @@ fun TransactionsMonthSection(
                                 subtitle = map["date"]?.toString() ?: "",
                                 middleText = map["subtype"]?.toString() ?: "",
                                 value = "$${map["amount"]}",
-                                valueColor = if (map["type"] == "income") OceanBlue else Void
+                                valueColor = if (map["type"] == "income") OceanBlue else if(isDarkMode) LightGreen else Void
                             )
                         }
                     )

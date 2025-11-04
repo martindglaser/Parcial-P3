@@ -23,6 +23,7 @@ import com.example.parcialtp3.ui.components.BottomNavIcon
 import com.example.parcialtp3.ui.screens.categories.entertainment.A_Entertainment_Screen
 import com.example.parcialtp3.ui.screens.categories.entertainment.B_Entertainment
 import com.example.parcialtp3.ui.screens.categories.food.FoodAddExpenseScreen
+import com.example.parcialtp3.ui.screens.accountBalance.AccountBalanceScreen
 import com.example.parcialtp3.ui.screens.categories.food.FoodScreen
 import com.example.parcialtp3.ui.screens.categories.gifts.GiftsScreen
 import com.example.parcialtp3.ui.screens.categories.gifts.Gifts_Add_Expenses_Screen
@@ -42,10 +43,16 @@ import com.example.parcialtp3.ui.screens.categories.saving.WeddingScreen
 import com.example.parcialtp3.ui.screens.categories.saving.Wedding_Expense_Screen
 import com.example.parcialtp3.ui.screens.categories.transport.TransportAddExpenseScreen
 import com.example.parcialtp3.ui.screens.categories.transport.TransportScreen
+import com.example.parcialtp3.ui.screens.home.HomeScreen
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
 import com.example.parcialtp3.ui.screens.launch.SplashScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.CreateAccountScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.ForgotPasswordScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.NewPasswordScreen
+import com.example.parcialtp3.ui.screens.loginSignUp.SecurityPinScreen
 import com.example.parcialtp3.ui.screens.loginSignUp.WelcomeScreen
 import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
+import com.example.parcialtp3.ui.screens.onBoarding.OnBoardingPagerScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.security.A_Security_Screen
@@ -53,6 +60,19 @@ import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
 import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
 import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
+import com.example.parcialtp3.ui.screens.profile.security.B_Change_Pin_Screen
+import com.example.parcialtp3.ui.screens.profile.security.D_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.security.H_Terms_And_Conditions_Screen
+import com.example.parcialtp3.ui.screens.profile.security.C_Change_Pin_Success_Screen
+import com.example.parcialtp3.ui.screens.profile.security.E_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.security.F_Fingerprint_Add_Screen
+import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Eliminate_Screen
+import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.A_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.B_Notification_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.C_Password_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.D_Password_Settings_Screen
+import com.example.parcialtp3.ui.screens.profile.setting.E_Delete_Account_Screen
 import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
@@ -142,9 +162,17 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        composable("welcome") { WelcomeScreen() }
-        composable("b_launch") { LaunchScreen(navController) }
+        //composable("onboarding") { OnBoardingPagerScreen(navController) }
+        composable("OnBoardingPagerScreen?next={next}") { backStackEntry ->
+            val next = backStackEntry.arguments?.getString("next") ?: "HomeScreen"
+            OnBoardingPagerScreen(navController = navController, nextRoute = next)
+        }
+
+        composable("HomeScreen") { HomeScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
+        composable("account_balance") { AccountBalanceScreen(navController) }
+        //composable("b_launch") { LaunchScreen(navController) }
+
         composable("edit_profile") { Edit_Profile_Screen(navController) }
 
 
@@ -191,11 +219,32 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
 
 
 
-        composable("security") { A_Security_Screen(navController) }
+        composable("security") { A_Security_Screen(navController, onChangePin = { navController.navigate("change_pin") },  onFingerprint = { navController.navigate("fingerprints") }, onTerms = { navController.navigate("termsAndConditions") }) }
         composable("shopList") { Transactions(navController, drawerState) }
         composable("favourites") { FavouritesScreen(navController, drawerState) }
         composable("profile") { Profile_Screen(navController)}
-        composable("settings") { SettingsScreen(navController, drawerState) }
+        composable("settings") { A_Settings_Screen(navController) }
+
+        composable("WelcomeScreen") { WelcomeScreen(navController = navController) }
+        composable("CreateAccountScreen") { CreateAccountScreen(navController = navController) }
+        composable("SecurityPinScreen") { SecurityPinScreen(navController = navController) }
+        composable("ForgotPasswordScreen") { ForgotPasswordScreen(navController) }
+        composable("NewPasswordScreen") { NewPasswordScreen(navController) }
+
+        composable("change_pin") { B_Change_Pin_Screen(navController, onConfirm = { navController.navigate("change_pin_success") }) }
+        composable("fingerprints") { D_Fingerprint_Screen(navController, onTapExisting = {navController.navigate("fingerprint")}, onAddFingerprint = {navController.navigate("fingerprint_add")}) }
+        composable("termsAndConditions") { H_Terms_And_Conditions_Screen(navController, onAccept = { navController.navigate("security") }) }
+        composable("change_pin_success") { C_Change_Pin_Success_Screen() }
+        composable("fingerprint_add") { F_Fingerprint_Add_Screen(navController, onUseTouchId = {navController.navigate("fingerprint_add_success")}) }
+        composable("fingerprint") { E_Fingerprint_Screen(navController, onDelete = { navController.navigate("fingerprint_eliminated_success") }) }
+        composable("fingerprint_eliminated_success") { G_Fingerprint_Eliminate_Screen() }
+        composable("fingerprint_add_success") { G_Fingerprint_Screen() }
+
+        composable("settings") {A_Settings_Screen(navController, onNotification= {navController.navigate("notification_settings")}, onPassword = {navController.navigate("password_settings")}, onDeleteAccount = {navController.navigate("delete_account")}) }
+        composable("notification_settings") {B_Notification_Settings_Screen(navController)}
+        composable("password_settings") {C_Password_Settings_Screen(navController, onChangePassword = {navController.navigate("password_change_success")}) }
+        composable("delete_account") {E_Delete_Account_Screen(navController)}
+        composable("password_change_success") {D_Password_Settings_Screen()}
     }
 }
 

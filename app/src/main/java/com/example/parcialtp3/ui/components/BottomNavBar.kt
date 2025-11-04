@@ -39,19 +39,19 @@ fun BottomNavBar(
             )
         )
 
-        // ANALYSIS
+        // BALANCE (Lupa)
         NavigationBarItem(
             icon = {
                 BottomNavIcon(
                     iconResId = R.drawable.ic_analysis,
-                    contentDescription = "Analysis",
-                    isSelected = current == "analysis",
+                    contentDescription = "Balance",
+                    isSelected = current == "account_balance",
                     selectedColor = selectedColor,
                     unselectedColor = unselectedColor
                 )
             },
-            selected = current == "analysis",
-            onClick = { navController.navigate("analysis") },
+            selected = current == "account_balance",
+            onClick = { navController.navigate("account_balance") },
             alwaysShowLabel = false,
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = selectedColor,

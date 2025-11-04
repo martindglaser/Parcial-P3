@@ -47,8 +47,6 @@ fun NewHouseScreen(
 
     BackgroundScaffold(
         headerHeight = 120.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "New House",

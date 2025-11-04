@@ -48,8 +48,6 @@ fun A_Medicine_Screen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Column(
                 modifier = Modifier

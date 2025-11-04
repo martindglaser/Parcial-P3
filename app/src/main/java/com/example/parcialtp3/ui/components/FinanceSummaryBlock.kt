@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.ThemeAwareColors
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
 
@@ -34,6 +35,7 @@ fun FinanceSummaryBlock(
     progressLabel: String = "30%",
     goalAmount: String = "$20,000.00",
 ) {
+    val themeColors = ThemeAwareColors.getColors()
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -68,7 +70,7 @@ fun FinanceSummaryBlock(
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Normal,
                                 fontSize = 12.sp,
-                                color = Void
+                                color = themeColors.transactionsHeaderSubTitle
                             )
                         )
                     }
@@ -118,7 +120,7 @@ fun FinanceSummaryBlock(
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Normal,
                                 fontSize = 12.sp,
-                                color = Void
+                                color = themeColors.transactionsHeaderSubTitle
                             )
                         )
                     }
@@ -221,7 +223,7 @@ fun FinanceSummaryBlock(
                     fontFamily = poppinsFamily,
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
-                    color = FenceGreen
+                    color = themeColors.transactionsHeaderSubTitle
                 )
             )
         }

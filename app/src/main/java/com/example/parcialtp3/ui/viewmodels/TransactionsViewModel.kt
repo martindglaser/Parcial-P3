@@ -1,4 +1,4 @@
-package com.example.parcialtp3.ui.screens.transactions
+package com.example.parcialtp3.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 class TransactionsViewModel : ViewModel() {
 
     private val repository = TransactionsRepository()
-
     private val _transactionsByMonth = MutableStateFlow<Map<String, List<Map<String, Any>>>>(emptyMap())
     val transactionsByMonth: StateFlow<Map<String, List<Map<String, Any>>>> = _transactionsByMonth
 
@@ -34,4 +33,3 @@ class TransactionsViewModel : ViewModel() {
         }
     }
 }
-

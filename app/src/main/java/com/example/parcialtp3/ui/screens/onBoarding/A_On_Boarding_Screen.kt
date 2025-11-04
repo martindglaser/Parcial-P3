@@ -11,13 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
+import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.poppinsFamily
 
 @Composable
@@ -25,48 +26,73 @@ fun OnBoardingAScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF002B28)),
-        contentAlignment = Alignment.Center
+            .background(CaribbeanGreen),
+        contentAlignment = Alignment.TopCenter
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 60.dp)
+            modifier = Modifier.fillMaxSize()
         ) {
-            // Título
+            // --- Título ---
+            Spacer(modifier = Modifier.height(60.dp))
             Text(
                 text = "Welcome To\nExpense Manager",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Void,
                 textAlign = TextAlign.Center,
                 fontFamily = poppinsFamily
             )
 
-            // Imagen
-            Image(
-                painter = painterResource(id = R.drawable.onboarding_coins),
-                contentDescription = "Coins illustration",
-                modifier = Modifier
-                    .size(220.dp)
-                    .padding(vertical = 24.dp)
-            )
+            Spacer(modifier = Modifier.height(40.dp))
 
-            // Botón Next
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Button(
-                    onClick = { navController.navigate("onboarding_b") },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                    modifier = Modifier.padding(bottom = 8.dp)
+            // --- Contenedor inferior claro ---
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .background(
+                        color = Honeydew,
+                        shape = RoundedCornerShape(topStart = 60.dp, topEnd = 60.dp)
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 60.dp, bottom = 40.dp)
                 ) {
-                    Text("Next", color = Color.White, fontWeight = FontWeight.Bold)
-                }
-                // Indicadores de página
-                Row(horizontalArrangement = Arrangement.Center) {
-                    Text("•", color = Color.White, fontSize = 16.sp)
-                    Text("○", color = Color.Gray, fontSize = 16.sp)
+                    // Imagen más grande
+                    Image(
+                        painter = painterResource(id = R.drawable.onboarding_coins),
+                        contentDescription = "Coins illustration",
+                        modifier = Modifier.size(260.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(40.dp))
+
+                    // Botón Next
+                    Text(
+                        text = "Next",
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = poppinsFamily,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Indicadores más grandes y centrados
+                    /*Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("•", color = CaribbeanGreen, fontSize = 22.sp)
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("○", color = Void, fontSize = 20.sp)
+                    }*/
                 }
             }
         }

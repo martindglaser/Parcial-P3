@@ -16,6 +16,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.OceanBlue
@@ -30,21 +31,25 @@ import com.example.parcialtp3.ui.components.SimpleText
 import com.example.parcialtp3.ui.components.TitleText
 
 @Composable
-fun NewPasswordScreen() {
+fun NewPasswordScreen(
+    navController: NavHostController
+) {
     BackgroundScaffold(
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },
-        panelContent = { Body() }
+        panelContent = { Body(navController) }
     )
 }
 
 @Composable
 private fun Title() {
-    TitleText("New password", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("New password", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
 @Composable
-private fun Body() {
+private fun Body(
+    navController: NavHostController
+) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -68,7 +73,9 @@ private fun Body() {
             width = 357.dp,
             height = 45.dp,
             backgroundColor = CaribbeanGreen,
-            onClick = {}
+            onClick = {},
+            navController = navController,
+            route = "WelcomeScreen"
         )
 
     }

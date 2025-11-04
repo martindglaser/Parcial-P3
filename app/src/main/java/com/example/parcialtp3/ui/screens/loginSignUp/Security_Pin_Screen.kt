@@ -18,6 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHost
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
@@ -30,21 +33,25 @@ import com.example.parcialtp3.ui.components.RoundedPassInput
 import com.example.parcialtp3.ui.components.TitleText
 
 @Composable
-fun SecurityPinScreen() {
+fun SecurityPinScreen(
+    navController: NavHostController
+) {
     BackgroundScaffold(
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },
-        panelContent = { Body() }
+        panelContent = { Body(navController) }
     )
 }
 
 @Composable
 private fun Title() {
-    TitleText("Security Pin", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Security Pin", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
 @Composable
-private fun Body() {
+private fun Body(
+    navController: NavHostController
+) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -54,7 +61,6 @@ private fun Body() {
     ){
         TitleText(
             "Enter Security Pin",
-            color = Void,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(top = 18.dp), // 2. Ya no necesita .align()
             fontSize = 20.sp
@@ -72,6 +78,8 @@ private fun Body() {
             onClick = {},
             width = 169.dp,
             height = 32.dp,
+            navController = navController,
+            route = "NewPasswordScreen"
         )
         Spacer(Modifier.height(10.dp))
 
@@ -81,8 +89,9 @@ private fun Body() {
             onClick = {},
             width = 169.dp,
             height = 32.dp,
+            navController = navController
         )
         Spacer(Modifier.height(200.dp))
-        FacebookGoogle()
+        FacebookGoogle(navController)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.parcialtp3.ui.screens.loginSignUp
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,11 +37,21 @@ import com.example.parcialtp3.ui.components.TitleText
 import com.example.parcialtp3.ui.viewmodels.WelcomeViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.colorResource
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.parcialtp3.ui.Cyprus
+import com.example.parcialtp3.ui.FenceGreen
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.ThemeAwareColors
+import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
 
 @Composable
 fun WelcomeScreen(
-    vm: WelcomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    vm: WelcomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    navController: NavHostController
 ) {
+    val themeColors = ThemeAwareColors.getColors()
+
     var email by remember { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
 
@@ -64,14 +75,21 @@ fun WelcomeScreen(
                     width = 207.dp,
                     height = 45.dp,
                     backgroundColor = CaribbeanGreen,
-                    onClick = { vm.login(email, pass) }
+                    onClick = { vm.login(email, pass) },
+                    navController = navController,
+                    route = "HomeScreen"
                 )
-                // si querés observar el token:
                 val token by vm.token.collectAsState()
                 token?.let {}
 
                 Spacer(Modifier.height(15.dp))
-                SimpleText("Forgot Password?", color = Void, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                SimpleText(
+                    "Forgot Password?",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp,
+                    navController = navController,
+                    route = "ForgotPasswordScreen"
+                )
                 Spacer(Modifier.height(15.dp))
 
                 RoundedButton(
@@ -79,14 +97,16 @@ fun WelcomeScreen(
                     width = 207.dp,
                     height = 45.dp,
                     backgroundColor = LightGreen,
-                    onClick = {}
+                    onClick = {},
+                    navController = navController,
+                    route = "CreateAccountScreen"
                 )
                 Spacer(Modifier.height(25.dp))
                 Text(
                     text = buildAnnotatedString {
-                        pushStyle(SpanStyle(color = Void))
+                        pushStyle(SpanStyle(color = themeColors.normalText))
                         append("Use ")
-                        withStyle(style = SpanStyle(color = OceanBlue)) {
+                        withStyle(style = SpanStyle(color = themeColors.highlightText)) {
                             append("Fingerprint")
                         }
                         append(" To Access")
@@ -97,7 +117,7 @@ fun WelcomeScreen(
                     fontSize = 14.sp
                 )
                 Spacer(Modifier.height(25.dp))
-                FacebookGoogle()
+                FacebookGoogle(navController)
             }
         }
     )
@@ -105,5 +125,5 @@ fun WelcomeScreen(
 
 @Composable
 private fun Title() {
-    TitleText("Welcome", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Welcome", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
