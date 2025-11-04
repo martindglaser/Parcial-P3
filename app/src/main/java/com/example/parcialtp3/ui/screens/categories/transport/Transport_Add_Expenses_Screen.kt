@@ -37,7 +37,8 @@ fun TransportAddExpenseScreen(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {

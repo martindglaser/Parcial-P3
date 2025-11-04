@@ -56,7 +56,8 @@ fun WeddingScreen(
         headerContent = {
             HeaderBar(
                 title = "Wedding",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

@@ -77,7 +77,8 @@ fun SavingsScreen(
             Column {
                 HeaderBar(
                     title = "Savings",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 FinanceSummaryBlock()

@@ -70,7 +70,8 @@ fun CategoriesScreen(
             Column {
                 HeaderBar(
                     title = "Categories",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 FinanceSummaryBlock()

@@ -48,7 +48,8 @@ fun CarScreen(
         headerContent = {
             HeaderBar(
                 title = "Car",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

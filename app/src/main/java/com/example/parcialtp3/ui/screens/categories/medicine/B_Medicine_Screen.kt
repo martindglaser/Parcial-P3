@@ -41,7 +41,8 @@ fun Medicine_Add_Expenses_Screen(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {

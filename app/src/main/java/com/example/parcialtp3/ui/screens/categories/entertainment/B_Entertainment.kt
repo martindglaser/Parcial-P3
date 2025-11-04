@@ -44,7 +44,8 @@ fun B_Entertainment(
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {

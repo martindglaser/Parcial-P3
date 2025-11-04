@@ -42,7 +42,8 @@ fun TravelScreen(
         headerContent = {
             HeaderBar(
                 title = "Travel",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

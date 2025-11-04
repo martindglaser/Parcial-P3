@@ -55,7 +55,8 @@ fun A_Entertainment_Screen(
             ) {
                 HeaderBar(
                     title = "Entertainment",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()

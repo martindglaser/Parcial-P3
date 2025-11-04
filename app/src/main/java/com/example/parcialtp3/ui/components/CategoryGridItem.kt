@@ -52,11 +52,9 @@ fun CategoryGridItem(
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
-        Text(
+        SimpleText(
             text = title,
             fontSize = 13.sp,
-            color = FenceGreen,
-            fontFamily = poppinsFamily
         )
     }
 }

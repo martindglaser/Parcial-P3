@@ -50,7 +50,8 @@ fun NewHouseScreen(
         headerContent = {
             HeaderBar(
                 title = "New House",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

@@ -43,7 +43,8 @@ fun Car_Expenses_Screen(
         headerContent = {
             HeaderBar(
                 title = "Add Savings",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {

@@ -54,7 +54,8 @@ fun GroceriesScreen(
             ) {
                 HeaderBar(
                     title = "Groceries",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()

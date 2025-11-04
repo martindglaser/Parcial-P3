@@ -59,7 +59,8 @@ fun RentScreen(
             ) {
                 HeaderBar(
                     title = "Rent",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()
