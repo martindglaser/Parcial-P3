@@ -46,12 +46,10 @@ fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewMod
 
                 Spacer(Modifier.height(30.dp))
 
-                Text(
+                SimpleText(
                     text = "Account Settings",
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    fontFamily = poppinsFamily,
-                    color = Void,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()

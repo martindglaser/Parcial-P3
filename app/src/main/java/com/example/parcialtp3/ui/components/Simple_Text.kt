@@ -53,7 +53,6 @@ fun SimpleText(
                 }
             }
         ),
-        color = textColor,
         fontSize = fontSize,
         fontFamily = PoppinsFamily,
         fontWeight = fontWeight,
