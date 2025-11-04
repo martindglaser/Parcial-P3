@@ -49,18 +49,17 @@ fun MonthSection(monthName: String, transactions: List<Transaction>) {
             .fillMaxWidth()
             .padding(vertical = 12.dp)
     ) {
-        Text(
+        TitleText(
             text = monthName,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
             modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
         )
 
-        // LazyColumn para que se muestren todas las filas
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(max = 600.dp) // se ajusta según tu layout
+                .heightIn(max = 600.dp)
         ) {
             items(transactions) { t ->
                 TransactionItem(
@@ -284,11 +283,9 @@ fun TransactionItem(
             Spacer(Modifier.width(10.dp))
 
             Column {
-                Text(
+                TitleText(
                     text = title,
-                    fontSize = 15.sp,
-                    color = Void,
-                    fontFamily = poppinsFamily
+                    fontSize = 14.sp,
                 )
                 Text(
                     text = subtitle,
@@ -315,11 +312,9 @@ fun TransactionItem(
                 .fillMaxHeight(),
             contentAlignment = Alignment.Center
         ) {
-            Text(
+            SimpleText(
                 text = middleText,
                 fontSize = 16.sp,
-                color = Void,
-                fontFamily = poppinsFamily
             )
         }
 
