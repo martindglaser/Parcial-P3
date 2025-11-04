@@ -51,7 +51,7 @@ fun FoodAddExpenseScreen(
                     .verticalScroll(rememberScrollState())
                     .padding(horizontal = 20.dp, vertical = 16.dp)
             ) {
-                // --- 1) DATE ---
+
                 RoundedInputRow(
                     label = "Date",
                     value = "April 30, 2024",
@@ -75,7 +75,7 @@ fun FoodAddExpenseScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 2) CATEGORY ---
+
                 RoundedInputRow(
                     label = "Category",
                     value = "Select the category",
@@ -91,7 +91,7 @@ fun FoodAddExpenseScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 3) AMOUNT ---
+
                 RoundedInputRow(
                     label = "Amount",
                     value = "$26,00",
@@ -99,7 +99,7 @@ fun FoodAddExpenseScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 4) EXPENSE TITLE ---
+
                 RoundedInputRow(
                     label = "Expense Title",
                     value = "Dinner",
@@ -107,7 +107,7 @@ fun FoodAddExpenseScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 5) ENTER MESSAGE ---
+
                 MessageBox(label = "Enter Message")
                 Spacer(modifier = Modifier.height(12.dp))
             }

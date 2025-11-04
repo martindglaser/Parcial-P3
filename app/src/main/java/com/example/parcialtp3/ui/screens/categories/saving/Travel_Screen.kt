@@ -68,7 +68,7 @@ fun TravelScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        // navController?.navigate("travel/addSavings")
+                        navController?.navigate("travel/addSavings")
                     }
                 )
             }

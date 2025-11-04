@@ -70,7 +70,7 @@ fun CarScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        // navController?.navigate("car/addSavings")
+                        navController?.navigate("car/addSavings")
                     }
                 )
             }

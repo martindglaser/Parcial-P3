@@ -20,8 +20,28 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.parcialtp3.ui.components.BottomNavIcon
+import com.example.parcialtp3.ui.screens.categories.entertainment.A_Entertainment_Screen
+import com.example.parcialtp3.ui.screens.categories.entertainment.B_Entertainment
+import com.example.parcialtp3.ui.screens.categories.food.FoodAddExpenseScreen
 import com.example.parcialtp3.ui.screens.accountBalance.AccountBalanceScreen
 import com.example.parcialtp3.ui.screens.categories.food.FoodScreen
+import com.example.parcialtp3.ui.screens.categories.gifts.GiftsScreen
+import com.example.parcialtp3.ui.screens.categories.gifts.Gifts_Add_Expenses_Screen
+import com.example.parcialtp3.ui.screens.categories.groceries.GroceriesAddExpenseScreen
+import com.example.parcialtp3.ui.screens.categories.groceries.GroceriesScreen
+import com.example.parcialtp3.ui.screens.categories.medicine.A_Medicine_Screen
+import com.example.parcialtp3.ui.screens.categories.medicine.Medicine_Add_Expenses_Screen
+import com.example.parcialtp3.ui.screens.categories.rent.RentScreen
+import com.example.parcialtp3.ui.screens.categories.saving.CarScreen
+import com.example.parcialtp3.ui.screens.categories.saving.Car_Expenses_Screen
+import com.example.parcialtp3.ui.screens.categories.saving.NewHouseScreen
+import com.example.parcialtp3.ui.screens.categories.saving.New_House_Add_Expenses_Screen
+import com.example.parcialtp3.ui.screens.categories.saving.SavingsScreen
+import com.example.parcialtp3.ui.screens.categories.saving.TravelAddExpenseScreen
+import com.example.parcialtp3.ui.screens.categories.saving.TravelScreen
+import com.example.parcialtp3.ui.screens.categories.saving.WeddingScreen
+import com.example.parcialtp3.ui.screens.categories.saving.Wedding_Expense_Screen
+import com.example.parcialtp3.ui.screens.categories.transport.TransportAddExpenseScreen
 import com.example.parcialtp3.ui.screens.categories.transport.TransportScreen
 import com.example.parcialtp3.ui.screens.home.HomeScreen
 import com.example.parcialtp3.ui.screens.launch.LaunchScreen
@@ -138,7 +158,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(
         navController = navController,
-        startDestination = "splash"
+        startDestination = "categories"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
@@ -161,9 +181,42 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
         composable("Income_Screen") { TransactionsIncomeScreen(navController) }
         composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
 
-        composable("food") { FoodScreen(navController) }
-        composable("transport") { TransportScreen(navController) }
+
+//cat
         composable("categories") { CategoriesScreen(navController) }
+        composable("food") { FoodScreen(navController) }
+        composable("food/addExpense") { FoodAddExpenseScreen(navController) }
+        composable("transport") { TransportScreen(navController) }
+        composable("transport/addExpense") { TransportAddExpenseScreen(navController) }
+        composable("medicine") { A_Medicine_Screen(navController) }
+        composable("medicine/addExpense") { Medicine_Add_Expenses_Screen(navController) }
+        composable("groceries") { GroceriesScreen(navController) }
+        composable("groceries/addExpense") { GroceriesAddExpenseScreen(navController) }
+        composable("rent") { RentScreen(navController) }
+        composable("rent/addExpense") { GroceriesAddExpenseScreen(navController) }
+        composable("gifts") { GiftsScreen(navController) }
+        composable("gifts/addExpense") { Gifts_Add_Expenses_Screen(navController) }
+        composable("entertainment") { A_Entertainment_Screen(navController) }
+        composable("entertainment/addExpense") { B_Entertainment(navController) }
+
+//sav
+
+        composable("savings") { SavingsScreen(navController) }
+        composable("travel") { TravelScreen(navController) }
+        composable("savings/addExpense") { TravelAddExpenseScreen(navController) }
+        composable("newHouse") { NewHouseScreen(navController) }
+        composable("newHouse/addExpense") { New_House_Add_Expenses_Screen(navController) }
+        composable("car") { CarScreen(navController) }
+        composable("car/carExpense") { Car_Expenses_Screen(navController) }
+        composable("wedding") { WeddingScreen(navController) }
+        composable("wedding/addExpense") { Wedding_Expense_Screen(navController) }
+
+// Rutas para agregar ahorros
+        composable("travel/addSavings") { TravelAddExpenseScreen(navController) }
+        composable("newHouse/addSavings") { New_House_Add_Expenses_Screen(navController) }
+        composable("car/addSavings") { Car_Expenses_Screen(navController) }
+        composable("wedding/addSavings") { Wedding_Expense_Screen(navController) }
+
 
 
         composable("security") { A_Security_Screen(navController, onChangePin = { navController.navigate("change_pin") },  onFingerprint = { navController.navigate("fingerprints") }, onTerms = { navController.navigate("termsAndConditions") }) }
