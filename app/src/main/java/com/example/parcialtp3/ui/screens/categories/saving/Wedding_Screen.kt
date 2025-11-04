@@ -80,7 +80,7 @@ fun WeddingScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        // navController?.navigate("wedding/addSavings")
+                         navController?.navigate("wedding/addSavings")
                     }
                 )
             }

@@ -13,15 +13,19 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.components.AddCategoryDialog
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryGridItem
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
@@ -40,15 +44,32 @@ data class SavingCategoryUi(
 fun SavingsScreen(
     navController: NavHostController
 ) {
+
+    var showAddCategoryDialog by remember { mutableStateOf(false) }
+
+
     val primaryColor = Color(0xFF006BFF)
     val secondaryColor = Color(0xFF87C8FF)
 
     val categories = listOf(
-        SavingCategoryUi("travel", "Travel", R.drawable.vector_plane, true, direccion = ""),
-        SavingCategoryUi("new_house", "New House", R.drawable.vector_newhouse, direccion = ""),
-        SavingCategoryUi("car", "Car", R.drawable.vector_car, direccion = ""),
-        SavingCategoryUi("wedding", "Wedding", R.drawable.vector_wedding, direccion = ""),
+        SavingCategoryUi("travel", "Travel", R.drawable.vector_plane, true, direccion = "travel"),
+        SavingCategoryUi("new_house", "New House", R.drawable.vector_newhouse, direccion = "newHouse"),
+        SavingCategoryUi("car", "Car", R.drawable.vector_car, direccion = "car"),
+        SavingCategoryUi("wedding", "Wedding", R.drawable.vector_wedding, direccion = "wedding"),
     )
+
+    if (showAddCategoryDialog) {
+        AddCategoryDialog(
+            onDismissRequest = {
+                showAddCategoryDialog = false
+            },
+            onConfirm = { categoryName ->
+
+                showAddCategoryDialog = false
+            }
+        )
+    }
+
 
     BackgroundScaffold(
         headerHeight = 290.dp,
@@ -82,15 +103,20 @@ fun SavingsScreen(
                             title = item.title,
                             iconRes = item.iconRes,
                             backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
-                            direccion = item.direccion,
-                            navController = navController
+                            onClick = {
+                                navController.navigate(item.direccion)
+                            }
                         )
                     }
                 }
 
                 PrimaryButton(
                     text = "Add More",
-                    onClick = { /* Lógica para añadir */ },
+
+                    onClick = {
+                        showAddCategoryDialog = true
+                    },
+
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp, bottom = 8.dp)

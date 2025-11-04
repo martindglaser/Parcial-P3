@@ -74,7 +74,7 @@ fun NewHouseScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        // navController?.navigate("newHouse/addSavings")
+                         navController?.navigate("newHouse/addSavings")
                     }
                 )
             }

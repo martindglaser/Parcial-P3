@@ -121,7 +121,7 @@ fun Medicine_Add_Expenses_Screen(
             ) {
                 PrimaryButton(
                     text = "Save",
-                    onClick = { navController?.popBackStack() }
+                    onClick = {  }
                 )
             }
         }
