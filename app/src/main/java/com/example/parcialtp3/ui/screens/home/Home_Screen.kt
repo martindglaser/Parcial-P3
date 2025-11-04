@@ -47,8 +47,6 @@ fun HomeScreen(navController: NavHostController) {
 
         BackgroundScaffold(
             headerHeight = 320.dp,
-            headerColor = CaribbeanGreen,
-            panelColor = Honeydew,
             headerContent = {
                 Column(
                     modifier = Modifier

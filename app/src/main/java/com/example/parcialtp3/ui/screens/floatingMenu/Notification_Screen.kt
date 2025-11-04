@@ -56,8 +56,6 @@ fun NotificationScreen(navController: NavHostController) {
 
     BackgroundScaffold(
         headerHeight = 160.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Box(
                 modifier = Modifier

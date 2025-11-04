@@ -52,8 +52,6 @@ fun SavingsScreen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Column {
                 HeaderBar(

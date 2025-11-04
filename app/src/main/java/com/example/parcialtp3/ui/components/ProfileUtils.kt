@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
@@ -94,12 +95,10 @@ fun ImagenFlotadora(altura: Dp,imagen: Int){
 
 @Composable
 fun DisplayName(id: String, name: String){
-    Text(
+    SimpleText(
         text = name,
-        color = Void,
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
-        fontFamily = poppinsFamily
     )
     Text(
         buildAnnotatedString {

@@ -76,7 +76,6 @@ fun WelcomeScreen(
                 Spacer(Modifier.height(15.dp))
                 SimpleText(
                     "Forgot Password?",
-                    color = Void,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
                     navController = navController,
@@ -117,5 +116,5 @@ fun WelcomeScreen(
 
 @Composable
 private fun Title() {
-    TitleText("Welcome", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Welcome", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }

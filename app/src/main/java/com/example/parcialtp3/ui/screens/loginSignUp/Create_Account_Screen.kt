@@ -124,5 +124,5 @@ fun CreateAccountScreen(
 }
 @Composable
 private fun Title() {
-    TitleText("Create Account", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Create Account", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }

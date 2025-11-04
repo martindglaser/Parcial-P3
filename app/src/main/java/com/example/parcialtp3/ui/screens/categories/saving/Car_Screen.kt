@@ -45,8 +45,6 @@ fun CarScreen(
 
     BackgroundScaffold(
         headerHeight = 120.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Car",

@@ -37,8 +37,6 @@ fun AccountBalanceScreen(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize()) {
         BackgroundScaffold(
             headerHeight = 480.dp,
-            headerColor = CaribbeanGreen,
-            panelColor = Honeydew,
             headerContent = {
                 Column(
                     modifier = Modifier

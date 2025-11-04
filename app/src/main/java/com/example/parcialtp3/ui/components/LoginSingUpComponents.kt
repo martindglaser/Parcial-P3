@@ -77,7 +77,6 @@ fun RoundedInputField(
     ) {
         SimpleText(
             text = label,
-            color = textColor,
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
             modifier = Modifier.padding(start = labelPaddingLeft)
@@ -137,7 +136,6 @@ fun RoundedPassInput(
     ) {
         SimpleText(
             text = label,
-            color = textColor,
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
             modifier = Modifier.padding(start = labelPaddingLeft)

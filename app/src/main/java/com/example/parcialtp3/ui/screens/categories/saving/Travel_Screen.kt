@@ -39,8 +39,6 @@ fun TravelScreen(
 
     BackgroundScaffold(
         headerHeight = 170.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Travel",
