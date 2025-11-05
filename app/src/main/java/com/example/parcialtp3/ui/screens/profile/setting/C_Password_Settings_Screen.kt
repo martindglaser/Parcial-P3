@@ -24,7 +24,7 @@ import com.example.parcialtp3.ui.components.PasswordInputField
 fun C_Password_Settings_Screen(
     navController: NavHostController,
     onBack: () -> Unit = { navController.popBackStack() },
-    onChangePassword: () -> Unit = {}
+    onChangePassword: (current: String, new: String, confirm: String) -> Unit = { _,_,_ -> }
 ) {
     var current by remember { mutableStateOf("") }
     var newPass by remember { mutableStateOf("") }
@@ -72,7 +72,7 @@ fun C_Password_Settings_Screen(
                 Spacer(Modifier.height(60.dp))
 
                 Button(
-                    onClick = { onChangePassword() },
+                    onClick = { onChangePassword(current, newPass, confirm) },
                     modifier = Modifier
                         .fillMaxWidth(0.6f)
                         .height(48.dp),

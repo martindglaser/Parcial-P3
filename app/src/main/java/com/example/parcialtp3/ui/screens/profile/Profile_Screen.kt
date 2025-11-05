@@ -60,7 +60,7 @@ fun Profile_Screen(navController: NavHostController) {
                 )
                 ProfileOption(iconRes = R.drawable.icon_help,
                     label = "Help",
-                    onClick = {navController.navigate("help_center")}
+                    onClick = {}
                 )
                 ProfileOption(
                     iconRes = R.drawable.icon_logout,

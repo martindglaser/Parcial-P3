@@ -33,15 +33,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.navigation.NavHostController
-import com.example.parcialtp3.ui.ThemeAwareColors
 
 @Composable
 fun CreateAccountScreen(
     vm: CreateAccountViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     navController: NavHostController
 ) {
-    val themeColors = ThemeAwareColors.getColors()
-
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
@@ -81,7 +78,7 @@ fun CreateAccountScreen(
                             append("Privacy Policy.")
                         }
                     },
-                    color = themeColors.normalText,
+                    color = Void,
                     fontFamily = PoppinsFamily,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
@@ -105,14 +102,14 @@ fun CreateAccountScreen(
                         append("Already have an account? ")
                         withStyle(
                             style = SpanStyle(
-                                color = themeColors.highlightText2,
+                                color = VividBlue,
                             )
                         ) {
                             append("Sign In")
                         }
                     },
                     fontSize = 13.sp,
-                    color = themeColors.normalText,
+                    color = Void,
                     fontWeight = FontWeight.Light,
                     fontFamily = PoppinsFamily,
                     modifier = Modifier.clickable(
@@ -127,5 +124,5 @@ fun CreateAccountScreen(
 }
 @Composable
 private fun Title() {
-    TitleText("Create Account", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Create Account", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }

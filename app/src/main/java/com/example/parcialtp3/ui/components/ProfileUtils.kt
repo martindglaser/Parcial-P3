@@ -17,7 +17,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,15 +30,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Cyprus
-import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
-import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
 
 @Composable
 fun ProfileOption(
@@ -69,9 +64,11 @@ fun ProfileOption(
 
         Spacer(Modifier.width(16.dp))
 
-        SimpleText(
+        Text(
             text = label,
-            fontSize = 16.sp
+            fontSize = 16.sp,
+            fontFamily = poppinsFamily,
+            color = Void
         )
     }
 }
@@ -97,15 +94,12 @@ fun ImagenFlotadora(altura: Dp,imagen: Int){
 
 @Composable
 fun DisplayName(id: String, name: String){
-    val themeViewModel: ThemeViewModel = viewModel()
-    val isDarkMode = themeViewModel.darkThemeEnabled.collectAsState().value
-    val textColor = if (isDarkMode) Honeydew else Void
-
-
-    SimpleText(
+    Text(
         text = name,
+        color = Void,
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
+        fontFamily = poppinsFamily
     )
     Text(
         buildAnnotatedString {
@@ -125,7 +119,7 @@ fun DisplayName(id: String, name: String){
             }
         },
         fontSize = 14.sp,
-        color = textColor,
+        color = Void,
         fontFamily = poppinsFamily
     )
 }
@@ -144,9 +138,11 @@ fun SettingsSwitchRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        SimpleText(
+        Text(
             text = label,
+            fontFamily = poppinsFamily,
             fontSize = 15.sp,
+            color = Void,
             fontWeight = FontWeight.Medium
         )
 

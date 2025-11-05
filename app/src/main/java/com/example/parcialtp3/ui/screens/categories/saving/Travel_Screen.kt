@@ -39,11 +39,12 @@ fun TravelScreen(
 
     BackgroundScaffold(
         headerHeight = 170.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Travel",
-                navController = navController,
-                onBackClick = { navController.popBackStack() }
+                navController = navController
             )
         },
         panelContent = {
@@ -69,7 +70,7 @@ fun TravelScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        navController?.navigate("travel/addSavings")
+                        // navController?.navigate("travel/addSavings")
                     }
                 )
             }

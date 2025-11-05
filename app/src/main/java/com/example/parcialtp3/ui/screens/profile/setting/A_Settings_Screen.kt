@@ -27,7 +27,6 @@ import com.example.parcialtp3.ui.ParcialTP3Theme
 fun A_Settings_Screen(
     navController: NavHostController,
     onBack: () -> Unit = { navController.popBackStack() },
-    onNotification: () -> Unit = {},
     onPassword: () -> Unit = {},
     onDeleteAccount: () -> Unit = {}
 ) {
@@ -52,7 +51,7 @@ fun A_Settings_Screen(
                 SettingsRow(
                     iconRes = R.drawable.icon_notification_caribbeangreen,
                     label = "Notification Settings",
-                    onClick = onNotification
+                    onClick = { /* nav a tu pantalla de notificaciones */ }
                 )
                 SettingsDivider()
 

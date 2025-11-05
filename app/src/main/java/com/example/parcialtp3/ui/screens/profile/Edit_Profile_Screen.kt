@@ -3,7 +3,6 @@ package com.example.parcialtp3.ui.screens.profile
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -13,7 +12,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
@@ -22,9 +20,9 @@ import com.example.parcialtp3.ui.components.*
 import com.example.parcialtp3.ui.poppinsFamily
 
 @Composable
-fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun Edit_Profile_Screen(navController: NavHostController) {   // ✅ agregamos el parámetro
     val pushNotificationsEnabled = remember { mutableStateOf(true) }
-    val darkThemeState = viewModel.darkThemeEnabled.collectAsState()
+    val darkThemeEnabled = remember { mutableStateOf(false) }
 
     BackgroundScaffold(
         headerHeight = 200.dp,
@@ -32,7 +30,7 @@ fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewMod
         headerContent = {
             HeaderBar(
                 title = "Edit My Profile",
-                navController = navController,
+                navController = navController,   // ✅ lo pasamos acá
                 onBackClick = { navController.popBackStack() }
             )
         },
@@ -46,10 +44,12 @@ fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewMod
 
                 Spacer(Modifier.height(30.dp))
 
-                SimpleText(
+                Text(
                     text = "Account Settings",
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
+                    fontFamily = poppinsFamily,
+                    color = Void,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -72,8 +72,8 @@ fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewMod
 
                 SettingsSwitchRow(
                     label = "Turn Dark Theme",
-                    checked = darkThemeState.value,
-                    onCheckedChange = { viewModel.toggleTheme(it) }
+                    checked = darkThemeEnabled.value,
+                    onCheckedChange = { darkThemeEnabled.value = it }
                 )
 
                 Spacer(Modifier.height(20.dp))

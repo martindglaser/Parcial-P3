@@ -31,7 +31,7 @@ fun HeaderBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Transparent)
+            .background(CaribbeanGreen)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -47,10 +47,12 @@ fun HeaderBar(
         )
 
         // Título centrado
-        TitleText(
+        Text(
             text = title,
-            fontSize = 22.sp,
+            color = Void,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
+            fontFamily = poppinsFamily,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )

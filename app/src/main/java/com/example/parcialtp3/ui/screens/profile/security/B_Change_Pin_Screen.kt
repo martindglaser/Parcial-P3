@@ -28,7 +28,6 @@ fun B_Change_Pin_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Change Pin",
-                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

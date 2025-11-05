@@ -45,11 +45,12 @@ fun CarScreen(
 
     BackgroundScaffold(
         headerHeight = 120.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Car",
-                navController = navController,
-                onBackClick = { navController.popBackStack() }
+                navController = navController
             )
         },
         panelContent = {
@@ -71,7 +72,7 @@ fun CarScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        navController?.navigate("car/addSavings")
+                        // navController?.navigate("car/addSavings")
                     }
                 )
             }

@@ -47,11 +47,12 @@ fun NewHouseScreen(
 
     BackgroundScaffold(
         headerHeight = 120.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "New House",
-                navController = navController,
-                onBackClick = { navController.popBackStack() }
+                navController = navController
             )
         },
         panelContent = {
@@ -73,7 +74,7 @@ fun NewHouseScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                         navController?.navigate("newHouse/addSavings")
+                        // navController?.navigate("newHouse/addSavings")
                     }
                 )
             }

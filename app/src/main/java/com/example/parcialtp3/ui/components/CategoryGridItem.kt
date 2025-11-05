@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-// Import de NavHostController ELIMINADO
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.poppinsFamily
 
@@ -29,8 +29,8 @@ fun CategoryGridItem(
     title: String,
     @DrawableRes iconRes: Int,
     backgroundColor: Color,
-
-    onClick: () -> Unit
+    direccion: String,
+    navController: NavHostController
 ) {
     Column(
         modifier = Modifier.width(98.dp),
@@ -41,8 +41,7 @@ fun CategoryGridItem(
                 .size(width = 98.dp, height = 90.dp)
                 .clip(RoundedCornerShape(26.dp))
                 .background(backgroundColor)
-
-                .clickable { onClick() },
+                .clickable { navController.navigate(direccion) },
             contentAlignment = Alignment.Center
         ) {
             Image(
@@ -52,9 +51,11 @@ fun CategoryGridItem(
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
-        SimpleText(
+        Text(
             text = title,
             fontSize = 13.sp,
+            color = FenceGreen,
+            fontFamily = poppinsFamily
         )
     }
 }

@@ -40,11 +40,12 @@ fun Wedding_Expense_Screen(
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Add Savings",
-                navController = navController,
-                onBackClick = { navController.popBackStack() }
+                navController = navController
             )
         }
     ) {

@@ -47,6 +47,8 @@ fun A_Entertainment_Screen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             Column(
                 modifier = Modifier
@@ -55,8 +57,7 @@ fun A_Entertainment_Screen(
             ) {
                 HeaderBar(
                     title = "Entertainment",
-                    navController = navController,
-                    onBackClick = { navController.popBackStack() }
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()

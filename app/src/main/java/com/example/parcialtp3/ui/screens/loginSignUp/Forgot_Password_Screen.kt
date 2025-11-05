@@ -36,7 +36,7 @@ fun ForgotPasswordScreen(
 }
 @Composable
 private fun Title() {
-    TitleText("Forgot Password", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Forgot Password", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
 @Composable
 private fun Body(
@@ -50,6 +50,7 @@ private fun Body(
     ) {
         TitleText(
             "Reset Password?",
+            color = Void,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(top = 18.dp), // Ya no necesita .align()
             fontSize = 20.sp

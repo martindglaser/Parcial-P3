@@ -27,6 +27,8 @@ import com.example.parcialtp3.ui.components.HeaderBar
 @Composable
 fun D_Fingerprint_Screen(
     navController: NavHostController,
+    onBack: () -> Unit = {},
+    onNotifications: () -> Unit = {},
     onTapExisting: () -> Unit = {},
     onAddFingerprint: () -> Unit = {}
 ) {
@@ -36,8 +38,7 @@ fun D_Fingerprint_Screen(
         headerContent = {
             HeaderBar(
                 navController = navController,
-                title = "Fingerprint",
-                onBackClick = { navController.popBackStack() }
+                title = "Fingerprint"
             )
         },
         panelContent = {

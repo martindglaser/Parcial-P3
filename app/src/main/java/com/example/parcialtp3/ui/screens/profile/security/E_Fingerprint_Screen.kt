@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.parcialtp3.ui.CaribbeanGreen
@@ -23,6 +24,8 @@ import com.example.parcialtp3.ui.components.LargeFingerprintIcon
 fun E_Fingerprint_Screen(
     navController: NavHostController,
     title: String = "Jhon Fingerprint",
+    onBack: () -> Unit = {},
+    onNotifications: () -> Unit = {},
     onDelete: () -> Unit = {}
 ) {
     BackgroundScaffold(
@@ -32,7 +35,6 @@ fun E_Fingerprint_Screen(
             HeaderBar(
                 navController = navController,
                 title = title,
-                onBackClick = { navController.popBackStack() },
             )
         },
         panelContent = {

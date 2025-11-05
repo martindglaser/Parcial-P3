@@ -27,7 +27,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,19 +49,14 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Cyprus
-import com.example.parcialtp3.ui.FenceGreen
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
-import com.example.parcialtp3.ui.ThemeAwareColors
 import com.example.parcialtp3.ui.VividBlue
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.poppinsFamily
-import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
 
 @Composable
 fun RoundedInputField(
@@ -83,6 +77,7 @@ fun RoundedInputField(
     ) {
         SimpleText(
             text = label,
+            color = textColor,
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
             modifier = Modifier.padding(start = labelPaddingLeft)
@@ -142,6 +137,7 @@ fun RoundedPassInput(
     ) {
         SimpleText(
             text = label,
+            color = textColor,
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
             modifier = Modifier.padding(start = labelPaddingLeft)
@@ -235,8 +231,6 @@ fun RoundedButton(
 fun FacebookGoogle(
     navController: NavHostController
 ){
-    val themeColors = ThemeAwareColors.getColors()
-
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SimpleText("or sign up with", fontSize = 13.sp, fontWeight = FontWeight.Light)
         Spacer(Modifier.height(13.dp))
@@ -264,14 +258,14 @@ fun FacebookGoogle(
                 append("Don’t have an account? ")
                 withStyle(
                     style = SpanStyle(
-                        color = themeColors.highlightText2,
+                        color = VividBlue,
                     )
                 ) {
                     append("Sign Up")
                 }
             },
             fontSize = 13.sp,
-            color = themeColors.normalText,
+            color = Void,
             fontWeight = FontWeight.Light,
             fontFamily = PoppinsFamily,
             modifier = Modifier.clickable(
@@ -292,8 +286,6 @@ fun OtpCircleInput(
     textColor: Color = Color(0xFF0D0D0D),
     onComplete: (String) -> Unit = {}
 ) {
-    val themeColors = ThemeAwareColors.getColors()
-
     val length = 6
     val circleSize = 35.78.dp
     val textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.SemiBold, fontFamily = PoppinsFamily)
@@ -311,7 +303,7 @@ fun OtpCircleInput(
                         .border(BorderStroke(borderWidth, borderColor), CircleShape)
                 ) {
                     if (char.isNotEmpty()) {
-                        Text(text = char, style = textStyle, color = themeColors.normalText)
+                        Text(text = char, style = textStyle, color = textColor)
                     }
                 }
             }

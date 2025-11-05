@@ -30,8 +30,8 @@ data class CategoryUi(
 
 @Composable
 fun CategoriesScreen(
-    navController: NavHostController
-
+    navController: NavHostController,
+    onCategoryClick: (String) -> Unit = {}
 ) {
     var showAddCategoryDialog by remember { mutableStateOf(false) }
 
@@ -39,18 +39,16 @@ fun CategoriesScreen(
     val secondaryColor = Color(0xFF87C8FF)
 
     val categories = listOf(
-        CategoryUi("food", "Food", R.drawable.vector_food, true, direccion = "food"),
+        CategoryUi("food", "Food", R.drawable.vector_food, true,direccion = "food"),
         CategoryUi("transport", "Transport", R.drawable.vector_transport, direccion = "transport"),
-        CategoryUi("medicine", "Medicine", R.drawable.vector_medicine, direccion = "medicine"),
-        CategoryUi("groceries", "Groceries", R.drawable.vector_groceries, direccion = "groceries"),
-        CategoryUi("rent", "Rent", R.drawable.vector_rent, direccion = "rent"),
-        CategoryUi("gifts", "Gifts", R.drawable.vector_gift, direccion = "gifts"),
-        CategoryUi("savings", "Savings", R.drawable.vector_savings, direccion = "savings"),
-        CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter, direccion = "entertainment"),
-        // El 'id' es la clave para "More"
-        CategoryUi("new_category", "More", R.drawable.vector_more, direccion = "more")
+        CategoryUi("medicine", "Medicine", R.drawable.vector_medicine,direccion = ""),
+        CategoryUi("groceries", "Groceries", R.drawable.vector_groceries,direccion = ""),
+        CategoryUi("rent", "Rent", R.drawable.vector_rent,direccion = ""),
+        CategoryUi("gifts", "Gifts", R.drawable.vector_gift,direccion = ""),
+        CategoryUi("savings", "Savings", R.drawable.vector_savings,direccion = ""),
+        CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter,direccion = ""),
+        CategoryUi("new_category", "More", R.drawable.vector_more,direccion = "")
     )
-
 
     if (showAddCategoryDialog) {
         AddCategoryDialog(
@@ -66,12 +64,13 @@ fun CategoriesScreen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             Column {
                 HeaderBar(
                     title = "Categories",
-                    navController = navController,
-                    onBackClick = { navController.popBackStack() }
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 FinanceSummaryBlock()
@@ -90,28 +89,20 @@ fun CategoriesScreen(
                     contentPadding = PaddingValues(bottom = 32.dp)
                 ) {
                     items(categories) { item ->
-
-
-
                         CategoryGridItem(
                             title = item.title,
                             iconRes = item.iconRes,
                             backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
-
-
-                            onClick = {
-                                if (item.id == "new_category") {
-
-                                    showAddCategoryDialog = true
-                                } else {
-
-                                    navController.navigate(item.direccion)
-                                }
-                            }
-
+                            direccion = item.direccion,
+                            navController = navController
                         )
-
-
+//                        onClick = {
+//                            if (item.id == "new_category") {
+//                                showAddCategoryDialog = true
+//                            } else {
+//                                onCategoryClick(item.id)
+//                            }
+//                        }
                     }
                 }
             }

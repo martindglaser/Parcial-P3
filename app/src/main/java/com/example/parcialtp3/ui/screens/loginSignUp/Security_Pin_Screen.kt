@@ -46,7 +46,7 @@ fun SecurityPinScreen(
 
 @Composable
 private fun Title() {
-    TitleText("Security Pin", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("Security Pin", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
 @Composable
 private fun Body(
@@ -61,6 +61,7 @@ private fun Body(
     ){
         TitleText(
             "Enter Security Pin",
+            color = Void,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(top = 18.dp), // 2. Ya no necesita .align()
             fontSize = 20.sp

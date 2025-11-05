@@ -35,11 +35,12 @@ fun GroceriesAddExpenseScreen(
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
+        headerColor = CaribbeanGreen,
+        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController,
-                onBackClick = { navController.popBackStack() }
+                navController = navController
             )
         }
     ) {

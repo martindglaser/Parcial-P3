@@ -9,7 +9,7 @@ import com.example.parcialtp3.ui.components.SuccessScreen
 fun C_Change_Pin_Success_Screen() {
     SuccessScreen(
         message = "Pin Has Been\nChanged Successfully",
-        iconRes = R.drawable.icon_check_progress1,
+        iconRes = R.drawable.icon_check_progress1
     )
 }
 
