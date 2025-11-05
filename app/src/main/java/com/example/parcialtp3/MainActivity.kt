@@ -4,19 +4,13 @@ import CategoriesScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.parcialtp3.ui.components.BottomNavIcon
@@ -76,7 +70,6 @@ import com.example.parcialtp3.ui.screens.profile.setting.E_Delete_Account_Screen
 import com.example.parcialtp3.ui.screens.profile.help.help_center.A_B_Help_Center_Screen
 import com.example.parcialtp3.ui.screens.profile.help.online_support.A_Online_Support_Screen
 import com.example.parcialtp3.ui.screens.profile.help.online_support.B_Online_Support_Screen
-import kotlinx.coroutines.launch
 
 val VerdeCaribeno = Color(0xFF00C49F)
 val Brown = Color(0xFF6D4C41)
@@ -85,80 +78,20 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppWithDrawer()
+            App()
         }
     }
 }
 
-/* ---------------- ESTRUCTURA CON DRAWER ---------------- */
 @Composable
-fun AppWithDrawer() {
-    val navController = rememberNavController()
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            DrawerContent(navController = navController, drawerState = drawerState)
-        }
-    ) {
-        MainNavHost(navController = navController, drawerState = drawerState)
-    }
+fun App() {
+    MainNavHost(navController = rememberNavController())
 }
 
-/* ---------------- CONTENIDO DEL DRAWER ---------------- */
-@Composable
-fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
-    val scope = rememberCoroutineScope()
-    ModalDrawerSheet {
-        Text(
-            "Menu",
-            modifier = Modifier.padding(16.dp),
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = null) },
-            label = { Text("Shop") },
-            selected = false,
-            onClick = {
-                navController.navigate("shopList")
-                scope.launch { drawerState.close() }
-            }
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
-            label = { Text("Favourites") },
-            selected = false,
-            onClick = {
-                navController.navigate("favourites")
-                scope.launch { drawerState.close() }
-            }
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Default.Person, contentDescription = null) },
-            label = { Text("Profile") },
-            selected = false,
-            onClick = {
-                navController.navigate("profile")
-                scope.launch { drawerState.close() }
-            }
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = null) },
-            label = { Text("Settings") },
-            selected = false,
-            onClick = {
-                navController.navigate("settings")
-                scope.launch { drawerState.close() }
-            }
-        )
-    }
-}
 
 /* ---------------- NAVHOST PRINCIPAL ---------------- */
 @Composable
-fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
+fun MainNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = "splash"
@@ -223,8 +156,8 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
 
 
         composable("security") { A_Security_Screen(navController, onChangePin = { navController.navigate("change_pin") },  onFingerprint = { navController.navigate("fingerprints") }, onTerms = { navController.navigate("termsAndConditions") }) }
-        composable("shopList") { Transactions(navController, drawerState) }
-        composable("favourites") { FavouritesScreen(navController, drawerState) }
+        composable("shopList") { Transactions(navController) }
+        composable("favourites") { FavouritesScreen(navController) }
         composable("profile") { Profile_Screen(navController)}
         composable("settings") { A_Settings_Screen(navController) }
 
@@ -255,24 +188,6 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     }
 }
 
-/* ---------------- TOP BAR ---------------- */
-@Composable
-fun CustomTopBar(title: String, onMenuClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(VerdeCaribeno)
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        IconButton(onClick = onMenuClick) {
-            Icon(Icons.Default.Menu, contentDescription = "Menu", tint = Color.Black)
-        }
-        Text(text = title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-        Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black)
-    }
-}
 
 /* ---------------- BOTTOM NAV ---------------- */
 @Composable
@@ -391,10 +306,9 @@ fun BottomNav(navController: NavHostController, current: String) {
 /* ---------------- PANTALLAS DE EJEMPLO ---------------- */
 
 @Composable
-fun Transactions(navController: NavHostController, drawerState: DrawerState) {
+fun Transactions(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     Scaffold(
-        topBar = { CustomTopBar("Transactions") { scope.launch { drawerState.open() } } },
         bottomBar = { BottomNav(navController, current = "shopList") },
         containerColor = VerdeCaribeno
     ) { paddingValues ->
@@ -410,10 +324,9 @@ fun Transactions(navController: NavHostController, drawerState: DrawerState) {
 }
 
 @Composable
-fun FavouritesScreen(navController: NavHostController, drawerState: DrawerState) {
+fun FavouritesScreen(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     Scaffold(
-        topBar = { CustomTopBar("Favourites") { scope.launch { drawerState.open() } } },
         bottomBar = { BottomNav(navController, current = "favourites") },
         containerColor = VerdeCaribeno
     ) { paddingValues ->
@@ -429,10 +342,9 @@ fun FavouritesScreen(navController: NavHostController, drawerState: DrawerState)
 }
 
 @Composable
-fun ProfileScreen(navController: NavHostController, drawerState: DrawerState) {
+fun ProfileScreen(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     Scaffold(
-        topBar = { CustomTopBar("Profile") { scope.launch { drawerState.open() } } },
         bottomBar = { BottomNav(navController, current = "profile") },
         containerColor = VerdeCaribeno
     ) { paddingValues ->
@@ -448,10 +360,9 @@ fun ProfileScreen(navController: NavHostController, drawerState: DrawerState) {
 }
 
 @Composable
-fun SettingsScreen(navController: NavHostController, drawerState: DrawerState) {
+fun SettingsScreen(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     Scaffold(
-        topBar = { CustomTopBar("Settings") { scope.launch { drawerState.open() } } },
         bottomBar = { BottomNav(navController, current = "settings") },
         containerColor = VerdeCaribeno
     ) { paddingValues ->
@@ -469,5 +380,5 @@ fun SettingsScreen(navController: NavHostController, drawerState: DrawerState) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    AppWithDrawer()
+    App()
 }
