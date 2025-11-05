@@ -83,7 +83,7 @@ fun BackgroundScaffold(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth(),
-                color = FenceGreen,
+                color = Color.Transparent,
                 shadowElevation = 12.dp
             ) {
                 BottomNavBar(navController = navController, current = current)

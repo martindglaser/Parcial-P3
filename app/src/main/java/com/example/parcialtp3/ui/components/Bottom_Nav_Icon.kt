@@ -7,19 +7,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.parcialtp3.ui.ThemeAwareColors
 
 @Composable
 fun BottomNavIcon(
     iconResId: Int,
-    contentDescription: String,
-    isSelected: Boolean,
-    selectedColor: Color,
-    unselectedColor: Color
+    contentDescription: String
 ) {
+    val themeColors = ThemeAwareColors.getColors()
     Icon(
         painter = painterResource(id = iconResId),
         contentDescription = contentDescription,
         modifier = Modifier.size(26.dp),
-        tint = if (isSelected) selectedColor else unselectedColor
+        tint = themeColors.iconColorBottomNavBar
     )
 }
