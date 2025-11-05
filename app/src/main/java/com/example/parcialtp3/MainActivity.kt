@@ -49,26 +49,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppWithDrawer()
+            AppWithoutDrawer()
         }
     }
 }
 
 /* ---------------- ESTRUCTURA CON DRAWER ---------------- */
 @Composable
-fun AppWithDrawer() {
+fun AppWithoutDrawer() {
     val navController = rememberNavController()
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            DrawerContent(navController = navController, drawerState = drawerState)
-        }
-    ) {
-        MainNavHost(navController = navController, drawerState = drawerState)
-    }
+    MainNavHost(navController = navController, drawerState = rememberDrawerState(DrawerValue.Closed))
 }
+
 
 /* ---------------- CONTENIDO DEL DRAWER ---------------- */
 @Composable
@@ -125,7 +117,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
     NavHost(
         navController = navController,
-        startDestination = "splash"
+        startDestination = "account_balance"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
@@ -134,11 +126,12 @@ fun MainNavHost(navController: NavHostController, drawerState: DrawerState) {
             val next = backStackEntry.arguments?.getString("next") ?: "HomeScreen"
             OnBoardingPagerScreen(navController = navController, nextRoute = next)
         }
-
         composable("HomeScreen") { HomeScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("account_balance") { AccountBalanceScreen(navController) }
         //composable("b_launch") { LaunchScreen(navController) }
+        composable("transactions") { Transactions_Screen(navController = navController) }
+
 
         composable("edit_profile") { Edit_Profile_Screen(navController) }
 
@@ -382,5 +375,5 @@ fun SettingsScreen(navController: NavHostController, drawerState: DrawerState) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    AppWithDrawer()
+    AppWithoutDrawer()
 }

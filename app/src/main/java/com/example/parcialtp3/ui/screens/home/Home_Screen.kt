@@ -13,9 +13,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
@@ -36,9 +38,9 @@ data class HomeTransaction(
 fun HomeScreen(navController: NavHostController) {
     val viewModel: TransactionsViewModel = viewModel()
     val transactions = listOf(
-        HomeTransaction(R.drawable.vector_salary, "Salary", "18:27 – April 30", "Monthly", "$4.000,00"),
-        HomeTransaction(R.drawable.vector_groceries, "Groceries", "17:00 – April 24", "Pantry", "-$100,00"),
-        HomeTransaction(R.drawable.vector_rent, "Rent", "8:30 – April 15", "Rent", "-$674,40")
+        HomeTransaction(R.drawable.icon_salary, "Salary", "18:27 – April 30", "Monthly", "$4.000,00"),
+        HomeTransaction(R.drawable.icon_groceries, "Groceries", "17:00 – April 24", "Pantry", "-$100,00"),
+        HomeTransaction(R.drawable.icon_rent, "Rent", "8:30 – April 15", "Rent", "-$674,40")
     )
 
     var selectedFilter by remember { mutableStateOf("Monthly") }
@@ -55,18 +57,68 @@ fun HomeScreen(navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp)
                 ) {
-                    HeaderBar(title = "Hi, Welcome Back", navController = navController)
-                    Spacer(Modifier.height(2.dp))
-                    Text("Good Morning", color = Void, fontFamily = poppinsFamily)
-                    Spacer(Modifier.height(2.dp))
+                    Spacer(modifier = Modifier.height(1.dp))
+
+                    // Fila superior: título y botón de notificaciones
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            // Título principal
+                            Text(
+                                text = "Hi, Welcome Back.",
+                                color = Void,
+                                fontFamily = poppinsFamily,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 22.sp,
+                                modifier = Modifier
+                                    .width(278.dp)
+                                    .height(22.dp)
+                            )
+
+                            Spacer(modifier = Modifier.height(4.dp))
+
+                            // Subtítulo
+                            Text(
+                                text = "Good Morning",
+                                color = Void,
+                                fontFamily = poppinsFamily,
+                                fontWeight = FontWeight.Normal,
+                                fontSize = 13.sp,
+                                modifier = Modifier
+                                    .width(169.dp)
+                                    .height(13.dp)
+                            )
+                        }
+
+                        // Icono de notificaciones clickeable
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_notification),
+                            contentDescription = "Notifications",
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clickable {
+                                    navController.navigate("notifications")
+                                }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    // Bloque financiero
                     FinanceSummaryBlock(
                         modifier = Modifier.clickable {
                             navController.navigate("account_balance")
                         }
                     )
+
                     Spacer(modifier = Modifier.height(10.dp))
                 }
-            },
+            }
+
+            ,
             panelContent = {
                 Column(
                     modifier = Modifier
@@ -93,20 +145,59 @@ fun HomeScreen(navController: NavHostController) {
                                 verticalArrangement = Arrangement.Center,
                                 modifier = Modifier.weight(1f)
                             ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.vector_gift),
-                                    contentDescription = "Savings Icon",
-                                    modifier = Modifier.size(40.dp)
-                                )
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier.size(90.dp)
+                                ) {
+                                    // Círculo dividido mitad blanca, mitad azul
+                                    Box(
+                                        modifier = Modifier
+                                            .matchParentSize()
+                                            .clip(CircleShape)
+                                    ) {
+                                        Row(Modifier.matchParentSize()) {
+                                            Box(
+                                                Modifier
+                                                    .weight(1f)
+                                                    .fillMaxHeight()
+                                                    .background(Honeydew)
+                                            )
+                                            Box(
+                                                Modifier
+                                                    .weight(1f)
+                                                    .fillMaxHeight()
+                                                    .background(OceanBlue)
+                                            )
+                                        }
+                                    }
+
+                                    // Ícono centrado
+                                    Box(
+                                        contentAlignment = Alignment.Center,
+                                        modifier = Modifier
+                                            .size(78.dp)
+                                            .clip(CircleShape)
+                                            .background(CaribbeanGreen)
+                                    ) {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.vector_car),
+                                            contentDescription = "Savings Icon",
+                                            modifier = Modifier.size(40.dp)
+                                        )
+                                    }
+                                }
+
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text("Savings\nOn Goals", color = Void, fontFamily = poppinsFamily)
                             }
+
                             Box(
                                 modifier = Modifier
                                     .width(1.5.dp)
                                     .height(70.dp)
-                                    .background(Void.copy(alpha = 0.8f))
+                                    .background(Honeydew.copy(alpha = 0.8f))
                             )
+
                             Column(
                                 modifier = Modifier
                                     .weight(2f)
@@ -115,7 +206,7 @@ fun HomeScreen(navController: NavHostController) {
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
-                                        painter = painterResource(id = R.drawable.vector_salary),
+                                        painter = painterResource(id = R.drawable.ic_salary),
                                         contentDescription = "Revenue Icon",
                                         modifier = Modifier.size(22.dp)
                                     )
@@ -125,12 +216,14 @@ fun HomeScreen(navController: NavHostController) {
                                         Text("$4.000,00", color = FenceGreen, fontFamily = poppinsFamily)
                                     }
                                 }
+
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(1.dp)
-                                        .background(Void.copy(alpha = 0.5f))
+                                        .background(Honeydew.copy(alpha = 0.5f))
                                 )
+
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Image(
                                         painter = painterResource(id = R.drawable.vector_food),
@@ -147,58 +240,71 @@ fun HomeScreen(navController: NavHostController) {
                         }
                     }
 
+
                     Spacer(modifier = Modifier.height(10.dp))
 
                     // ───── Filtros ─────
-                    Row(
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                            .padding(vertical = 12.dp)
+                            .background(
+                                color = LightGreen,
+                                shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp)
+                            )
+                            .padding(horizontal = 6.dp, vertical = 6.dp)
                     ) {
-                        listOf("Daily", "Weekly", "Monthly").forEach { label ->
-                            val isSelected = selectedFilter == label
-                            Surface(
-                                color = if (isSelected) CaribbeanGreen else LightGreen,
-                                shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(horizontal = 4.dp)
-                                    .height(36.dp)
-                                    .clickable { selectedFilter = label }
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Text(
-                                        text = label,
-                                        color = if (isSelected) Honeydew else FenceGreen,
-                                        fontFamily = poppinsFamily,
-                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                                    )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            listOf("Daily", "Weekly", "Monthly").forEach { label ->
+                                val isSelected = selectedFilter == label
+                                Surface(
+                                    color = if (isSelected) CaribbeanGreen else Color.Transparent,
+                                    shape = androidx.compose.foundation.shape.RoundedCornerShape(20.dp),
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(46.dp)
+                                        .clickable { selectedFilter = label }
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Text(
+                                            text = label,
+                                            color = Void,
+                                            fontFamily = poppinsFamily,
+                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                                            fontSize = 14.sp
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
 
                     Spacer(modifier = Modifier.height(10.dp))
-
-                    // ───── Transacciones ─────
+                    // ───── Transacciones ────
                     LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 4.dp),
                         contentPadding = PaddingValues(bottom = 100.dp)
                     ) {
                         items(transactions) { t ->
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 10.dp),
+                                    .padding(vertical = 8.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
+                                // Ícono circular perfectamente centrado y proporcionado
                                 Box(
                                     modifier = Modifier
-                                        .size(48.dp)
+                                        .size(44.dp)
                                         .clip(CircleShape)
                                         .background(
-                                            if (t.amount.startsWith("-")) LightBlue.copy(alpha = 0.25f)
+                                            if (t.amount.startsWith("-")) LightBlue.copy(alpha = 0.3f)
                                             else LightGreen
                                         ),
                                     contentAlignment = Alignment.Center
@@ -206,47 +312,93 @@ fun HomeScreen(navController: NavHostController) {
                                     Image(
                                         painter = painterResource(id = t.iconRes),
                                         contentDescription = t.title,
-                                        modifier = Modifier.size(24.dp)
+                                        modifier = Modifier.size(22.dp)
                                     )
                                 }
 
                                 Spacer(modifier = Modifier.width(14.dp))
 
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(t.title, color = Void, fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
-                                    Text(t.subtitle, color = OceanBlue, fontFamily = poppinsFamily)
+                                // Columna izquierda (título y subtítulo)
+                                Column(
+                                    modifier = Modifier.weight(1.3f),
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = t.title,
+                                        color = Void,
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = 15.sp
+                                    )
+                                    Spacer(modifier = Modifier.height(2.dp))
+                                    Text(
+                                        text = t.subtitle,
+                                        color = OceanBlue,
+                                        fontFamily = poppinsFamily,
+                                        fontSize = 12.sp
+                                    )
                                 }
 
+                                // Línea vertical centrada
                                 Box(
                                     modifier = Modifier
-                                        .width(2.dp)
-                                        .height(45.dp)
-                                        .background(CaribbeanGreen.copy(alpha = 0.6f))
+                                        .width(1.dp)
+                                        .height(36.dp)
+                                        .background(CaribbeanGreen.copy(alpha = 0.5f))
                                 )
 
-                                Spacer(modifier = Modifier.width(12.dp))
-
-                                Text(t.category, color = FenceGreen, fontFamily = poppinsFamily)
-
+                                // Categoría centrada
                                 Box(
                                     modifier = Modifier
-                                        .width(2.dp)
-                                        .height(45.dp)
-                                        .background(CaribbeanGreen.copy(alpha = 0.6f))
-                                        .padding(horizontal = 10.dp)
+                                        .weight(0.8f)
+                                        .fillMaxHeight(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = t.category,
+                                        color = FenceGreen,
+                                        fontFamily = poppinsFamily,
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
+
+                                // Línea vertical centrada
+                                Box(
+                                    modifier = Modifier
+                                        .width(1.dp)
+                                        .height(36.dp)
+                                        .background(CaribbeanGreen.copy(alpha = 0.5f))
                                 )
 
-                                Spacer(modifier = Modifier.width(12.dp))
-
-                                Text(
-                                    text = t.amount,
-                                    color = if (t.amount.startsWith("-")) OceanBlue else FenceGreen,
-                                    fontFamily = poppinsFamily,
-                                    fontWeight = FontWeight.SemiBold
-                                )
+                                // Monto centrado
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .fillMaxHeight(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = t.amount,
+                                        color = if (t.amount.startsWith("-")) OceanBlue else FenceGreen,
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = 15.sp
+                                    )
+                                }
                             }
+
+                            // Divider sutil entre transacciones
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(1.dp)
+                                    .background(Honeydew.copy(alpha = 0.6f))
+                            )
                         }
                     }
+
+
                 }
             }
         )
