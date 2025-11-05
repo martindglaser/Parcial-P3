@@ -193,7 +193,7 @@ fun AccountBalanceScreen(navController: NavHostController) {
                             fontFamily = poppinsFamily,
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier.clickable {
-                                navController.navigate("transactions")
+                                navController.navigate("Tranasctions_Screen")
                             }
                         )
                     }
