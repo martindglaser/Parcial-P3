@@ -1,6 +1,9 @@
 package com.example.parcialtp3.ui.screens.profile
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +22,12 @@ import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.LightGreen
 import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.components.*
+import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.DisplayName
+import com.example.parcialtp3.ui.components.HeaderBar
+import com.example.parcialtp3.ui.components.ImagenFlotadora
+import com.example.parcialtp3.ui.components.ProfileOption
+import com.example.parcialtp3.ui.components.RoundedButton
 
 @Composable
 fun Profile_Screen(navController: NavHostController) {

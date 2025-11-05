@@ -1,5 +1,6 @@
 package com.example.parcialtp3.ui.screens.categories.entertainment
 
+// NUEVOS IMPORTS
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,15 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.*
 import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.CategoryPanel
 import com.example.parcialtp3.ui.components.FinanceSummaryBlock
 import com.example.parcialtp3.ui.components.HeaderBar
-// NUEVOS IMPORTS
-import com.example.parcialtp3.ui.components.CategoryPanel
 import com.example.parcialtp3.ui.components.MonthlyExpenseGroup
 
 data class EntertainmentExpense(

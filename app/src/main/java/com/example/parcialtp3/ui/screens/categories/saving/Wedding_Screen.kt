@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.HeaderBar
 import com.example.parcialtp3.ui.components.SavingsDepositPanel
@@ -80,7 +79,7 @@ fun WeddingScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                         navController?.navigate("wedding/addSavings")
+                         navController.navigate("wedding/addSavings")
                     }
                 )
             }

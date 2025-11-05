@@ -23,8 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.components.AddCategoryDialog
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.CategoryGridItem

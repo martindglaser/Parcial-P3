@@ -4,13 +4,15 @@ import CategoriesScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.parcialtp3.ui.screens.accountBalance.AccountBalanceScreen
 import com.example.parcialtp3.ui.screens.categories.entertainment.A_Entertainment_Screen
 import com.example.parcialtp3.ui.screens.categories.entertainment.B_Entertainment
 import com.example.parcialtp3.ui.screens.categories.food.FoodAddExpenseScreen
-import com.example.parcialtp3.ui.screens.accountBalance.AccountBalanceScreen
 import com.example.parcialtp3.ui.screens.categories.food.FoodScreen
 import com.example.parcialtp3.ui.screens.categories.gifts.GiftsScreen
 import com.example.parcialtp3.ui.screens.categories.gifts.Gifts_Add_Expenses_Screen
@@ -42,27 +44,27 @@ import com.example.parcialtp3.ui.screens.notifications.NotificationScreen
 import com.example.parcialtp3.ui.screens.onBoarding.OnBoardingPagerScreen
 import com.example.parcialtp3.ui.screens.profile.Edit_Profile_Screen
 import com.example.parcialtp3.ui.screens.profile.Profile_Screen
+import com.example.parcialtp3.ui.screens.profile.help.help_center.A_B_Help_Center_Screen
+import com.example.parcialtp3.ui.screens.profile.help.online_support.A_Online_Support_Screen
+import com.example.parcialtp3.ui.screens.profile.help.online_support.B_Online_Support_Screen
 import com.example.parcialtp3.ui.screens.profile.security.A_Security_Screen
-import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
-import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
-import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
-import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
 import com.example.parcialtp3.ui.screens.profile.security.B_Change_Pin_Screen
-import com.example.parcialtp3.ui.screens.profile.security.D_Fingerprint_Screen
-import com.example.parcialtp3.ui.screens.profile.security.H_Terms_And_Conditions_Screen
 import com.example.parcialtp3.ui.screens.profile.security.C_Change_Pin_Success_Screen
+import com.example.parcialtp3.ui.screens.profile.security.D_Fingerprint_Screen
 import com.example.parcialtp3.ui.screens.profile.security.E_Fingerprint_Screen
 import com.example.parcialtp3.ui.screens.profile.security.F_Fingerprint_Add_Screen
 import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Eliminate_Screen
 import com.example.parcialtp3.ui.screens.profile.security.G_Fingerprint_Screen
+import com.example.parcialtp3.ui.screens.profile.security.H_Terms_And_Conditions_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.A_Settings_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.B_Notification_Settings_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.C_Password_Settings_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.D_Password_Settings_Screen
 import com.example.parcialtp3.ui.screens.profile.setting.E_Delete_Account_Screen
-import com.example.parcialtp3.ui.screens.profile.help.help_center.A_B_Help_Center_Screen
-import com.example.parcialtp3.ui.screens.profile.help.online_support.A_Online_Support_Screen
-import com.example.parcialtp3.ui.screens.profile.help.online_support.B_Online_Support_Screen
+import com.example.parcialtp3.ui.screens.transaction.TransactionScreen
+import com.example.parcialtp3.ui.screens.transactions.TransactionsExpenseScreen
+import com.example.parcialtp3.ui.screens.transactions.TransactionsIncomeScreen
+import com.example.parcialtp3.ui.screens.transactions.Transactions_Screen
 
 
 class MainActivity : ComponentActivity() {

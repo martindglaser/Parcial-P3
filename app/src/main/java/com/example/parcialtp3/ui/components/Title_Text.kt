@@ -7,10 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.parcialtp3.ui.Cyprus
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.Void
 import com.example.parcialtp3.ui.screens.profile.ThemeViewModel

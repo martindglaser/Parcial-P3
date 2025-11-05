@@ -1,16 +1,20 @@
 package com.example.parcialtp3.ui.screens.transaction
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.parcialtp3.R
-import com.example.parcialtp3.ui.*
-import com.example.parcialtp3.ui.components.*
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.FinanceSummaryBlock
+import com.example.parcialtp3.ui.components.HeaderBar
+import com.example.parcialtp3.ui.components.TarjetaBalance
+import com.example.parcialtp3.ui.components.TransactionsMonthSection
 import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
 

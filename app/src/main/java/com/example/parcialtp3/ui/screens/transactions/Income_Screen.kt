@@ -1,7 +1,9 @@
 package com.example.parcialtp3.ui.screens.transactions
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +15,11 @@ import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.OceanBlue
 import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.components.*
+import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.BottomNavBar
+import com.example.parcialtp3.ui.components.CabeceraTransactions
+import com.example.parcialtp3.ui.components.HeaderBar
+import com.example.parcialtp3.ui.components.TransactionsMonthSection
 import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 
 

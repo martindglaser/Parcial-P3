@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
@@ -20,8 +22,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.parcialtp3.ui.VividBlue
-import com.example.parcialtp3.ui.Void
+import androidx.navigation.NavHostController
+import com.example.parcialtp3.ui.ThemeAwareColors
 import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.components.PoppinsFamily
 import com.example.parcialtp3.ui.components.RoundedButton
@@ -29,11 +31,6 @@ import com.example.parcialtp3.ui.components.RoundedInputField
 import com.example.parcialtp3.ui.components.RoundedPassInput
 import com.example.parcialtp3.ui.components.TitleText
 import com.example.parcialtp3.ui.viewmodels.CreateAccountViewModel
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
-import androidx.navigation.NavHostController
-import com.example.parcialtp3.ui.ThemeAwareColors
 
 @Composable
 fun CreateAccountScreen(

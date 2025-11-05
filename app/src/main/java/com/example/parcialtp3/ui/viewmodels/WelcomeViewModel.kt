@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.parcialtp3.data.remote.AuthRepository
 import com.example.parcialtp3.di.Providers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class WelcomeViewModel(
     private val repo: AuthRepository = Providers.authRepository

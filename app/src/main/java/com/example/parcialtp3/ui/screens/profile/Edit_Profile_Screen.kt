@@ -1,7 +1,10 @@
 package com.example.parcialtp3.ui.screens.profile
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -13,13 +16,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
-import com.example.parcialtp3.ui.Void
-import com.example.parcialtp3.ui.components.*
-import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.DisplayName
+import com.example.parcialtp3.ui.components.HeaderBar
+import com.example.parcialtp3.ui.components.ImagenFlotadora
+import com.example.parcialtp3.ui.components.RoundedButton
+import com.example.parcialtp3.ui.components.RoundedInputField
+import com.example.parcialtp3.ui.components.SettingsSwitchRow
+import com.example.parcialtp3.ui.components.SimpleText
 
 @Composable
 fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
