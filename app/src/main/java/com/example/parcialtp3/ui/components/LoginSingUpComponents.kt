@@ -1,6 +1,9 @@
 package com.example.parcialtp3.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
@@ -15,17 +18,25 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
@@ -33,15 +44,25 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.Cyprus
+import com.example.parcialtp3.ui.FenceGreen
+import com.example.parcialtp3.ui.Honeydew
 import com.example.parcialtp3.ui.LightGreen
+import com.example.parcialtp3.ui.ThemeAwareColors
 import com.example.parcialtp3.ui.VividBlue
 import com.example.parcialtp3.ui.Void
+import com.example.parcialtp3.ui.poppinsFamily
+import com.example.parcialtp3.ui.screens.profile.ThemeViewModel
 
 @Composable
 fun RoundedInputField(
@@ -51,6 +72,8 @@ fun RoundedInputField(
     backgroundColor: Color = LightGreen,
     textColor: Color = Color(0xFF1A1A1A),
     placeholderColor: Color = Color(0xFF7C8A86),
+    labelPaddingLeft: Dp = 20.dp,
+    onTextChanged: (String) -> Unit = {}
 ) {
     var value by remember { mutableStateOf("") }
 
@@ -60,10 +83,9 @@ fun RoundedInputField(
     ) {
         SimpleText(
             text = label,
-            color = textColor,
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
-            modifier = Modifier.padding(start = 20.dp)
+            modifier = Modifier.padding(start = labelPaddingLeft)
         )
         Spacer(Modifier.height(5.dp))
 
@@ -89,7 +111,9 @@ fun RoundedInputField(
                 }
                 BasicTextField(
                     value = value,
-                    onValueChange = { value = it },
+                    onValueChange = {
+                        value = it
+                        onTextChanged(it)},
                     singleLine = true,
                     textStyle = TextStyle(color = textColor, fontSize = 15.sp),
                     cursorBrush = SolidColor(textColor),
@@ -106,6 +130,9 @@ fun RoundedPassInput(
     label: String = "Password",
     textColor: Color = Color(0xFF1A1A1A),
     placeholderColor: Color = Color(0xFF7C8A86),
+    labelPaddingLeft: Dp = 20.dp,
+    passPaddingLeft: Dp = 40.dp,
+    onTextChanged: (String) -> Unit = {}
 ) {
     var value by remember { mutableStateOf("") }
 
@@ -115,10 +142,9 @@ fun RoundedPassInput(
     ) {
         SimpleText(
             text = label,
-            color = textColor,
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
-            modifier = Modifier.padding(start = 20.dp)
+            modifier = Modifier.padding(start = labelPaddingLeft)
         )
         Spacer(Modifier.height(5.dp))
 
@@ -134,19 +160,22 @@ fun RoundedPassInput(
             ) {
                 if (value.isEmpty()) {
                     Text(
-                        text = "● ● ● ● ● ● ● ●",
+                        text = "●  ●  ●  ●  ●  ●  ●  ●",
                         color = placeholderColor,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Normal,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.ExtraBold,
                         fontFamily = PoppinsFamily,
                         modifier = Modifier
                             .align(Alignment.CenterStart)
-                            .padding(start = 40.dp, end = 40.dp)
+                            .padding(start = passPaddingLeft, end = 40.dp)
                     )
                 }
                 BasicTextField(
                     value = value,
-                    onValueChange = { value = it },
+                    onValueChange = {
+                        value = it
+                        onTextChanged(it)
+                    },
                     singleLine = true,
                     textStyle = TextStyle(color = textColor, fontSize = 15.sp),
                     cursorBrush = SolidColor(textColor),
@@ -170,36 +199,44 @@ fun RoundedPassInput(
 fun RoundedButton(
     text: String,
     modifier: Modifier = Modifier,
+    navController: NavHostController,
+    route: String? = null,
     width: Dp = 200.dp,
     height: Dp = 50.dp,
     backgroundColor: Color = CaribbeanGreen,
     textColor: Color = Void,
     onClick: () -> Unit = {}
 ) {
-    Surface(
-        color = backgroundColor,
-        shape = RoundedCornerShape(50.dp),
+    Box(
         modifier = modifier
             .sizeIn(minWidth = width, minHeight = height)
-            .clickable(onClick = onClick)
+            .clip(RoundedCornerShape(50.dp))
+            .background(backgroundColor)
+            .clickable {
+                onClick()
+                route?.let {
+                    navController.navigate(it)
+                }
+            },
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier
-                .height(height),
-            contentAlignment = Alignment.Center
-        ) {
-            SimpleText(
-                text = text,
-                color = textColor,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
+        Text(
+            text = text,
+            color = textColor,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = poppinsFamily,
+            modifier = Modifier.align(Alignment.Center)
+
+        )
     }
 }
 @Composable
-fun FacebookGoogle(){
+fun FacebookGoogle(
+    navController: NavHostController
+){
+    val themeColors = ThemeAwareColors.getColors()
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SimpleText("or sign up with", fontSize = 13.sp, fontWeight = FontWeight.Light)
         Spacer(Modifier.height(13.dp))
@@ -227,17 +264,74 @@ fun FacebookGoogle(){
                 append("Don’t have an account? ")
                 withStyle(
                     style = SpanStyle(
-                        color = VividBlue,
+                        color = themeColors.highlightText2,
                     )
                 ) {
                     append("Sign Up")
                 }
             },
             fontSize = 13.sp,
-            color = Void,
+            color = themeColors.normalText,
             fontWeight = FontWeight.Light,
-            fontFamily = PoppinsFamily
+            fontFamily = PoppinsFamily,
+            modifier = Modifier.clickable(
+                onClick = {
+                    navController.navigate("CreateAccountScreen")
+                }
+            )
         )
     }
 }
+@Composable
+fun OtpCircleInput(
+    modifier: Modifier = Modifier,
+    circleSpacing: Dp = 15.dp,
+    borderWidth: Dp = 3.dp,
+    borderColor: Color = Color(0xFF00C19A),
+    fillColor: Color = Color.Transparent,
+    textColor: Color = Color(0xFF0D0D0D),
+    onComplete: (String) -> Unit = {}
+) {
+    val themeColors = ThemeAwareColors.getColors()
+
+    val length = 6
+    val circleSize = 35.78.dp
+    val textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.SemiBold, fontFamily = PoppinsFamily)
+    var value by remember { mutableStateOf("") }
+
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        Row(horizontalArrangement = Arrangement.spacedBy(circleSpacing), verticalAlignment = Alignment.CenterVertically) {
+            for (i in 0 until length) {
+                val char = value.getOrNull(i)?.toString().orEmpty()
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(circleSize)
+                        .background(fillColor, CircleShape)
+                        .border(BorderStroke(borderWidth, borderColor), CircleShape)
+                ) {
+                    if (char.isNotEmpty()) {
+                        Text(text = char, style = textStyle, color = themeColors.normalText)
+                    }
+                }
+            }
+        }
+        BasicTextField(
+            value = value,
+            onValueChange = { raw ->
+                val digits = raw.filter { it.isDigit() }.take(length)
+                value = digits
+                if (digits.length == length) onComplete(digits)
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            cursorBrush = SolidColor(Color.Transparent),
+            textStyle = TextStyle(color = Color.Transparent),
+            modifier = Modifier
+                .matchParentSize()
+                .clickable {}
+        )
+    }
+}
+
+
 

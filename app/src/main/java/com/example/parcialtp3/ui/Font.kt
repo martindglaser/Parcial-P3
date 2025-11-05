@@ -7,5 +7,6 @@ import com.example.parcialtp3.R
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
-    Font(R.font.poppins_bold, FontWeight.Bold)
+    Font(R.font.poppins_bold, FontWeight.Bold),Font(R.font.poppins_thin, FontWeight.Thin),
+    Font(R.font.poppins_light, FontWeight.Light),  Font(R.font.poppins_medium, FontWeight.Medium),    Font(R.font.poppins_semi_bold, FontWeight.SemiBold),
 )

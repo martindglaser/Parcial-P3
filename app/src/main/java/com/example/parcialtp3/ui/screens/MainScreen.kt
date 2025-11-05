@@ -29,7 +29,7 @@ data class NavItem(val label: String, val icon: ImageVector, val route: String)
 @Composable
 fun MainScreen(navController: NavController) {
     val navItems = listOf(
-        NavItem("Home", Icons.Default.Home, "home"),
+        NavItem("Home", Icons.Default.Home, "HomeScreen"),
         NavItem("Favorites", Icons.Default.Favorite, "favorites"),
         NavItem("Add", Icons.Default.Add, "add"),
         NavItem("Profile", Icons.Default.Person, "profile"),

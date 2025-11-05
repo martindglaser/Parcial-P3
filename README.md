@@ -1,0 +1,1 @@
+Por problemas con conflictos tuvimos que resolverlos manualmente, pero todo lo que está dentro de categories fue hecho por Tatiana Pisani, aca esta la evidencia: https://github.com/martindglaser/Parcial-P3/commit/5ad8ec53f10799bf60fbcf2a719ddcf7debbf66b

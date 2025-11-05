@@ -1,2 +1,122 @@
-package com.example.parcialtp3.ui.screens.categories
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.parcialtp3.R
+import com.example.parcialtp3.ui.CaribbeanGreen
+import com.example.parcialtp3.ui.Honeydew
+import com.example.parcialtp3.ui.components.AddCategoryDialog
+import com.example.parcialtp3.ui.components.BackgroundScaffold
+import com.example.parcialtp3.ui.components.CategoryGridItem
+import com.example.parcialtp3.ui.components.FinanceSummaryBlock
+import com.example.parcialtp3.ui.components.HeaderBar
 
+data class CategoryUi(
+    val id: String,
+    val title: String,
+    val iconRes: Int,
+    val isPrimary: Boolean = false,
+    val direccion: String
+)
+
+@Composable
+fun CategoriesScreen(
+    navController: NavHostController
+
+) {
+    var showAddCategoryDialog by remember { mutableStateOf(false) }
+
+    val primaryColor = Color(0xFF006BFF)
+    val secondaryColor = Color(0xFF87C8FF)
+
+    val categories = listOf(
+        CategoryUi("food", "Food", R.drawable.vector_food, true, direccion = "food"),
+        CategoryUi("transport", "Transport", R.drawable.vector_transport, direccion = "transport"),
+        CategoryUi("medicine", "Medicine", R.drawable.vector_medicine, direccion = "medicine"),
+        CategoryUi("groceries", "Groceries", R.drawable.vector_groceries, direccion = "groceries"),
+        CategoryUi("rent", "Rent", R.drawable.vector_rent, direccion = "rent"),
+        CategoryUi("gifts", "Gifts", R.drawable.vector_gift, direccion = "gifts"),
+        CategoryUi("savings", "Savings", R.drawable.vector_savings, direccion = "savings"),
+        CategoryUi("entertainment", "Entertainment", R.drawable.vector_enter, direccion = "entertainment"),
+        // El 'id' es la clave para "More"
+        CategoryUi("new_category", "More", R.drawable.vector_more, direccion = "more")
+    )
+
+
+    if (showAddCategoryDialog) {
+        AddCategoryDialog(
+            onDismissRequest = {
+                showAddCategoryDialog = false
+            },
+            onConfirm = { categoryName ->
+
+                showAddCategoryDialog = false
+            }
+        )
+    }
+
+    BackgroundScaffold(
+        navController = navController,
+        current = "categories",
+        headerHeight = 290.dp,
+        headerContent = {
+            Column {
+                HeaderBar(
+                    title = "Categories",
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                FinanceSummaryBlock()
+            }
+        },
+        panelContent = {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 18.dp)
+            ) {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    verticalArrangement = Arrangement.spacedBy(20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(bottom = 32.dp)
+                ) {
+                    items(categories) { item ->
+
+
+
+                        CategoryGridItem(
+                            title = item.title,
+                            iconRes = item.iconRes,
+                            backgroundColor = if (item.isPrimary) primaryColor else secondaryColor,
+
+
+                            onClick = {
+                                if (item.id == "new_category") {
+
+                                    showAddCategoryDialog = true
+                                } else {
+
+                                    navController.navigate(item.direccion)
+                                }
+                            }
+
+                        )
+
+
+                    }
+                }
+            }
+        }
+    )
+}
