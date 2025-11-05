@@ -53,12 +53,11 @@ fun WeddingScreen(
 
     BackgroundScaffold(
         headerHeight = 120.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Wedding",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {
@@ -80,7 +79,7 @@ fun WeddingScreen(
                     amount = { it.amount },
                     iconRes = { it.iconRes },
                     onAddSavingsClick = {
-                        // navController?.navigate("wedding/addSavings")
+                         navController?.navigate("wedding/addSavings")
                     }
                 )
             }

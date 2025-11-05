@@ -42,6 +42,7 @@ fun H_Terms_And_Conditions_Screen(
             HeaderBar(
                 navController = navController,
                 title = "Terms And Conditions",
+                onBackClick = { navController.popBackStack() }
             )
         },
         panelContent = {

@@ -51,8 +51,6 @@ fun RentScreen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Column(
                 modifier = Modifier
@@ -61,7 +59,8 @@ fun RentScreen(
             ) {
                 HeaderBar(
                     title = "Rent",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()

@@ -44,7 +44,7 @@ fun NewPasswordScreen(
 
 @Composable
 private fun Title() {
-    TitleText("New password", color = Void, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
+    TitleText("New password", fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 18.dp))
 }
 @Composable
 private fun Body(
