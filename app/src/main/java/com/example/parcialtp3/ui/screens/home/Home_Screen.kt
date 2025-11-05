@@ -73,9 +73,6 @@ fun HomeScreen(navController: NavHostController) {
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 22.sp,
-                                modifier = Modifier
-                                    .width(278.dp)
-                                    .height(22.dp)
                             )
 
                             Spacer(modifier = Modifier.height(4.dp))
@@ -86,10 +83,7 @@ fun HomeScreen(navController: NavHostController) {
                                 color = Void,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Normal,
-                                fontSize = 13.sp,
-                                modifier = Modifier
-                                    .width(169.dp)
-                                    .height(13.dp)
+                                fontSize = 13.sp
                             )
                         }
 

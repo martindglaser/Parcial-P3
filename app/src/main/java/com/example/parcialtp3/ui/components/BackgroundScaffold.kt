@@ -78,14 +78,16 @@ fun BackgroundScaffold(
                 }
             }
         }
-        Surface(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth(),
-            color = FenceGreen,
-            shadowElevation = 12.dp
-        ) {
-            BottomNavBar(navController = navController, current = current)
+        if(displayBottomNavBar) {
+            Surface(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth(),
+                color = FenceGreen,
+                shadowElevation = 12.dp
+            ) {
+                BottomNavBar(navController = navController, current = current)
+            }
         }
     }
 }

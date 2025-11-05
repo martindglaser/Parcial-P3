@@ -37,6 +37,7 @@ fun SecurityPinScreen(
     navController: NavHostController
 ) {
     BackgroundScaffold(
+        displayBottomNavBar = false,
         navController = navController,
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,

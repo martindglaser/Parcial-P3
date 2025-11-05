@@ -19,33 +19,34 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.ui.*
+import com.example.parcialtp3.ui.components.BackgroundScaffold
 import com.example.parcialtp3.ui.poppinsFamily
 
 @Composable
 fun OnBoardingAScreen(navController: NavHostController) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(CaribbeanGreen),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            // --- Título ---
-            Spacer(modifier = Modifier.height(60.dp))
-            Text(
-                text = "Welcome To\nExpense Manager",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Void,
-                textAlign = TextAlign.Center,
-                fontFamily = poppinsFamily
-            )
+    BackgroundScaffold(
+        navController = navController,
+        displayBottomNavBar = false,
+        headerHeight = 308.dp,
 
-            Spacer(modifier = Modifier.height(70.dp))
-
+        headerContent = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                // --- Título ---
+                Spacer(modifier = Modifier.height(60.dp))
+                Text(
+                    text = "Welcome To\nExpense Manager",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Void,
+                    textAlign = TextAlign.Center,
+                    fontFamily = poppinsFamily
+                )
+            }
+        },
+        panelContent = {
             // --- Contenedor inferior claro ---
             Box(
                 modifier = Modifier
@@ -64,7 +65,6 @@ fun OnBoardingAScreen(navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(top = 60.dp, bottom = 40.dp)
                 ) {
-                    // Imagen más grande
                     Image(
                         painter = painterResource(id = R.drawable.onboarding_coins),
                         contentDescription = "Coins illustration",
@@ -73,7 +73,6 @@ fun OnBoardingAScreen(navController: NavHostController) {
 
                     Spacer(modifier = Modifier.height(35.dp))
 
-                    // Botón Next
                     Text(
                         text = "Next",
                         fontSize = 28.sp,
@@ -84,18 +83,9 @@ fun OnBoardingAScreen(navController: NavHostController) {
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
-
-                    // Indicadores más grandes y centrados
-                    /*Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text("•", color = CaribbeanGreen, fontSize = 22.sp)
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text("○", color = Void, fontSize = 20.sp)
-                    }*/
                 }
             }
         }
-    }
+
+    )
 }

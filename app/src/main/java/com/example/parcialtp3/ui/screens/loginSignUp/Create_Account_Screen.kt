@@ -51,6 +51,7 @@ fun CreateAccountScreen(
 
     BackgroundScaffold(
         navController = navController,
+        displayBottomNavBar = false,
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },
