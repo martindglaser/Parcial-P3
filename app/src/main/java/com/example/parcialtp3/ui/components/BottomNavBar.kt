@@ -13,9 +13,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
-import com.example.parcialtp3.Brown
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.ThemeAwareColors
+import com.example.parcialtp3.ui.Void
 
 @Composable
 fun BottomNavBar(navController: NavHostController, current: String) {
@@ -33,7 +33,7 @@ fun BottomNavBar(navController: NavHostController, current: String) {
                 .fillMaxWidth()
                 .padding(bottom = 0.dp)
         ) {
-            val selectedColor = Brown
+            val selectedColor = Void
             val unselectedColor = Color.White
 
             val navItems = listOf(

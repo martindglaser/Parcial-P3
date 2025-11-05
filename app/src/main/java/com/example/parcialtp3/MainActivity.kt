@@ -4,16 +4,9 @@ import CategoriesScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
-import com.example.parcialtp3.ui.components.BottomNavIcon
 import com.example.parcialtp3.ui.screens.categories.entertainment.A_Entertainment_Screen
 import com.example.parcialtp3.ui.screens.categories.entertainment.B_Entertainment
 import com.example.parcialtp3.ui.screens.categories.food.FoodAddExpenseScreen
@@ -71,8 +64,6 @@ import com.example.parcialtp3.ui.screens.profile.help.help_center.A_B_Help_Cente
 import com.example.parcialtp3.ui.screens.profile.help.online_support.A_Online_Support_Screen
 import com.example.parcialtp3.ui.screens.profile.help.online_support.B_Online_Support_Screen
 
-val VerdeCaribeno = Color(0xFF00C49F)
-val Brown = Color(0xFF6D4C41)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,11 +85,10 @@ fun App() {
 fun MainNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "HomeScreen"
+        startDestination = "splash"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
-        //composable("onboarding") { OnBoardingPagerScreen(navController) }
         composable("OnBoardingPagerScreen?next={next}") { backStackEntry ->
             val next = backStackEntry.arguments?.getString("next") ?: "HomeScreen"
             OnBoardingPagerScreen(navController = navController, nextRoute = next)
@@ -117,7 +107,6 @@ fun MainNavHost(navController: NavHostController) {
         composable("Expense_Screen") { TransactionsExpenseScreen(navController) }
 
 
-//cat
         composable("categories") { CategoriesScreen(navController) }
         composable("food") { FoodScreen(navController) }
         composable("food/addExpense") { FoodAddExpenseScreen(navController) }
@@ -134,7 +123,6 @@ fun MainNavHost(navController: NavHostController) {
         composable("entertainment") { A_Entertainment_Screen(navController) }
         composable("entertainment/addExpense") { B_Entertainment(navController) }
 
-//sav
 
         composable("savings") { SavingsScreen(navController) }
         composable("travel") { TravelScreen(navController) }
@@ -146,7 +134,6 @@ fun MainNavHost(navController: NavHostController) {
         composable("wedding") { WeddingScreen(navController) }
         composable("wedding/addExpense") { Wedding_Expense_Screen(navController) }
 
-// Rutas para agregar ahorros
         composable("travel/addSavings") { TravelAddExpenseScreen(navController) }
         composable("newHouse/addSavings") { New_House_Add_Expenses_Screen(navController) }
         composable("car/addSavings") { Car_Expenses_Screen(navController) }
