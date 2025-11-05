@@ -26,6 +26,7 @@ fun E_Fingerprint_Screen(
     onDelete: () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

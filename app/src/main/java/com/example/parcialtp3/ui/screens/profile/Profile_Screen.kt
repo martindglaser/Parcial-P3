@@ -26,6 +26,8 @@ fun Profile_Screen(navController: NavHostController) {
     val showDialog = remember { mutableStateOf(false) }
 
     BackgroundScaffold(
+        navController = navController,
+        current = "profile",
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

@@ -67,6 +67,7 @@ fun B_Online_Support_Screen(
     }
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

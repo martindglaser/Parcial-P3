@@ -28,6 +28,7 @@ fun A_Security_Screen(
     onTerms: () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = androidx.compose.ui.unit.Dp.Unspecified,
         headerContent = {

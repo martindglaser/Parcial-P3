@@ -45,6 +45,7 @@ fun TransportScreen(
     )
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 290.dp,
         headerContent = {
             Column(

@@ -38,6 +38,7 @@ fun TravelScreen(
     )
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 170.dp,
         headerContent = {
             HeaderBar(

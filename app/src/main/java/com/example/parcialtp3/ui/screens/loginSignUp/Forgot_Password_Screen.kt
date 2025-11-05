@@ -28,6 +28,7 @@ fun ForgotPasswordScreen(
     navController: NavHostController
 ){
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },

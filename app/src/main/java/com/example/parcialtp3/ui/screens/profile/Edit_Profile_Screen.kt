@@ -27,6 +27,7 @@ fun Edit_Profile_Screen(navController: NavHostController,viewModel: ThemeViewMod
     val darkThemeState = viewModel.darkThemeEnabled.collectAsState()
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

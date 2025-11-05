@@ -36,6 +36,7 @@ fun H_Terms_And_Conditions_Screen(
     val link = "https://www.finwiseapp.de"
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

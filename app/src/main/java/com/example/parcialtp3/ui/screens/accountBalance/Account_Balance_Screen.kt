@@ -44,6 +44,8 @@ fun AccountBalanceScreen(navController: NavHostController) {
 
     Box(modifier = Modifier.fillMaxSize()) {
         BackgroundScaffold(
+            navController = navController,
+            current = "account_balance",
             headerHeight = 460.dp,
             headerContent = {
                 Column(
@@ -292,16 +294,5 @@ fun AccountBalanceScreen(navController: NavHostController) {
                 }
             }
         )
-
-        // --- Bottom Navigation ---
-        Surface(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth(),
-            color = FenceGreen,
-            shadowElevation = 12.dp
-        ) {
-            BottomNavBar(navController = navController, current = "transactions")
-        }
     }
 }

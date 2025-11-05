@@ -40,6 +40,7 @@ fun B_Entertainment(
     navController: NavHostController
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 180.dp,
         headerContent = {
             HeaderBar(
@@ -47,8 +48,9 @@ fun B_Entertainment(
                 navController = navController,
                 onBackClick = { navController.popBackStack() }
             )
-        }
-    ) {
+        },
+        panelContent =
+     {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -130,4 +132,5 @@ fun B_Entertainment(
             }
         }
     }
+    )
 }

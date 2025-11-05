@@ -39,6 +39,7 @@ fun Car_Expenses_Screen(
     navController: NavHostController
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 180.dp,
         headerContent = {
             HeaderBar(
@@ -46,8 +47,8 @@ fun Car_Expenses_Screen(
                 navController = navController,
                 onBackClick = { navController.popBackStack() }
             )
-        }
-    ) {
+        },
+    panelContent = {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -119,5 +120,5 @@ fun Car_Expenses_Screen(
                 )
             }
         }
-    }
+    })
 }

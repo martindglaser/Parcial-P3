@@ -48,6 +48,8 @@ fun HomeScreen(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize()) {
 
         BackgroundScaffold(
+            current = "HomeScreen",
+            navController = navController,
             headerHeight = 320.dp,
             headerContent = {
                 Column(
@@ -400,16 +402,5 @@ fun HomeScreen(navController: NavHostController) {
                 }
             }
         )
-
-        // --- Bottom Navigation Bar ---
-        Surface(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth(),
-            color = FenceGreen,
-            shadowElevation = 12.dp
-        ) {
-            BottomNavBar(navController = navController, current = "HomeScreen")
-        }
     }
 }

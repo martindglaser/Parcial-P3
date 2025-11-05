@@ -33,6 +33,7 @@ fun TransportAddExpenseScreen(
     navController: NavHostController
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 180.dp,
         headerContent = {
             HeaderBar(
@@ -40,8 +41,8 @@ fun TransportAddExpenseScreen(
                 navController = navController,
                 onBackClick = { navController.popBackStack() }
             )
-        }
-    ) {
+        },
+        panelContent = {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -127,5 +128,5 @@ fun TransportAddExpenseScreen(
                 )
             }
         }
-    }
+    })
 }

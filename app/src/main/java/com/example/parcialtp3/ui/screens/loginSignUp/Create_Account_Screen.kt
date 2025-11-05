@@ -50,6 +50,7 @@ fun CreateAccountScreen(
     var pass2 by remember { mutableStateOf("") }
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },

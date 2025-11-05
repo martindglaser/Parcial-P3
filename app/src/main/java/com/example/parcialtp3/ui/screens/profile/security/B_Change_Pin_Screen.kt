@@ -22,6 +22,7 @@ fun B_Change_Pin_Screen(
     onConfirm: () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

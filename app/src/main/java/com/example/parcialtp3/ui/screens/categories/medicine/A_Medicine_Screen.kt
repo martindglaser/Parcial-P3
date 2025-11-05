@@ -47,6 +47,7 @@ fun A_Medicine_Screen(
     )
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 290.dp,
         headerContent = {
             Column(

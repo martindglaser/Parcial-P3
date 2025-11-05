@@ -27,6 +27,7 @@ fun HeaderBar(
     title: String,
     navController: NavHostController,
     onBackClick: (() -> Unit)? = null
+
 ) {
     Row(
         modifier = Modifier

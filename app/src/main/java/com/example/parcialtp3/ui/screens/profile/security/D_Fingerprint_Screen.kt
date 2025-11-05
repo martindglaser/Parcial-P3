@@ -31,6 +31,7 @@ fun D_Fingerprint_Screen(
     onAddFingerprint: () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

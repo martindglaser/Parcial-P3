@@ -32,6 +32,7 @@ fun E_Delete_Account_Screen(
     var showDialog by remember { mutableStateOf(false) }
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

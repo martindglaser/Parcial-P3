@@ -25,6 +25,7 @@ fun TransactionsIncomeScreen(navController: NavHostController) {
         bottomBar = { BottomNavBar(navController, current = "transactions") }
     ) { paddingValues ->
         BackgroundScaffold(
+            navController = navController,
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
             headerContent = { TransactionsIncomeHeader(navController) },

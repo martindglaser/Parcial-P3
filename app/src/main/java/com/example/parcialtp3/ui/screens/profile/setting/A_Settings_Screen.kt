@@ -32,6 +32,7 @@ fun A_Settings_Screen(
     onDeleteAccount: () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

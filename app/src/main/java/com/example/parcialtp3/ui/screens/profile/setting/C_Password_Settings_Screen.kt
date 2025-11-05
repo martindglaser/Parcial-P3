@@ -31,6 +31,7 @@ fun C_Password_Settings_Screen(
     var confirm by remember { mutableStateOf("") }
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

@@ -24,6 +24,7 @@ fun F_Fingerprint_Add_Screen(
     onUseTouchId: () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

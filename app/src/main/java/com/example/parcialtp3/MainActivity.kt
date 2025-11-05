@@ -94,7 +94,7 @@ fun App() {
 fun MainNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "splash"
+        startDestination = "HomeScreen"
     ) {
         composable("splash") { SplashScreen(navController) }
         composable("launch") { LaunchScreen(navController) }
@@ -107,7 +107,6 @@ fun MainNavHost(navController: NavHostController) {
         composable("HomeScreen") { HomeScreen(navController) }
         composable("notifications") { NotificationScreen(navController) }
         composable("account_balance") { AccountBalanceScreen(navController) }
-        //composable("b_launch") { LaunchScreen(navController) }
 
         composable("edit_profile") { Edit_Profile_Screen(navController) }
 
@@ -156,8 +155,6 @@ fun MainNavHost(navController: NavHostController) {
 
 
         composable("security") { A_Security_Screen(navController, onChangePin = { navController.navigate("change_pin") },  onFingerprint = { navController.navigate("fingerprints") }, onTerms = { navController.navigate("termsAndConditions") }) }
-        composable("shopList") { Transactions(navController) }
-        composable("favourites") { FavouritesScreen(navController) }
         composable("profile") { Profile_Screen(navController)}
         composable("settings") { A_Settings_Screen(navController) }
 
@@ -186,199 +183,4 @@ fun MainNavHost(navController: NavHostController) {
         composable("online_support_chats") { A_Online_Support_Screen(navController, onStartNewChat = {navController.navigate("online_support_assistant")}) }
         composable("online_support_assistant") { B_Online_Support_Screen(navController) }
     }
-}
-
-
-/* ---------------- BOTTOM NAV ---------------- */
-@Composable
-fun BottomNav(navController: NavHostController, current: String) {
-    NavigationBar(containerColor = VerdeCaribeno) {
-        val selectedColor = Brown
-        val unselectedColor = Color.White
-
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_home,
-                    contentDescription = "Home",
-                    isSelected = current == "shopList",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            label = null,
-            selected = current == "shopList",
-            onClick = { navController.navigate("shopList") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_analysis,
-                    contentDescription = "Analysis",
-                    isSelected = current == "analysis",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            label = null,
-            selected = current == "analysis",
-            onClick = { navController.navigate("analysis") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_transaction,
-                    contentDescription = "Transaction",
-                    isSelected = current == "favourites",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            label = null,
-            selected = current == "favourites",
-            onClick = { navController.navigate("favourites") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_category,
-                    contentDescription = "Category",
-                    isSelected = current == "category",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            label = null,
-            selected = current == "category",
-            onClick = { navController.navigate("category") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_profile,
-                    contentDescription = "Profile",
-                    isSelected = current == "profile",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            label = null,
-            selected = current == "profile",
-            onClick = { navController.navigate("profile") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-    }
-}
-
-/* ---------------- PANTALLAS DE EJEMPLO ---------------- */
-
-@Composable
-fun Transactions(navController: NavHostController) {
-    val scope = rememberCoroutineScope()
-    Scaffold(
-        bottomBar = { BottomNav(navController, current = "shopList") },
-        containerColor = VerdeCaribeno
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text("Pantalla Transactions")
-        }
-    }
-}
-
-@Composable
-fun FavouritesScreen(navController: NavHostController) {
-    val scope = rememberCoroutineScope()
-    Scaffold(
-        bottomBar = { BottomNav(navController, current = "favourites") },
-        containerColor = VerdeCaribeno
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text("Pantalla Favourites")
-        }
-    }
-}
-
-@Composable
-fun ProfileScreen(navController: NavHostController) {
-    val scope = rememberCoroutineScope()
-    Scaffold(
-        bottomBar = { BottomNav(navController, current = "profile") },
-        containerColor = VerdeCaribeno
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text("Pantalla Profile")
-        }
-    }
-}
-
-@Composable
-fun SettingsScreen(navController: NavHostController) {
-    val scope = rememberCoroutineScope()
-    Scaffold(
-        bottomBar = { BottomNav(navController, current = "settings") },
-        containerColor = VerdeCaribeno
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text("Pantalla Settings")
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    App()
 }

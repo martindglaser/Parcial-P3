@@ -41,6 +41,7 @@ fun A_B_Help_Center_Screen(
     onClickCustomService : () -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

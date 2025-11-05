@@ -45,6 +45,7 @@ fun GroceriesScreen(
     )
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 290.dp,
         headerContent = {
             Column(

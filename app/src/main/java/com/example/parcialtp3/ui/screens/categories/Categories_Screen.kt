@@ -65,6 +65,8 @@ fun CategoriesScreen(
     }
 
     BackgroundScaffold(
+        navController = navController,
+        current = "categories",
         headerHeight = 290.dp,
         headerContent = {
             Column {

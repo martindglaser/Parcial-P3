@@ -56,6 +56,7 @@ fun WelcomeScreen(
     var pass by remember { mutableStateOf("") }
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 187.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = { Title() },

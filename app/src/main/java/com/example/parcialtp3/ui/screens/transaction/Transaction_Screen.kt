@@ -21,6 +21,7 @@ fun TransactionScreen(
     val viewModel: TransactionsViewModel = viewModel()
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 410.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

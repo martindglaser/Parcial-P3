@@ -34,6 +34,7 @@ fun GroceriesAddExpenseScreen(
     navController: NavHostController
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 180.dp,
         headerContent = {
             HeaderBar(
@@ -41,91 +42,92 @@ fun GroceriesAddExpenseScreen(
                 navController = navController,
                 onBackClick = { navController.popBackStack() }
             )
-        }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
+        },
+        panelContent = {
             Column(
                 modifier = Modifier
-                    .weight(1f)
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 20.dp, vertical = 16.dp)
+                    .fillMaxSize()
             ) {
-                // --- 1) DATE ---
-                RoundedInputRow(
-                    label = "Date",
-                    value = "March 30, 2024", // <-- Dato del Figma
-                    valueColor = Void,
-                    trailing = {
-                        Box(
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(CircleShape)
-                                .background(CaribbeanGreen),
-                            contentAlignment = Alignment.Center
-                        ) {
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 20.dp, vertical = 16.dp)
+                ) {
+                    // --- 1) DATE ---
+                    RoundedInputRow(
+                        label = "Date",
+                        value = "March 30, 2024", // <-- Dato del Figma
+                        valueColor = Void,
+                        trailing = {
+                            Box(
+                                modifier = Modifier
+                                    .size(30.dp)
+                                    .clip(CircleShape)
+                                    .background(CaribbeanGreen),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.vector_calendar),
+                                    contentDescription = "calendar",
+                                    tint = FenceGreen,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // --- 2) CATEGORY ---
+                    RoundedInputRow(
+                        label = "Category",
+                        value = "Select the category",
+                        valueColor = Cyprus,
+                        trailing = {
                             Icon(
-                                painter = painterResource(id = R.drawable.vector_calendar),
-                                contentDescription = "calendar",
-                                tint = FenceGreen,
+                                painter = painterResource(id = R.drawable.vector_down),
+                                contentDescription = "down",
+                                tint = Color.Unspecified,
                                 modifier = Modifier.size(16.dp)
                             )
                         }
-                    }
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 2) CATEGORY ---
-                RoundedInputRow(
-                    label = "Category",
-                    value = "Select the category",
-                    valueColor = Cyprus,
-                    trailing = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.vector_down),
-                            contentDescription = "down",
-                            tint = Color.Unspecified,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+                    // --- 3) AMOUNT ---
+                    RoundedInputRow(
+                        label = "Amount",
+                        value = "$26.00",
+                        valueColor = Void
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 3) AMOUNT ---
-                RoundedInputRow(
-                    label = "Amount",
-                    value = "$26.00",
-                    valueColor = Void
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+                    // --- 4) EXPENSE TITLE ---
+                    RoundedInputRow(
+                        label = "Expense Title",
+                        value = "Groceries",
+                        valueColor = Void
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                // --- 4) EXPENSE TITLE ---
-                RoundedInputRow(
-                    label = "Expense Title",
-                    value = "Groceries",
-                    valueColor = Void
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+                    MessageBox(label = "Enter Message")
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
 
-                MessageBox(label = "Enter Message")
-                Spacer(modifier = Modifier.height(12.dp))
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 26.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                PrimaryButton(
-                    text = "Save",
-                    onClick = {
-                        // Lógica para guardar el gasto
-                    }
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 26.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    PrimaryButton(
+                        text = "Save",
+                        onClick = {
+                            // Lógica para guardar el gasto
+                        }
+                    )
+                }
             }
         }
-    }
+    )
 }

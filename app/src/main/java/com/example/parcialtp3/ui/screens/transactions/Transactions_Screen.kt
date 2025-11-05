@@ -20,20 +20,16 @@ import com.example.parcialtp3.ui.viewmodels.TransactionsViewModel
 @Composable
 fun Transactions_Screen(navController: NavHostController) {
     val viewModel: TransactionsViewModel = viewModel()
-
-    Scaffold(
-        bottomBar = { BottomNavBar(navController, current = "transactions") }
-    ) { paddingValues ->
         BackgroundScaffold(
+            current = "Tranasctions_Screen",
+            navController = navController,
             headerHeight = 410.dp,
             whiteHeight = Dp.Unspecified,
             headerContent = { Transactions_Header(navController) },
             panelContent = {
                 TransactionsMonthSection(viewModel = viewModel)
-            },
-            modifier = Modifier.padding(paddingValues)
+            }
         )
-    }
 }
 
 @Composable

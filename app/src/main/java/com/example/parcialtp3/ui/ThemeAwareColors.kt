@@ -14,6 +14,7 @@ data class AppThemeColors(
     val headerBackground: Color,
     val contentBackground: Color,
     val transactionsHeaderSubTitle: Color,
+    val navBarColor: Color
 )
 
 object ThemeAwareColors {
@@ -31,6 +32,7 @@ object ThemeAwareColors {
             headerBackground = if (isDarkMode) FenceGreen else CaribbeanGreen,
             contentBackground = if (isDarkMode) Cyprus else Honeydew,
             transactionsHeaderSubTitle = if (isDarkMode) LightGreen else Void,
+            navBarColor = if (isDarkMode) Cyprus else LightGreen
         )
     }
 }

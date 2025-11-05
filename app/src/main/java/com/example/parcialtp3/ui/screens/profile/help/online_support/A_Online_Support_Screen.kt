@@ -49,6 +49,7 @@ fun A_Online_Support_Screen(
     onOpenChat: (String) -> Unit = {}
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

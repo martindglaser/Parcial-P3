@@ -29,6 +29,7 @@ fun B_Notification_Settings_Screen(
     onBack: () -> Unit = { navController.popBackStack() }
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 200.dp,
         whiteHeight = Dp.Unspecified,
         headerContent = {

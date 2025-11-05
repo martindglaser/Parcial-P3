@@ -46,6 +46,7 @@ fun NewHouseScreen(
     )
 
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 120.dp,
         headerContent = {
             HeaderBar(

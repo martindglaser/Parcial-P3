@@ -32,6 +32,7 @@ fun FoodAddExpenseScreen(
     navController: NavHostController
 ) {
     BackgroundScaffold(
+        navController = navController,
         headerHeight = 180.dp,
         headerContent = {
             HeaderBar(
@@ -39,8 +40,8 @@ fun FoodAddExpenseScreen(
                 navController = navController,
                 onBackClick = { navController.popBackStack() }
             )
-        }
-    ) {
+        },
+    panelContent = {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -127,4 +128,5 @@ fun FoodAddExpenseScreen(
             }
         }
     }
+    )
 }

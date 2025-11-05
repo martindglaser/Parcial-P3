@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isSpecified
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.parcialtp3.ui.CaribbeanGreen
 import com.example.parcialtp3.ui.Cyprus
 import com.example.parcialtp3.ui.FenceGreen
@@ -23,14 +24,16 @@ import com.example.parcialtp3.ui.ThemeAwareColors
 
 @Composable
 fun BackgroundScaffold(
+    navController: NavHostController,
     modifier: Modifier = Modifier,
     headerHeight: Dp = 220.dp,
     whiteHeight: Dp = Dp.Unspecified,
     overlapRoundness: Dp = 48.dp,
     overlapOffset: Dp = 8.dp,
     headerContent: @Composable () -> Unit = {},
-    panelContent: @Composable () -> Unit = {}
-
+    panelContent: @Composable () -> Unit = {},
+    current: String = "",
+    displayBottomNavBar: Boolean = true
 ) {
     val themeColors = ThemeAwareColors.getColors()
     Box(
@@ -74,6 +77,15 @@ fun BackgroundScaffold(
                     panelContent()
                 }
             }
+        }
+        Surface(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
+            color = FenceGreen,
+            shadowElevation = 12.dp
+        ) {
+            BottomNavBar(navController = navController, current = current)
         }
     }
 }
