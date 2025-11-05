@@ -1,126 +1,84 @@
 package com.example.parcialtp3.ui.components
 
-import androidx.compose.material3.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.parcialtp3.R
 import com.example.parcialtp3.VerdeCaribeno
 import com.example.parcialtp3.Brown
+import com.example.parcialtp3.ui.Honeydew
 
 @Composable
 fun BottomNavBar(
     navController: NavHostController,
     current: String
 ) {
-    NavigationBar(containerColor = VerdeCaribeno) {
-
-        val selectedColor = Brown
-        val unselectedColor = Color.White
-
-        // HOME
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_home,
-                    contentDescription = "Home",
-                    isSelected = current == "transactions",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
+    Surface(
+        color = Honeydew, // cubre el fondo entero
+        shadowElevation = 8.dp,
+        tonalElevation = 0.dp // mantiene limpio el color
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = Honeydew,
+                    shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
                 )
-            },
-            selected = current == "transactions",
-            onClick = { navController.navigate("transactions") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-
-        // BALANCE (Lupa)
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_analysis,
-                    contentDescription = "Balance",
-                    isSelected = current == "account_balance",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
+                .padding(vertical = 10.dp, horizontal = 24.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val items = listOf(
+                    Triple("transactions", R.drawable.ic_home, "Home"),
+                    Triple("account_balance", R.drawable.ic_analysis, "Balance"),
+                    Triple("favourites", R.drawable.ic_transaction, "Transaction"),
+                    Triple("category", R.drawable.ic_category, "Category"),
+                    Triple("profile", R.drawable.ic_profile, "Profile")
                 )
-            },
-            selected = current == "account_balance",
-            onClick = { navController.navigate("account_balance") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
 
-        // TRANSACTION
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_transaction,
-                    contentDescription = "Transaction",
-                    isSelected = current == "favourites",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            selected = current == "favourites",
-            onClick = { navController.navigate("favourites") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
+                items.forEach { (route, iconResId, _) ->
+                    val isSelected = current == route
 
-        // CATEGORY
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_category,
-                    contentDescription = "Category",
-                    isSelected = current == "category",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            selected = current == "category",
-            onClick = { navController.navigate("category") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
-
-        // PROFILE
-        NavigationBarItem(
-            icon = {
-                BottomNavIcon(
-                    iconResId = R.drawable.ic_profile,
-                    contentDescription = "Profile",
-                    isSelected = current == "profile",
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor
-                )
-            },
-            selected = current == "profile",
-            onClick = { navController.navigate("profile") },
-            alwaysShowLabel = false,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = selectedColor,
-                unselectedIconColor = unselectedColor,
-                indicatorColor = Color.Transparent
-            )
-        )
+                    Box(
+                        modifier = Modifier
+                            .size(46.dp)
+                            .clip(CircleShape)
+                            .background(
+                                if (isSelected) VerdeCaribeno else Color.Transparent
+                            )
+                            .clickable {
+                                navController.navigate(route) {
+                                    popUpTo("HomeScreen") { inclusive = false }
+                                    launchSingleTop = true
+                                }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = iconResId),
+                            contentDescription = route,
+                            tint = if (isSelected) Honeydew else Brown,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+            }
+        }
     }
 }

@@ -37,14 +37,14 @@ fun OnBoardingAScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(60.dp))
             Text(
                 text = "Welcome To\nExpense Manager",
-                fontSize = 22.sp,
+                fontSize = 32.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Void,
                 textAlign = TextAlign.Center,
                 fontFamily = poppinsFamily
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(70.dp))
 
             // --- Contenedor inferior claro ---
             Box(
@@ -68,14 +68,15 @@ fun OnBoardingAScreen(navController: NavHostController) {
                     Image(
                         painter = painterResource(id = R.drawable.onboarding_coins),
                         contentDescription = "Coins illustration",
-                        modifier = Modifier.size(260.dp)
+                        modifier = Modifier.size(280.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(40.dp))
+                    Spacer(modifier = Modifier.height(35.dp))
 
                     // Botón Next
                     Text(
                         text = "Next",
+                        fontSize = 28.sp,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
                         fontFamily = poppinsFamily,
