@@ -40,12 +40,11 @@ fun New_House_Add_Expenses_Screen(
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Add Savings",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {

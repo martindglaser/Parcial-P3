@@ -38,12 +38,11 @@ fun Medicine_Add_Expenses_Screen(
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {
@@ -121,7 +120,7 @@ fun Medicine_Add_Expenses_Screen(
             ) {
                 PrimaryButton(
                     text = "Save",
-                    onClick = { navController?.popBackStack() }
+                    onClick = {  }
                 )
             }
         }

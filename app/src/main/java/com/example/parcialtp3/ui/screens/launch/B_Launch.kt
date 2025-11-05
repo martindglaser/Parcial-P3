@@ -40,7 +40,7 @@ fun LaunchScreen(navController: NavHostController) {
 
             Text(
                 text = "FinWise",
-                fontSize = 58.sp,
+                fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = CaribbeanGreen,
                 fontFamily = poppinsFamily
@@ -72,7 +72,7 @@ fun LaunchScreen(navController: NavHostController) {
                     .fillMaxWidth(0.6f)
                     .height(48.dp)
             ) {
-                Text("Log In",fontSize = 25.sp, color = Void, fontWeight = FontWeight.Bold)
+                Text("Log In", color = Honeydew, fontWeight = FontWeight.Bold)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -90,7 +90,7 @@ fun LaunchScreen(navController: NavHostController) {
                     .fillMaxWidth(0.6f)
                     .height(48.dp)
             ) {
-                Text("Sign Up", fontSize = 25.sp, color = FenceGreen, fontWeight = FontWeight.Bold)
+                Text("Sign Up", color = FenceGreen, fontWeight = FontWeight.Bold)
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -98,7 +98,7 @@ fun LaunchScreen(navController: NavHostController) {
             // FORGOT PASSWORD
             Text(
                 text = "Forgot Password?",
-                color = Void,
+                color = OceanBlue,
                 fontSize = 13.sp,
                 fontFamily = poppinsFamily,
                 modifier = Modifier.clickable {

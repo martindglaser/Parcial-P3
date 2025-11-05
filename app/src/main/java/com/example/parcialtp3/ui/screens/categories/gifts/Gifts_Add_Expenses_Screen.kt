@@ -3,6 +3,7 @@ package com.example.parcialtp3.ui.screens.categories.gifts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -38,12 +39,11 @@ fun Gifts_Add_Expenses_Screen(
 ) {
     BackgroundScaffold(
         headerHeight = 180.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             HeaderBar(
                 title = "Add Expenses",
-                navController = navController
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) {
@@ -77,7 +77,7 @@ fun Gifts_Add_Expenses_Screen(
                         }
                     }
                 )
-                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 RoundedInputRow(
                     label = "Category",
                     value = "Select the category",
@@ -91,21 +91,21 @@ fun Gifts_Add_Expenses_Screen(
                         )
                     }
                 )
-                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 RoundedInputRow(
                     label = "Amount",
                     value = "$30,00",
                     valueColor = Void
                 )
-                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+               Spacer(modifier = Modifier.height(16.dp))
                 RoundedInputRow(
                     label = "Expense Title",
                     value = "Perfume",
                     valueColor = Void
                 )
-                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+               Spacer(modifier = Modifier.height(16.dp))
                 MessageBox(label = "Enter Message")
-                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(12.dp))
+           Spacer(modifier = Modifier.height(12.dp))
             }
             Box(
                 modifier = Modifier
@@ -115,7 +115,7 @@ fun Gifts_Add_Expenses_Screen(
             ) {
                 PrimaryButton(
                     text = "Save",
-                    onClick = { navController?.popBackStack() }
+                    onClick = { }
                 )
             }
         }

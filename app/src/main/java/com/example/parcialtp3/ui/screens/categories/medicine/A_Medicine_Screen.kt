@@ -48,8 +48,6 @@ fun A_Medicine_Screen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Column(
                 modifier = Modifier
@@ -58,7 +56,8 @@ fun A_Medicine_Screen(
             ) {
                 HeaderBar(
                     title = "Medicine",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()
