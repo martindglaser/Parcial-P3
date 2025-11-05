@@ -46,8 +46,6 @@ fun TransportScreen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Column(
                 modifier = Modifier
@@ -56,7 +54,8 @@ fun TransportScreen(
             ) {
                 HeaderBar(
                     title = "Transport",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()

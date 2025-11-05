@@ -49,8 +49,6 @@ fun GiftsScreen(
 
     BackgroundScaffold(
         headerHeight = 290.dp,
-        headerColor = CaribbeanGreen,
-        panelColor = Honeydew,
         headerContent = {
             Column(
                 modifier = Modifier
@@ -59,7 +57,8 @@ fun GiftsScreen(
             ) {
                 HeaderBar(
                     title = "Gifts",
-                    navController = navController
+                    navController = navController,
+                    onBackClick = { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 FinanceSummaryBlock()

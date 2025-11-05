@@ -23,8 +23,6 @@ import com.example.parcialtp3.ui.LightGreen
 @Composable
 fun A_Security_Screen(
     navController: NavHostController,
-    onBack: () -> Unit = {},
-    onNotifications: () -> Unit = {},
     onChangePin: () -> Unit = {},
     onFingerprint: () -> Unit = {},
     onTerms: () -> Unit = {}
