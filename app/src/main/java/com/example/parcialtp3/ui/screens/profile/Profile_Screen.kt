@@ -84,6 +84,7 @@ fun Profile_Screen(navController: NavHostController) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     RoundedButton(
+                        route = "WelcomeScreen",
                         text = "Yes, End Session",
                         width = 207.dp,
                         height = 45.dp,
